@@ -23,7 +23,7 @@ Quick Pound is the social network for the future. Use this app to post pictures,
 ##### Run
 
 1. Run `npm start`
-2. Navigate to `localhost:3000`
+2. Navigate to `localhost:2121`
 
 
 ## How It's Made:
