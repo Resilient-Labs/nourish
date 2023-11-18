@@ -22,7 +22,7 @@ Run `npm install`
 
 ##### Run
 
-Run `npm start`
+`npm start`
 
 
 ## How It's Made:
