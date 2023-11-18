@@ -9,7 +9,7 @@ Quick Pound is the social network for the future. Use this app to post pictures,
 
 ##### Install
 
-1. Run `npm install`
+Run `npm install`
 
 ##### Things to add
 
@@ -22,8 +22,7 @@ Quick Pound is the social network for the future. Use this app to post pictures,
 
 ##### Run
 
-1. Run `npm start`
-2. Navigate to `localhost:2121`
+Run `npm start`
 
 
 ## How It's Made:
