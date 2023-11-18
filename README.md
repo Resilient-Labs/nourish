@@ -44,4 +44,5 @@ Library Catalog: https://github.com/JacinthaDev/personalfullstack2
 
 ## Backend Technologies
 MongoDB Atlas: https://www.mongodb.com/atlas/database
+
 Cloudinary: https://cloudinary.com/
