@@ -20,14 +20,18 @@ const communityPostSchema = new mongoose.Schema({
 		ref: "User",
 		required: true,
 	},
-	location: {
+	cityState: {
 		type: String,
 		required: true,
 	},
-	city: {
+	zipCode: {
 		type: String,
 		required: true,
 	},
+	tags: [{
+		type: String
+	}]
+
 })
 
 // Create the CommunityPost model using the community post schema
