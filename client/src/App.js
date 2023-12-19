@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-            Hello Frontend. Hurry the hell up - Quite Frankly, BackendTeam (Hozay (mostly), Kyle, Finklenator, Ro) 
+          Work here in client folder for frontend. 
         </p>
         <a
           className="App-link"
