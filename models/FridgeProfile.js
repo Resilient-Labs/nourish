@@ -17,10 +17,6 @@ const fridgeProfileSchema = new mongoose.Schema({
             required: true,
         }
 	},
-    fridgeName: {
-		type: String,
-		required: true,
-    },
     fridgeContact: {
         phoneNumber: {
             type: String,
@@ -30,11 +26,11 @@ const fridgeProfileSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        volunteerContact: {
+        volunteerURL: {
             type: String,
             required: true,
         },
-        donateContact: {
+        donateURL: {
             type: String,
             required: true,
         }
