@@ -1,22 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar.js'
+import Fridge from './components/Fridge.js'
+import About from './components/About.js'
+import Initiatives from './components/Initiatives.js'
+import GetInvolved from './components/GetInvolved.js'
+import Footer from './components/Footer.js'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Work here in client folder for frontend. 
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        < Navbar />
+        < Fridge />
+        < About />
+        < Initiatives />
+        < GetInvolved />
+        < Footer />
       </header>
     </div>
   );
