@@ -10,8 +10,9 @@ const methodOverride = require("method-override")
 const flash = require("express-flash")
 const logger = require("morgan")
 const connectDB = require("./config/database")
-const mainRoutes = require("./routes/main")
+const fridgeRoutes = require("./routes/fridge")
 const axios = require('axios');
+const fridge = require("./controllers/fridge")
 // const CONNECTION_URL = 'mongodb+srv://kyle:123@cluster0.ogd4hel.mongodb.net/'
 
 // Use .env file in config folder
@@ -53,7 +54,7 @@ app.use(passport.session())
 app.use(flash())
 
 // Setup Routes For Which The Server Is Listening
-app.use("/", mainRoutes)
+app.use("/", fridgeRoutes)
 
 // Serve React App
 app.use(express.static("client/build"))

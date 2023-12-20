@@ -2,8 +2,9 @@ const cloudinary = require("../middleware/cloudinary");
 const Fridge = require("../models/FridgeProfile");
 
 module.exports = {
-    getProfile: async (req, res) => {
+    getFridgesbyZip: async (req, res) => {
         try {
+            //=================Do we want to do req.params.zipcode or reqbodyzipcode?
             const fridges = await Fridge.find({ user: req.body.zipcode });
             res.json({ fridges: fridges });
         } catch (err) {
