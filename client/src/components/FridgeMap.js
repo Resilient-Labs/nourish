@@ -1,7 +1,8 @@
 export default function FridgeMap() {
     return (
         <div>
-            <img/>
+            INTERACTIVE MAP PLACEHOLDER
+            <iframe/>
         </div>
     )
 }
