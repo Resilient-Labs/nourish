@@ -7,6 +7,8 @@ const fridgeProfileSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+    //add: longitude and latitude need to be added to schema 
+    //add: google maps url for directions
 	fridgeLocation: {
 		cityState: {
             type: String,
@@ -43,3 +45,10 @@ const FridgeProfile = mongoose.model("FridgeProfile", fridgeProfileSchema)
 
 // Export the CommunityPost model
 module.exports = FridgeProfile
+
+
+
+
+
+
+
