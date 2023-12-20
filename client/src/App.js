@@ -10,12 +10,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        < Navbar />
-        < Fridge />
-        < About />
-        < Initiatives />
-        < GetInvolved />
-        < Footer />
+        <Navbar />
+        <Fridge />
+        <About />
+        <Initiatives />
+        <GetInvolved />
+        <Footer />
       </header>
     </div>
   );
