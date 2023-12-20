@@ -1,99 +1,25 @@
-import './App.css';
-import Navbar from './components/Navbar.js'
-import Fridge from './components/Fridge.js'
-import About from './components/About.js'
-import Initiatives from './components/Initiatives.js'
-import GetInvolved from './components/GetInvolved.js'
-import Footer from './components/Footer.js'
+import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Community from './pages/Community'
+import FridgeProfile from './pages/FridgeProfile'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import UserProfile from './pages/UserProfile'
 
-function App() {
-
-  const fridgeData = [// figure out how to fetch that data. For now i cant fetch it until backend makes the endpoint 
-    {
-      fridgeName: "Fridge name 1",
-      key: 1,
-      //add: longitude and latitude need to be added to schema 
-      //add: google maps url for directions
-      //how do i fetch my data ? Backend making the endpoint , the way this is making a request
-      fridgeLocation: {
-        address:"street address 1", //ADD
-        cityState: "",
-        zipCode: "",
-        long: "",//ADD
-        lat: "",//ADD
-        url: ""//ADD
-      },
-      fridgeImage: "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&ga=GA1.1.1428990738.1703065310&semt=sph",//ADD
-      fridgeContact: {
-        phoneNumber: "",
-        email: "",
-        volunteerURL: "",
-        donateURL: ""
-      }
-
-    },
-    {
-      fridgeName: "East Falls Community Fridge",
-      //add: longitude and latitude need to be added to schema 
-      //add: google maps url for directions -> geo location
-      //based off what is on my mockup this is what i need. this is muy shcema. i can update my structure 
-      //how do i fetch my data 
-
-      fridgeLocation: {
-        address: "street address 2",
-        cityState: "Philiedelphia, PA",
-        zipCode: "19129",
-        long: "",
-        lat: "",
-        url: ""
-      },
-      fridgeImage: "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&ga=GA1.1.1428990738.1703065310&semt=sph",//ADD
-      fridgeContact: {
-        phoneNumber: "",
-        email: "",
-        volunteerURL: "",
-        donateURL: ""
-      }
-
-    },
-    // Add more data as needed
-    {
-      fridgeName: "Ronnie Vega Community Fridge",
-      //add: longitude and latitude need to be added to schema 
-      //add: google maps url for directions
-      //how do i fetch my data 
-      fridgeLocation: {
-        address: "street address 3",
-        cityState: "PA",
-        zipCode: "19104",
-        long:"",
-        lat:"",
-        url:""
-
-      },
-      fridgeImage: "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&ga=GA1.1.1428990738.1703065310&semt=sph",//ADD
-      fridgeContact: {
-        phoneNumber: "",
-        email: "",
-        volunteerURL: "",
-        donateURL: ""
-      }
-
-    }
-  ];
-
+// Routes for pages
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        < Navbar />
-        < Fridge data={fridgeData}/>
-        < About />
-        < Initiatives />
-        < GetInvolved />
-        < Footer />
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/fridgeprofile" element={<FridgeProfile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
-
-export default App;
