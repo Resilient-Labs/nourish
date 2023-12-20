@@ -1,10 +1,12 @@
 import FridgeList from './FridgeList.js'
 import FridgeMap from './FridgeMap.js'
 
-export default function Fridge() {
+export default function Fridge({ data }) {
+    console.log("data")
+    console.log(data)
     return (
         <div>
-            < FridgeList />
+            < FridgeList data={data} />
             < FridgeMap />
         </div>
     )
