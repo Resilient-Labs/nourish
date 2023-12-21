@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const CommunityFridgeSchema = new mongoose.Schema({
 
     donations: {
@@ -38,7 +39,7 @@ const CommunityFridgeSchema = new mongoose.Schema({
         cityState: {
             type: String,
         },
-        zipcode: {
+        zipCode: {
             type: String,
         },
         directionsURL: {
@@ -72,5 +73,5 @@ const CommunityFridgeSchema = new mongoose.Schema({
     },
 });
 
-const CommunityFridge = mongoose.model("CommunityFridge", CommunityFridgeSchema);
+const CommunityFridge = mongoose.model("CommunityFridge", CommunityFridgeSchema, "communityFridges");
 export { CommunityFridge };

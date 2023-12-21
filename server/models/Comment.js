@@ -1,7 +1,5 @@
-// Import the mongoose module
 import mongoose from "mongoose"
 
-// Define the comment schema
 const CommentSchema = new mongoose.Schema({
 	title: {
 		type: String,
@@ -33,8 +31,6 @@ const CommentSchema = new mongoose.Schema({
 	},
 })
 
-// Create the Comment model using the comment schema
-const Comment = mongoose.model("Comment", CommentSchema)
 
-// Export the Comment model
-export default Comment
+const Comment = mongoose.model("Comment", CommentSchema);
+export { Comment };

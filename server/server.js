@@ -6,14 +6,19 @@ import ConnectMongo from 'connect-mongo';
 import flash from 'express-flash';
 import logger from 'morgan';
 import { connectDB } from './config/database.js';
-import { passport } from './config/passport.js'; // Make sure this matches your export
+//import { passport } from './config/passport.js'; // Make sure this matches your export
 import { router as fridgeRoutes } from './routes/fridge.js';
 import { router as postRoutes } from './routes/posts.js';
 import dotenv from 'dotenv';
 import path from 'path';
 
+import passport from 'passport';
+import { configurePassport } from './config/passport.js';
+
+
+
 // Use .env file in config folder
-dotenv.config({ path: "./config/.env" });
+dotenv.config({ path: "./.env" });
 
 // Connect To Database
 connectDB();
@@ -32,18 +37,24 @@ app.use(express.json());
 app.use(logger("dev"));
 
 // Passport Config
-configurePassport(passport); // Use the imported function to configure passport
+configurePassport(passport);
 
 // Setup Sessions - stored in MongoDB
-const MongoStore = ConnectMongo(session);
+const MongoStore = ConnectMongo.create({
+	mongoUrl: process.env.DB_STRING, // Your MongoDB connection string
+	//collectionName: 'sessions' // Optional: collection name to use in MongoDB
+});
+
+	// Then use it in your session configuration
 app.use(
 	session({
 		secret: "backendsessionsecret",
 		resave: false,
 		saveUninitialized: false,
-		store: new MongoStore({ mongooseConnection: mongoose.connection }),
+		store: MongoStore,
 	})
 );
+
 
 // Passport middleware
 app.use(passport.initialize());
@@ -58,9 +69,9 @@ app.use("/post", postRoutes);
 
 // Serve React App
 app.use(express.static("client/build"));
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
 
 // Server Running
 app.listen(process.env.PORT, () => {

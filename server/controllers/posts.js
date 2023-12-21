@@ -1,6 +1,6 @@
 import { cloudinary } from "../middleware/cloudinary.js";
 import { Post } from "../models/Post.js";
-import { Comments } from "../models/Comments.js";
+import { Comment } from "../models/Comment.js";
 import pkg from 'mongodb';
 const { ObjectID } = pkg;
 
