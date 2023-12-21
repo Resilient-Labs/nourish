@@ -1,5 +1,4 @@
-
-/**************************************************Fridge Landing Page *********************************/
+/****************************Fridge Landing Page *********************************/
 
 /*******Fridge Component Styling ******/
 .leaflet-container-outside{
@@ -21,7 +20,7 @@
     height: 30rem;
     width: 100%;
     /* padding: 1rem 3rem; */
-    /* overflow: scroll; */
+    overflow: scroll;
 }
 
 /******************************************End Fridge Landing Pg********************************************/
