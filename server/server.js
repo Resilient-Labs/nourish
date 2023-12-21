@@ -11,8 +11,8 @@ const flash = require("express-flash")
 const logger = require("morgan")
 const connectDB = require("./config/database")
 const fridgeRoutes = require("./routes/fridge")
+const postRoutes = require("./routes/posts")
 const axios = require('axios');
-const fridge = require("./controllers/fridge")
 // const CONNECTION_URL = 'mongodb+srv://kyle:123@cluster0.ogd4hel.mongodb.net/'
 
 // Use .env file in config folder
@@ -55,6 +55,7 @@ app.use(flash())
 
 // Setup Routes For Which The Server Is Listening
 app.use("/", fridgeRoutes)
+app.use("/post", postRoutes);
 
 // Serve React App
 app.use(express.static("client/build"))
