@@ -1,21 +1,19 @@
-// Define the mongoose module
-const mongoose = require("mongoose")
+import mongoose from "mongoose";
 
-// Define the community post schema
 const CommunityFridgeSchema = new mongoose.Schema({
-	donations: {
-		allowed: {
+    donations: {
+        allowed: {
             type: Array,
         },
         notAllowed: {
             type: Array,
         }
-	},
+    },
     community: {
         type: String,
     },
-	contact: {
-		email: {
+    contact: {
+        email: {
             type: String,
         },
         instagramURL: {
@@ -24,7 +22,7 @@ const CommunityFridgeSchema = new mongoose.Schema({
         siteURL: {
             type: String,
         }
-	},
+    },
     isFridge: {
         type: Boolean,
         required: true,
@@ -34,7 +32,7 @@ const CommunityFridgeSchema = new mongoose.Schema({
         required: true,
     },
     location: {
-		address: {
+        address: {
             type: String,
         },
         cityState: {
@@ -52,38 +50,26 @@ const CommunityFridgeSchema = new mongoose.Schema({
         long: {
             type: String,
         },
-        
-	},
+    },
     name: {
-        type: Boolean,
+        type: String,
         required: true,
     },
-	rules: {
+    rules: {
         type: Array,
     },
     status: {
-        type: string,
+        type: String,
     },
     key: {
-        type: string,
+        type: String,
     },
     profileIMG: {
-        type: string,
+        type: String,
     },
     description: {
-        type: string,
+        type: String,
     },
-})
+});
 
-// Create the CommunityFridge model using the community post schema
-const CommunityFridge = mongoose.model("CommunityFridge", CommunityFridgeSchema)
-
-// Export the CommunityFridge  model
-module.exports = CommunityFridgeFridge
-
-
-
-
-
-
-
+export default mongoose.model("CommunityFridge", CommunityFridgeSchema);
