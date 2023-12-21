@@ -8,7 +8,6 @@ const connectDB = async () => {
       useFindAndModify: false,
       useCreateIndex: true,
     });
-
     console.log(`MongoDB Connected: ${conn.connection.host}. Server running on port ${process.env.PORT}`);
   } catch (err) {
     console.error(err);
