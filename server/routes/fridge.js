@@ -7,6 +7,7 @@ const fridgeController = require("../controllers/fridge");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
  //=================If we're usinng req param zipcode then we need to do router.get("/${zipcode}", fridgeController.getFridgesbyZip);
+router.get("/allFridges", fridgeController.getAllFridges);
 router.get("/getFridges", fridgeController.getFridgesbyZip);
 
 //not using right now but leaving as an example incase we need to
