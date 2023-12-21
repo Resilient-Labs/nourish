@@ -13,10 +13,9 @@ const connectDB = require("./config/database")
 const fridgeRoutes = require("./routes/fridge")
 const postRoutes = require("./routes/posts")
 const axios = require('axios');
-// const CONNECTION_URL = 'mongodb+srv://kyle:123@cluster0.ogd4hel.mongodb.net/'
 
 // Use .env file in config folder
-// require("dotenv").config({ path: "./config/.env" })
+require("dotenv").config({ path: "./config/.env" })
 
 // Passport config
 require("./config/passport")(passport)
