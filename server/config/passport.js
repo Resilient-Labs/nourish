@@ -1,9 +1,7 @@
 import { Strategy as LocalStrategy } from "passport-local";
-import mongoose from "mongoose";
 import { User } from "../models/User.js";
 
-
-export const passport = function(passport) {
+export const configurePassport = (passport) => {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
       User.findOne({ email: email.toLowerCase() }, (err, user) => {

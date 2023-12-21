@@ -1,7 +1,5 @@
-// Import the mongoose module
 import mongoose from "mongoose"
 
-// Define the post schema
 const PostSchema = new mongoose.Schema({
 	title: {
 		type: String,
@@ -42,8 +40,5 @@ const PostSchema = new mongoose.Schema({
 	},
 })
 
-// Create the Post model using the post schema
-const Post = mongoose.model("Post", PostSchema)
-
-// Export the Post model
-export default Post
+const Post = mongoose.model("Post", PostSchema);
+export { Post };

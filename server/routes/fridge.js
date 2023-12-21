@@ -12,8 +12,8 @@ const { ObjectID } = pkg
 //import { ensureAuth, ensureGuest } from "../middleware/auth/js";
 
 router.get("/getAllFridges", getAllFridges);
-router.get("/getFridges", getFridgesbyZip);
-router.get("/fridgeprofile/:id", getFridge);
+router.get("/getFridges/:zipcode", getFridgesbyZip);
+router.get("/fridgeProfile/:id", getFridge);
 
 
 export { router };
