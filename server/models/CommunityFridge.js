@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-
 const CommunityFridgeSchema = new mongoose.Schema({
+
     donations: {
         allowed: {
             type: Array,
@@ -72,4 +72,5 @@ const CommunityFridgeSchema = new mongoose.Schema({
     },
 });
 
-export default mongoose.model("CommunityFridge", CommunityFridgeSchema);
+const CommunityFridge = mongoose.model("CommunityFridge", CommunityFridgeSchema);
+export { CommunityFridge };

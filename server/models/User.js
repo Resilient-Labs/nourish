@@ -29,4 +29,8 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 };
 
-export const User = mongoose.model("User", UserSchema);
+// Assign the model to a variable
+const User = mongoose.model("User", UserSchema);
+
+// Export the model using named export
+export { User };
