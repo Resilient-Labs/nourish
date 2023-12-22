@@ -11,6 +11,7 @@ import { router as fridgeRoutes } from './routes/fridge.js';
 import { router as postRoutes } from './routes/posts.js';
 import dotenv from 'dotenv';
 import path from 'path';
+import cors from 'cors';
 
 import passport from 'passport';
 import { configurePassport } from './config/passport.js';
@@ -32,6 +33,14 @@ app.use(express.static("public"));
 // Body Parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Cors errors
+app.use(cors({
+	origin: 'http://localhost:3000', // Allow requests only from port 3000
+	methods: 'GET,POST,PUT,DELETE', // Allow specific HTTP methods
+	allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+}));
+
 
 // Logging
 app.use(logger("dev"));
