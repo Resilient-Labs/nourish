@@ -17,8 +17,8 @@ export default function Home() {
         address: "street address 1", //ADD
         cityState: "",
         zipCode: "",
-        long: "",//ADD
-        lat: "",//ADD
+        long: "-75.174741",//ADD
+        lat: "39.933026",//ADD
         url: ""//ADD
       },
       fridgeImage: "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&ga=GA1.1.1428990738.1703065310&semt=sph",//ADD
@@ -41,8 +41,8 @@ export default function Home() {
         address: "street address 2",
         cityState: "Philiedelphia, PA",
         zipCode: "19129",
-        long: "",
-        lat: "",
+        long: "-75.14716981234415",
+        lat: "39.96391256593655",
         url: ""
       },
       fridgeImage: "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&ga=GA1.1.1428990738.1703065310&semt=sph",//ADD
@@ -64,8 +64,8 @@ export default function Home() {
         address: "street address 3",
         cityState: "PA",
         zipCode: "19104",
-        long: "",
-        lat: "",
+        long: "-75.15233672748722",
+        lat: "39.958458569206655",
         url: ""
 
       },
