@@ -7,7 +7,7 @@ export default function Fridge({ data }) {
     return (
         <div className="leaflet-container-outside"> 
             < FridgeList data={data} />
-            < FridgeMap />
+            < FridgeMap data={data} />
         </div>
     )
 }
