@@ -56,7 +56,7 @@ export default function FridgeMap(data) {
         // Push the new object into the reformatData array
         reformatData.push(fridgeLocation);
     }
-
+    
     // Calculate the bounds to include all markers
     const bounds = reformatData.map(({ position }) => position);
     const mapCenter = [39.933026, -75.174741]; // South Philly
