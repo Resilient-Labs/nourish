@@ -1,11 +1,11 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Community from './pages/Community'
-import FridgeProfile from './pages/FridgeProfile'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import SignUp from './pages/SignUp'
-import UserProfile from './pages/UserProfile'
+import "./App.css"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Community from "./pages/Community"
+import FridgeProfile from "./pages/FridgeProfile"
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import SignUp from "./pages/SignUp"
+import UserProfile from "./pages/UserProfile"
 
 // Routes for pages
 export default function App() {
