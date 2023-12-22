@@ -1,19 +1,29 @@
 //Do we want to use require or import/export? -Ro
-
-const express = require("express")
+import express from 'express'
 const app = express()
-const mongoose = require("mongoose")
-const passport = require("passport")
-const session = require("express-session")
+import mongoose from 'mongoose'
+import passport from 'passport'
+import session from 'express-session'
+import methodOverride from 'method-override'
 const MongoStore = require("connect-mongo")(session)
+
 const methodOverride = require("method-override")
 const flash = require("express-flash")
 const logger = require("morgan")
 const connectDB = require("./config/database")
 const fridgeRoutes = require("./routes/fridge")
+const postRoutes = require("./routes/posts")
 const axios = require('axios');
-const fridge = require("./controllers/fridge")
 // const CONNECTION_URL = 'mongodb+srv://kyle:123@cluster0.ogd4hel.mongodb.net/'
+
+import flash from 'express-flash'
+import logger from 'morgan'
+import connectDB from './config/database'
+import fridgeRoutes from './routes/fridge'
+import axios from 'axios'
+import fridge from './controllers/fridge'
+
+
 
 // Use .env file in config folder
 // require("dotenv").config({ path: "./config/.env" })
@@ -55,6 +65,7 @@ app.use(flash())
 
 // Setup Routes For Which The Server Is Listening
 app.use("/", fridgeRoutes)
+app.use("/post", postRoutes);
 
 // Serve React App
 app.use(express.static("client/build"))
