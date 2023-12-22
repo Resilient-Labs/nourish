@@ -15,7 +15,7 @@ import {
 
 
 
-//****************************************DRAFT 3  */
+//****************************************DRAFT 3 *************************************************** */
 // added bound prop
 //The MapContainer component now includes a bounds prop, which is set to the calculated bounds array.
 //The center prop of the MapContainer is still set to South Philly.
@@ -29,29 +29,46 @@ const fridgeIcon = new L.Icon({
     popupAnchor: [0, -32],
 });
 
-const fridgeLocations = [
-    {
-        id: 1,
-        position: [39.933026, -75.174741],
-        name: 'South Philadelphia Community Fridge',
-        address: '1229 S 6th St, Philadelphia, PA 19147',
-    },
-    // Add more fridge locations as needed
-];
+export default function FridgeMap(data) {
+   
 
-export default function FridgeMap() {
+    let reformatData = [];
+    // Iterate through each object in the data array using a for...of loop
+    for (const item of data.data) {
+        let fridgeLocation = {};
+
+        // Extract latitude and longitude values
+        const lat = item.fridgeLocation.lat;
+        const long = item.fridgeLocation.long;
+
+        // Convert lat and long to numbers and push them into the position array
+        fridgeLocation.position = [parseFloat(lat), parseFloat(long)];
+
+        // Convert key to id and push it into the position array
+        fridgeLocation.id = item.key;
+
+        // Convert name and push it into the position array
+        fridgeLocation.name = item.fridgeName;
+
+        // Convert key to id and push it into the position array
+        fridgeLocation.address = item.fridgeLocation.address;
+
+        // Push the new object into the reformatData array
+        reformatData.push(fridgeLocation);
+    }
+
     // Calculate the bounds to include all markers
-    const bounds = fridgeLocations.map(({ position }) => position);
+    const bounds = reformatData.map(({ position }) => position);
     const mapCenter = [39.933026, -75.174741]; // South Philly
 
     return (
         <div className="leaflet-container">
-            <MapContainer center={mapCenter} zoom={15} style={{ height: '100vh' }} bounds={bounds}>
+            <MapContainer center={mapCenter} zoom={13} style={{ height: '100vh' }} bounds={bounds}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {fridgeLocations.map(({ id, position, name, address }) => (
+                {reformatData.map(({ id, position, name, address }) => (
                     <Marker key={id} position={position} icon={fridgeIcon}>
                         <Popup>
                             Name: {name} <br /> Location: {address}
