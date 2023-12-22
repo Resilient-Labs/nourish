@@ -15,7 +15,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/fridgeprofile" element={<FridgeProfile />} />
+        <Route path="/fridgeprofile/:userId" element={<FridgeProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userprofile" element={<UserProfile />} />
