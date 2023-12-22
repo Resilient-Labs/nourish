@@ -23,4 +23,36 @@
     overflow: scroll;
 }
 
-/******************************************End Fridge Landing Pg********************************************/
+/*********************************End Fridge Landing Pg********************************************/
+
+
+/********************************************** Icons styling ********************************************/
+.social-icons {
+  width: 2rem;
+}
+
+
+/************************************** Fridge Profile Styling *******************************************/
+
+
+/******** Container styling******/
+.fridgePage--parent {
+  display: flex;
+  border: 1px solid black;
+  width: 100%;
+}
+
+
+.fridgePage--left,
+.fridgePage--right {
+  width: 50%;
+  padding: 5rem;
+}
+
+.fridgePage--community {
+  font-weight:200;
+}
+
+.fridgePage--status a {
+  text-decoration: none;
+}
