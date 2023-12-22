@@ -3,7 +3,7 @@ import { v2 as cloudinary } from 'cloudinary';
 
 // Configuring dotenv (if needed, see note below)
 import dotenv from 'dotenv';
-dotenv.config({ path: './config/.env' });
+dotenv.config({ path: "./.env" });
 
 // Cloudinary configuration
 cloudinary.config({
