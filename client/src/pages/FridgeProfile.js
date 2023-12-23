@@ -11,7 +11,7 @@ export default function FridgeProfile() {
     const fetchFridge = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/fridgeProfile/${userId}`
+          `http://localhost:8000/fridgeProfile/${userId}`
         )
         console.log(response)
         const data = await response.json()

@@ -10,13 +10,17 @@ export default function FridgeList() {
     const [myFridges, setFridges] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
     useEffect(() => {
         const fetchFridges = async () => {
             try {
                 console.log("i am here now")
-                const response = await fetch(`http://localhost:8000/getAllFridges`)
+                const response = await fetch(`http://localhost:3000/getAllFridges`)
                 console.log(response)
+
                 const data = await response.json();
+                console.log(" data i am here now pt 2")
+                console.log(data)
                 setFridges(data);
             } catch (error) {
                 setError(error);
@@ -52,6 +56,10 @@ export default function FridgeList() {
                         <Button href="#" size="sm"
                             className="bg-pink-400 hover:bg-pink-500">
                             Directions
+                        </Button>
+                        <Button href="#" size="sm"
+                            className="bg-pink-400 hover:bg-pink-500">
+                            <a href=''></a>Learn More
                         </Button>
                     </Card>    
                 ))}
