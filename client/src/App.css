@@ -1,7 +1,7 @@
 /****************************Fridge Landing Page *********************************/
 
 /*******Fridge Component Styling ******/
-.leaflet-container-outside{
+.leaflet-container-outside {
   display: flex;
   justify-content: space-around;
   height: 30rem;
@@ -16,24 +16,21 @@
 }
 
 /*******FridgeMap Component Styling ******/
-.leaflet-container-list{
-    height: 30rem;
-    width: 100%;
-    /* padding: 1rem 3rem; */
-    overflow: scroll;
+.leaflet-container-list {
+  height: 30rem;
+  width: 100%;
+  /* padding: 1rem 3rem; */
+  overflow: scroll;
 }
 
 /*********************************End Fridge Landing Pg********************************************/
-
 
 /********************************************** Icons styling ********************************************/
 .social-icons {
   width: 2rem;
 }
 
-
 /************************************** Fridge Profile Styling *******************************************/
-
 
 /******** Container styling******/
 .fridgePage--parent {
@@ -42,7 +39,6 @@
   width: 100%;
 }
 
-
 .fridgePage--left,
 .fridgePage--right {
   width: 50%;
@@ -50,7 +46,7 @@
 }
 
 .fridgePage--community {
-  font-weight:200;
+  font-weight: 200;
 }
 
 .fridgePage--status a {

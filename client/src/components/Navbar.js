@@ -1,34 +1,44 @@
-'use client';
-import { Button, Navbar } from 'flowbite-react';
+"use client"
+import { Button, Navbar } from "flowbite-react"
 
 export default function Component() {
   return (
     <Navbar fluid rounded>
-
       <Navbar.Brand href="https://nourish.com" className="pl-10">
-        <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Nourish</span>
+        <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+          Nourish
+        </span>
       </Navbar.Brand>
 
       <div className="flex gap-2 md:order-2 pr-10">
-        <Button href="#" size="lg"
-        className="text-gray-700 bg-gray-100 hover:bg-gray-200">
+        <Button
+          href="#"
+          size="lg"
+          className="text-gray-700 bg-gray-100 hover:bg-gray-200"
+        >
           Log In
         </Button>
 
-        <Button href="#" size="lg"
-        className="bg-pink-400 hover:bg-pink-500">
+        <Button href="#" size="lg" className="bg-pink-400 hover:bg-pink-500">
           Sign Up
         </Button>
-        <Navbar.Toggle/>
+        <Navbar.Toggle />
       </div>
 
       <Navbar.Collapse>
-        <Navbar.Link href="#" className="text-lg">Home</Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">Donate</Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">Volunteer</Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">Contact</Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Donate
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Volunteer
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Contact
+        </Navbar.Link>
       </Navbar.Collapse>
-
     </Navbar>
-  );
+  )
 }

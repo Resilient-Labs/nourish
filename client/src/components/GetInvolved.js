@@ -1,5 +1,5 @@
-import fridge2 from '../images/fridge2.jpg';
-import fridge3 from '../images/fridge3.webp';
+import fridge2 from "../images/fridge2.jpg"
+import fridge3 from "../images/fridge3.webp"
 
 export default function GetInvolved() {
   return (
@@ -15,7 +15,7 @@ export default function GetInvolved() {
               src={fridge2}
               alt="Germantown fridge"
               className="rounded-lg shadow-md max-w-full h-auto"
-              style={{ maxHeight: '400px' }}
+              style={{ maxHeight: "400px" }}
             />
           </div>
 
@@ -24,7 +24,7 @@ export default function GetInvolved() {
               src={fridge3}
               alt="volunteers stocking fridge"
               className="rounded-lg shadow-md max-w-full h-auto"
-              style={{ maxHeight: '400px' }}
+              style={{ maxHeight: "400px" }}
             />
           </div>
 
@@ -32,9 +32,13 @@ export default function GetInvolved() {
             <div>
               <h4 className="text-2xl font-bold mb-4">Donate</h4>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Help keep our fridges well-stocked and maintained by contributing to our fridge fund.
+                Help keep our fridges well-stocked and maintained by
+                contributing to our fridge fund.
               </p>
-              <button type="button" className="mt-4 bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-md">
+              <button
+                type="button"
+                className="mt-4 bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-md"
+              >
                 Learn More
               </button>
             </div>
@@ -44,9 +48,14 @@ export default function GetInvolved() {
             <div>
               <h4 className="text-2xl font-bold mb-4">Volunteer</h4>
               <p className="text-gray-700 text-lg leading-relaxed">
-                There's always room for more volunteers. Fulfill food requests, tidy up a fridge in need, or drop off a fresh batch of groceries!
+                There's always room for more volunteers. Fulfill food requests,
+                tidy up a fridge in need, or drop off a fresh batch of
+                groceries!
               </p>
-              <button type="button" className="mt-4 bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-md">
+              <button
+                type="button"
+                className="mt-4 bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-md"
+              >
                 Learn More
               </button>
             </div>
@@ -54,5 +63,5 @@ export default function GetInvolved() {
         </div>
       </div>
     </div>
-  );
+  )
 }

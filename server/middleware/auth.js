@@ -1,15 +1,15 @@
 export const ensureAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
-      return next();
+    return next()
   } else {
-      res.redirect("/");
+    res.redirect("/")
   }
-};
+}
 
 export const ensureGuest = (req, res, next) => {
   if (!req.isAuthenticated()) {
-      return next();
+    return next()
   } else {
-      res.redirect("/dashboard");
+    res.redirect("/dashboard")
   }
-};
+}

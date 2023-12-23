@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import { Card, Button } from 'flowbite-react';
 import FridgeCard from './FridgeCard.js'
