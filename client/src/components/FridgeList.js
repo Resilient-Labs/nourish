@@ -1,72 +1,63 @@
 "use client"
-
 import { Card, Button } from 'flowbite-react';
-import FridgeCard from './FridgeCard.js'
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 
-
-export default function FridgeList() {
-    const [myFridges, setFridges] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchFridges = async () => {
-            try {
-                console.log("i am here now")
-                const response = await fetch(`http://localhost:3000/getAllFridges`)
-                console.log(response)
-
-                const data = await response.json();
-                console.log(" data i am here now pt 2")
-                console.log(data)
-                setFridges(data);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchFridges();
-    }, []);
-    // ... inside the ReportCard component
-    if (isLoading) {
-        return <p>Loading fridge list data...</p>;
-    }
-    if (error) {
-        return <p>Error fetching data: {error.message}</p>;
-    }
-    console.log(myFridges)
+export default function FridgeList({ allFridges }) {
     return (
         <div className="leaflet-container-list">
             <div>
-                <h1 className="text-2xl font-bold text-center pb-2"> Philidelphia Community Fridges</h1>
-                {myFridges.fridges.map((item, index) => (
-                    // item refers to object holding all keys and values 
-                    // <FridgeCard data={item} />
-                    <Card className="max-w-sm m-6" >
-                        <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white" key={index}>
-                            {item}
-                        </h2>
-                        <p className="font-normal text-gray-700 dark:text-gray-400">
-                            <i className="fas fa-map-marker-alt pr-2" style={{ color:"#f17eb8" }}></i>
-                            {item.fridgeLocation.address}
-                        </p>
-                        <Button href="#" size="sm"
-                            className="bg-pink-400 hover:bg-pink-500">
-                            Directions
-                        </Button>
-                        <Button href="#" size="sm"
-                            className="bg-pink-400 hover:bg-pink-500">
-                            <a href=''></a>Learn More
-                        </Button>
-                    </Card>    
+                {allFridges.fridges.map((item, index) => (
+                    <Card className="max-w-sm m-6" imgSrc={item.fridgeIMG ? item.fridgeIMG : item.pantryIMG} horizontal>
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {item.name}
+                    </h2>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">
+                        <i className="fas fa-map-marker-alt pr-2" style={{ color: "#f17eb8" }}></i>
+                        {item.location.address}, { }
+                        { item.location.cityState}
+                    </p>
+                    <Button href={item.location.directionsURL} size="sm"
+                        className="bg-pink-400 hover:bg-pink-500">
+                            Directions  
+                    </Button>
+                    <Button href="#" size="sm"
+                        className="bg-pink-400 hover:bg-pink-500">
+                            Learn More
+                    </Button>
+                </Card>
                 ))}
-            </div> 
+            </div>
         </div>
-    )
+    );
 }
+
+
+// chatgpt card ********************************
+{/* <Card className="max-w-sm m-6" key={index}>
+    <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {fridge.name}
+    </h2>
+    {/* Render other fridge details here */}
+// </Card> }
+
+//**************************************************** */
+
+
+//                     <Card className="max-w-sm m-6" imgSrc={item.fridgeImage} horizontal>
+//                         <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+//                             {item.fridgeName}
+//                             {/* South Philly Community Fridge */}
+//                         </h2>
+//                         <p className="font-normal text-gray-700 dark:text-gray-400">
+//                             <i className="fas fa-map-marker-alt pr-2" style={{ color: "#f17eb8" }}></i>
+//                             {item.fridgeLocation.address}
+//                         </p>
+//                         <Button href="#" size="sm"
+//                             className="bg-pink-400 hover:bg-pink-500">
+//                             Directions
+//                         </Button>
+//                     </Card>
+
 
 //*****************DRAFT 4 configuring data from mongoDB***************
 
