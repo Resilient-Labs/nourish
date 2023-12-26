@@ -9,6 +9,9 @@ export default function Component() {
           <Footer.Brand href="https://nourish.com" name="Nourish" />
           <Footer.LinkGroup>
             <Footer.Link href="#">About</Footer.Link>
+            <Footer.Link href="#">Locations</Footer.Link>
+            <Footer.Link href="#">Community</Footer.Link>
+            <Footer.Link href="#">Volunteer</Footer.Link>
             <Footer.Link href="#">Contact</Footer.Link>
           </Footer.LinkGroup>
         </div>
