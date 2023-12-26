@@ -12,14 +12,14 @@ export default function FridgeList({ allFridges }) {
                         {item.name}
                     </h2>
                     <p className="font-normal text-gray-700 dark:text-gray-400">
-                        <i className="fas fa-map-marker-alt pr-2" style={{ color: "#f17eb8" }}></i>
+                            <i className="fas fa-map-marker-alt pr-2" style={{ color: "#31c48d" }}></i>
                         {item.location.address}, { }
                         {item.location.cityState}
                     </p>
-                        <Button href={item.location.directionsURL} size="sm" style={{ width: "100%" }} className="bg-pink-400 hover:bg-pink-500">
+                        <Button href={item.location.directionURL} size="sm" style={{ width: "100%" }} className="bg-green-500 hover:bg-green-600">
                             Directions  
                     </Button>
-                        <Button href={`/fridgeprofile/${item._id}`} size="sm" style={{ width: "100%" }} className="bg-pink-400 hover:bg-pink-500">
+                        <Button href={`/fridgeprofile/${item._id}`} size="sm" style={{ width: "100%" }} className="bg-green-500 hover:bg-green-600">
                             Learn More
                     </Button>
                 </Card>
