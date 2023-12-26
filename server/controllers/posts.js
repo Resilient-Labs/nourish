@@ -16,22 +16,23 @@ export const getAllPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
-    const comments = await Comments.find({ postID: req.params.id })
-    res.json({ post: post, comments: comments, user: req.user })
+    const comments = await Comment.find({ postID: req.params.id })
+    res.json({ post: post, comment: comments, user: req.user })
   } catch (err) {
     console.log(err)
   }
 }
-export const getProfile = async (req, res) => {
-  try {
-    const posts = await Post.find({ user: req.user.id })
-      .sort({ time: "desc" })
-      .lean()
-    res.json({ posts: posts, user: req.user })
-  } catch (err) {
-    console.log(err)
-  }
-}
+//Not need since we have the profile controller right?
+// export const getProfile = async (req, res) => {
+//   try {
+//     const posts = await Post.find({ user: req.user.id })
+//       .sort({ time: "desc" })
+//       .lean()
+//     res.json({ posts: posts, user: req.user })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 export const createPost = async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path)
@@ -65,7 +66,7 @@ export const likePost = async (req, res) => {
 //COMMENTS =====================================================
 export const addComment = async (req, res) => {
   try {
-    await Comments.create({
+    await Comment.create({
       comment: req.body.comment.trim(),
       commentByUserID: req.user.id,
       commentByUserName: req.user.userName,
@@ -81,34 +82,44 @@ export const addComment = async (req, res) => {
 }
 export const editComment = async (req, res) => {
   try {
-    await Comments.create({
-      comment: req.body.comment.trim(),
-      commentByUserID: req.user.id,
-      commentByUserName: req.user.userName,
-      postID: req.params.id
-    })
-    console.log("Comment has been edited!")
-    //res.redirect(`/post/${req.params.id}`);
-    res.status(200).send({ message: "Comment edited successfully" })
+   
+    const commentId = req.params.id;
+
+    // Find the comment by ID and update
+    const updatedComment = await Comment.findByIdAndUpdate(
+      commentId,
+      { comment: req.body.comment.trim() }, // Update the 'comment' field
+      { new: true } // Returns the updated document
+    );
+
+    if (!updatedComment) {
+      return res.status(404).send({ message: "Comment not found" });
+    }
+
+    console.log("Comment has been edited!");
+    res.status(200).send({ message: "Comment edited successfully" });
   } catch (err) {
-    console.log(err)
-    res.status(500).send({ message: "Error editing comment" })
+    console.log(err);
+    res.status(500).send({ message: "Error editing comment" });
   }
 }
 export const deleteComment = async (req, res) => {
   try {
-    await Comments.create({
-      comment: req.body.comment.trim(),
-      commentByUserID: req.user.id,
-      commentByUserName: req.user.userName,
-      postID: req.params.id
-    })
-    console.log("Comment has been deleted!")
-    //res.redirect(`/post/${req.params.id}`);
-    res.status(200).send({ message: "Comment deleted successfully" })
+    
+    const commentId = req.params.id;
+
+    // Find the comment by ID and delete it
+    const deletedComment = await Comment.findByIdAndDelete(commentId);
+
+    if (!deletedComment) {
+      return res.status(404).send({ message: "Comment not found" });
+    }
+
+    console.log("Comment has been deleted!");
+    res.status(200).send({ message: "Comment deleted successfully" });
   } catch (err) {
-    console.log(err)
-    res.status(500).send({ message: "Error deleting comment" })
+    console.log(err);
+    res.status(500).send({ message: "Error deleting comment" });
   }
 }
 //END COMMENTS =====================================================
