@@ -19,7 +19,7 @@ import passport from "passport"
 import { configurePassport } from "./config/passport.js"
 
 // Use .env file in config folder
-dotenv.config({ path: "./config/.env" })
+dotenv.config({ path: "./.env" })
 
 // Connect To Database
 connectDB()
