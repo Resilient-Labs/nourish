@@ -1,4 +1,5 @@
 import express from "express"
+
 import mongoose from "mongoose"
 import session from "express-session"
 import methodOverride from "method-override"
@@ -18,7 +19,7 @@ import passport from "passport"
 import { configurePassport } from "./config/passport.js"
 
 // Use .env file in config folder
-dotenv.config({ path: "./.env" })
+dotenv.config({ path: "./config/.env" })
 
 // Connect To Database
 connectDB()
@@ -48,6 +49,8 @@ app.use(logger("dev"))
 // Passport Config
 configurePassport(passport)
 
+console.log(process.env.DB_STRING)
+
 // Setup Sessions - stored in MongoDB
 const MongoStore = ConnectMongo.create({
   mongoUrl: process.env.DB_STRING // Your MongoDB connection string
@@ -74,7 +77,7 @@ app.use(flash())
 // Setup Routes For Which The Server Is Listening
 app.use("/", fridgeRoutes)
 app.use("/post", postRoutes)
-app.use("/profile", postRoutes)
+app.use("/profile", profileRoutes)
 
 
 // Serve React App

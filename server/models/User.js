@@ -1,5 +1,7 @@
-import bcrypt from "bcrypt"
-import mongoose from "mongoose"
+import pkg from 'bcrypt';
+const { bcrypt } = pkg;
+
+import { mongoose } from "mongoose"
 
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
