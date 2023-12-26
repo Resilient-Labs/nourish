@@ -1,11 +1,16 @@
-const cloudinary = require("cloudinary").v2;
+// Importing Cloudinary
+import { v2 as cloudinary } from "cloudinary"
 
-require("dotenv").config({ path: "./config/.env" });
+// Configuring dotenv (if needed, see note below)
+import dotenv from "dotenv"
+dotenv.config({ path: "./.env" })
 
+// Cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
-});
+  api_secret: process.env.API_SECRET
+})
 
-module.exports = cloudinary;
+// Exporting the configured cloudinary instance
+export { cloudinary }

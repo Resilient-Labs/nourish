@@ -1,5 +1,5 @@
-import fridge2 from '../images/fridge2.jpg';
-import fridge3 from '../images/fridge3.webp';
+import fridge2 from "../images/fridge2.jpg"
+import fridge3 from "../images/fridge3.webp"
 
 export default function GetInvolved() {
   return (

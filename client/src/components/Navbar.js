@@ -1,5 +1,5 @@
-'use client';
-import { Button, Navbar } from 'flowbite-react';
+"use client"
+import { Button, Navbar } from "flowbite-react"
 
 export default function Component() {
   return (
@@ -19,7 +19,7 @@ export default function Component() {
         className="bg-green-500 hover:bg-green-600">
           Sign Up
         </Button>
-        <Navbar.Toggle/>
+        <Navbar.Toggle />
       </div>
 
       <Navbar.Collapse>
@@ -29,7 +29,6 @@ export default function Component() {
         <Navbar.Link href="#" className="text-lg">Volunteer</Navbar.Link>
         <Navbar.Link href="#" className="text-lg">Contact</Navbar.Link>
       </Navbar.Collapse>
-
     </Navbar>
-  );
+  )
 }

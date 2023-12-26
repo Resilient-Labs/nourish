@@ -1,16 +1,22 @@
-const express = require("express");
-const router = express.Router();
-const authController = require("../controllers/auth");
-const fridgeController = require("../controllers/fridge");
+import express from "express"
+const router = express.Router()
+import {
+  getAllFridges,
+  getFridgesbyZip,
+  getFridge
+} from "../controllers/fridge.js"
 
-//Do we need this here?
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+//import authController from "../controllers/auth.js";
 
- //=================If we're usinng req param zipcode then we need to do router.get("/${zipcode}", fridgeController.getFridgesbyZip);
-router.get("/allFridges", fridgeController.getAllFridges);
-router.get("/getFridges", fridgeController.getFridgesbyZip);
+//import { ObjectID } from 'mongodb';
+import pkg from "mongodb"
+const { ObjectID } = pkg
 
-//not using right now but leaving as an example incase we need to
-router.get("/profile", ensureAuth, postsController.getProfile);
+// If you're using ensureAuth and ensureGuest, import them as well
+//import { ensureAuth, ensureGuest } from "../middleware/auth/js";
 
-module.exports = router;
+router.get("/getAllFridges", getAllFridges)
+router.get("/getFridges/:zipcode", getFridgesbyZip)
+router.get("/fridgeProfile/:id", getFridge)
+
+export { router }

@@ -1,38 +1,30 @@
-//Do we want to use require or import/export? -Ro
-import express from 'express'
-const app = express()
-import mongoose from 'mongoose'
-import passport from 'passport'
-import session from 'express-session'
-import methodOverride from 'method-override'
-const MongoStore = require("connect-mongo")(session)
+import express from "express"
+import mongoose from "mongoose"
+import session from "express-session"
+import methodOverride from "method-override"
+import ConnectMongo from "connect-mongo"
+import flash from "express-flash"
+import logger from "morgan"
+import { connectDB } from "./config/database.js"
+//import { passport } from './config/passport.js'; // Make sure this matches your export
+import { router as fridgeRoutes } from "./routes/fridge.js"
+import { router as postRoutes } from "./routes/posts.js"
+import { router as profileRoutes } from "./routes/profile.js"
+import dotenv from "dotenv"
+import path from "path"
+import cors from "cors"
 
-const methodOverride = require("method-override")
-const flash = require("express-flash")
-const logger = require("morgan")
-const connectDB = require("./config/database")
-const fridgeRoutes = require("./routes/fridge")
-const postRoutes = require("./routes/posts")
-const axios = require('axios');
-// const CONNECTION_URL = 'mongodb+srv://kyle:123@cluster0.ogd4hel.mongodb.net/'
-
-import flash from 'express-flash'
-import logger from 'morgan'
-import connectDB from './config/database'
-import fridgeRoutes from './routes/fridge'
-import axios from 'axios'
-import fridge from './controllers/fridge'
-
-
+import passport from "passport"
+import { configurePassport } from "./config/passport.js"
 
 // Use .env file in config folder
-// require("dotenv").config({ path: "./config/.env" })
-
-// Passport config
-require("./config/passport")(passport)
+dotenv.config({ path: "./.env" })
 
 // Connect To Database
 connectDB()
+
+// Initialize Express app
+const app = express()
 
 // Static Folder
 app.use(express.static("public"))
@@ -41,20 +33,36 @@ app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+// Cors errors
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests only from port 3000
+    methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"] // Allow specific headers
+  })
+)
+
 // Logging
 app.use(logger("dev"))
 
+// Passport Config
+configurePassport(passport)
+
 // Setup Sessions - stored in MongoDB
+const MongoStore = ConnectMongo.create({
+  mongoUrl: process.env.DB_STRING // Your MongoDB connection string
+  //collectionName: 'sessions' // Optional: collection name to use in MongoDB
+})
+
+// Then use it in your session configuration
 app.use(
-	session({
-		secret: "backendsessionsecret",
-		resave: false,
-		saveUninitialized: false,
-		store: new MongoStore({ mongooseConnection: mongoose.connection }),
-	})
+  session({
+    secret: "backendsessionsecret",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore
+  })
 )
-
-
 
 // Passport middleware
 app.use(passport.initialize())
@@ -65,30 +73,17 @@ app.use(flash())
 
 // Setup Routes For Which The Server Is Listening
 app.use("/", fridgeRoutes)
-app.use("/post", postRoutes);
+app.use("/post", postRoutes)
+app.use("/profile", postRoutes)
+
 
 // Serve React App
 app.use(express.static("client/build"))
-
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-})
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
 
 // Server Running
 app.listen(process.env.PORT, () => {
-	console.log("Server is running, you better catch it!")
+  console.log("Server is running, you better catch it!")
 })
-
-
-//I ran it already in the client folder, I think you should just need to npm install but you need to be on the client folder specifically -Ro ✅
-
-//Also Jose I think I gave you read and write access so you should be able to use the terminal, kyle if you sent me a request I can let you do it to. -ro
-
-//Im about to install some dependencies for the client side -ro
-
-//This jawn just popped on my computer, react is working -ro
-//I just ran it and built it :)-jose
-
-//thank you thank you appreciate you. Im gonna install the rest of the dependencies and then I think its set up for front end to start their side and we can start our side -ro
-
-// do you want to use axios? @Ro? -Jose

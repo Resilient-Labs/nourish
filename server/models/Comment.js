@@ -1,34 +1,35 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose"
 
 const CommentSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: true
   },
   image: {
     type: String,
-    require: true,
+    require: true
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    require: true
   },
   caption: {
     type: String,
-    required: true,
+    required: true
   },
   likes: {
     type: Number,
-    required: true,
+    required: true
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User"
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-  },
-});
+    default: Date.now
+  }
+})
 
-module.exports = mongoose.model("Comment", CommentSchema);
+const Comment = mongoose.model("Comment", CommentSchema)
+export { Comment }
