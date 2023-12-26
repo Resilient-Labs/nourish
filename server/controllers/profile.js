@@ -5,8 +5,7 @@ import { Post } from "../models/Post.js"
 import pkg1 from "mongodb"
 const { ObjectID } = pkg1
 
-import pkg2 from 'bcrypt';
-const { bcrypt } = pkg2;
+import bcrypt from 'bcrypt';
 
 
 export const getUserProfile = async (req, res) => {

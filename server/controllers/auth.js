@@ -1,8 +1,8 @@
-import pkg1 from 'passport';
-const { passport } = pkg1;
+import passport from 'passport';
 
-import pkg2 from 'validator';
-const { validator } = pkg2;
+
+import validator from 'validator';
+
 
 import { User } from "../models/User.js";
 

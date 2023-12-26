@@ -1,5 +1,4 @@
-import pkg from 'bcrypt';
-const { bcrypt } = pkg;
+import bcrypt from 'bcrypt';
 
 import { mongoose } from "mongoose"
 
