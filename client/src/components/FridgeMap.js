@@ -7,11 +7,8 @@ import L from "leaflet"
 //building blocks for leaflet
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
 
-//****************************************DRAFT 3 *************************************************** */
-// added bound prop
 //The MapContainer component now includes a bounds prop, which is set to the calculated bounds array.
 //The center prop of the MapContainer is still set to South Philly.
-
 // Create a custom icon
 const fridgeIcon = new L.Icon({
   iconUrl:
