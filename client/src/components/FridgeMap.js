@@ -7,11 +7,8 @@ import L from "leaflet"
 //building blocks for leaflet
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
 
-//****************************************DRAFT 3 *************************************************** */
-// added bound prop
 //The MapContainer component now includes a bounds prop, which is set to the calculated bounds array.
 //The center prop of the MapContainer is still set to South Philly.
-
 // Create a custom icon
 const fridgeIcon = new L.Icon({
   iconUrl:
@@ -61,7 +58,7 @@ export default function FridgeMap({ allFridges }) {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
         />
         {reformatData.map(({ id, position, name, address }) => (
           <Marker key={id} position={position} icon={fridgeIcon}>
