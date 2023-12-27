@@ -6,6 +6,8 @@ const { ObjectID } = pkg
 export const getAllFridges = async (req, res) => {
   try {
     const fridges = await Fridge.find().lean()
+    console.log('getAllFridges: ')
+    console.log(fridges)
     res.json({ fridges: fridges })
   } catch (err) {
     console.log(err)
