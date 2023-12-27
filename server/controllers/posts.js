@@ -35,12 +35,13 @@ export const getPost = async (req, res) => {
 // }
 export const createPost = async (req, res) => {
   try {
+    //may have to add to this once community board is created
     const result = await cloudinary2.uploader.upload(req.file.path)
     await Post.create({
       title: req.body.title,
       image: result.secure_url,
       cloudinaryId: result.public_id,
-      caption: req.body.caption,
+      content: req.body.content,
       likes: 0,
       user: req.user.id
     })
@@ -68,9 +69,8 @@ export const addComment = async (req, res) => {
   try {
     await Comment.create({
       comment: req.body.comment.trim(),
-      commentByUserID: req.user.id,
-      commentByUserName: req.user.userName,
-      postID: req.params.id
+      user: req.user.id,
+      post: req.params.id
     })
     console.log("Comment has been added!")
     //res.redirect(`/post/${req.params.id}`);
