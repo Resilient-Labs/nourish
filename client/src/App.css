@@ -30,6 +30,22 @@
   width: 2.5rem;
 }
 
+/************************************** Fridge Landing Styling *******************************************/
+.fridgeLanding h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.fridgeLanding--areas {
+  font-size: 2rem;
+}
+
+
+/************************************** End of Fridge Landing Styling ************************************/
+
+
+
+
 /************************************** Fridge Profile Styling *******************************************/
 
 /******** Container styling******/
@@ -121,10 +137,14 @@
   max-height: 1300px;
 }
 
-.fridgePage--directions {
+.fridgePage--directions,
+.fridgeProfile--email {
   color: #0e9e6d;
 }
 
+.fridgeDonation--conditional {
+  margin: 1rem;
+}
 /****************************************** Media Queries ********************************************/
 
 /******************* Individual Fridge Profiles ************************/
