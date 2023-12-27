@@ -46,9 +46,9 @@ export default function FridgeProfile() {
                         <p>
                             <a className="fridgePage--directions" href={fridgeObj.location.directionURL}>{fridgeObj.location.address} {fridgeObj.location.cityState} {fridgeObj.location.zipCode} </a> 
                                 | {fridgeObj.status === "Active" ? (
-                                <span className="fridgeProfile--status">Active 🟢</span>
+                                <span className="fridgeProfile--status">Active Site 🟢</span>
                                 ) : (
-                                <span className="fridgeProfile--status">Unavailable 🔴</span>
+                                <span className="fridgeProfile--status">Site Unavailable 🔴</span>
                                 )}
                         </p>
                         <h2 className="fridgePage--header">About this fridge</h2>
@@ -74,7 +74,7 @@ export default function FridgeProfile() {
                                 ))}
                             </ul>
                         ) : (
-                            <p className="fridgeDonation--conditional">Data not available, please contact <span className="fridgeProfile--email">{fridgeObj.contact.email}</span> for specific donation inquiries!</p>
+                            <p className="fridgeDonation--conditional">Data not available, please contact <span className="fridgeProfile--email">{fridgeObj.contact.email}</span> for specific donation inquiries.</p>
                         )}
                     </div>
                     <div className="donationsSub">
@@ -86,7 +86,7 @@ export default function FridgeProfile() {
                                 ))}
                             </ul>
                         ) : (
-                            <p className="fridgeDonation--conditional">Data not available, please contact <span className="fridgeProfile--email">{fridgeObj.contact.email}</span> for specific donation inquiries!</p>
+                            <p className="fridgeDonation--conditional">Data not available, please contact <span className="fridgeProfile--email">{fridgeObj.contact.email}</span> for specific donation inquiries.</p>
                         )}
                     </div>
                     </div>
