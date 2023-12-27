@@ -1,6 +1,6 @@
-import passport from "passport";
-import validator from "validator";
-import User from "../models/User";
+import passport from 'passport';
+import validator from 'validator';
+import { User } from "../models/User.js";
 
 export const getLogin = (req, res) => {
   if (req.user) {

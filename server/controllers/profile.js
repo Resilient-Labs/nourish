@@ -1,11 +1,11 @@
 import { cloudinary } from "../middleware/cloudinary.js"
-import bcrypt from 'bcryptjs';
 import { User } from "../models/User.js"
 import { Post } from "../models/Post.js"
 
-import pkg from "mongodb"
-const { ObjectID } = pkg
+import pkg1 from "mongodb"
+const { ObjectID } = pkg1
 
+import bcrypt from 'bcrypt';
 
 
 export const getUserProfile = async (req, res) => {
@@ -35,45 +35,45 @@ export const changePassword = async (req, res) => {
   const { currentPassword, newPassword, confirmPassword } = req.body;
 
   try {
-      // Ensure the user is authenticated
-      if (!req.user) {
-          return res.status(401).json({ success: false, message: 'User not authenticated.' });
-      }
+    // Ensure the user is authenticated
+    if (!req.user) {
+      return res.status(401).json({ success: false, message: 'User not authenticated.' });
+    }
 
-      // Validate the new password
-      if (!validator.isLength(newPassword, { min: 8 })) {
-          return res.status(400).json({ success: false, message: 'Password must be at least 8 characters long.' });
-      }
+    // Validate the new password
+    if (!validator.isLength(newPassword, { min: 8 })) {
+      return res.status(400).json({ success: false, message: 'Password must be at least 8 characters long.' });
+    }
 
-      if (newPassword !== confirmPassword) {
-          return res.status(400).json({ success: false, message: 'Passwords do not match.' });
-      }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ success: false, message: 'Passwords do not match.' });
+    }
 
-      // Fetch the user from the database
-      const user = await User.findById(req.user._id);
+    // Fetch the user from the database
+    const user = await User.findById(req.user._id);
 
-      if (!user) {
-          return res.status(404).json({ success: false, message: 'User not found.' });
-      }
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found.' });
+    }
 
-      // Verify the current password
-      const isMatch = await bcrypt.compare(currentPassword, user.password);
-      if (!isMatch) {
-          return res.status(401).json({ success: false, message: 'Your current password is incorrect.' });
-      }
+    // Verify the current password
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: 'Your current password is incorrect.' });
+    }
 
-      // Hash the new password
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(newPassword, salt);
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
 
-      // Update the password
-      user.password = hash;
-      await user.save();
+    // Update the password
+    user.password = hash;
+    await user.save();
 
-      res.json({ success: true, message: 'Password successfully changed.' });
+    res.json({ success: true, message: 'Password successfully changed.' });
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
 
@@ -81,18 +81,19 @@ export const changePassword = async (req, res) => {
 
 export const updateContact = async (req, res) => {
   try {
-    
+
     const userId = req.params.id;
 
     // Find the profile by ID and update
     const updateProfile = await User.findByIdAndUpdate(
       userId,
-      { userName: req.body.userName.trim(),
-      fName: req.body.firstName.trim(),
-      lName: req.body.lastName.trim(),
-     email: req.body.email.trim(),  
-      }, 
-      { new: true } 
+      {
+        userName: req.body.userName.trim(),
+        fName: req.body.firstName.trim(),
+        lName: req.body.lastName.trim(),
+        email: req.body.email.trim(),
+      },
+      { new: true }
     );
 
     if (!updateProfile) {
