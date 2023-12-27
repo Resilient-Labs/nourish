@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary.js"
+import { cloudinary } from "../middleware/cloudinary2.js"
 import { Post } from "../models/Post.js"
 import { Comment } from "../models/Comment.js"
 import pkg from "mongodb"
