@@ -30,7 +30,7 @@ export default function Fridge() {
     };
     fetchAllFridges();
   }, []);
-  // ... inside the ReportCard component
+
   if (isLoading) {
     return <p>Loading fridge list data...</p>;
   }
