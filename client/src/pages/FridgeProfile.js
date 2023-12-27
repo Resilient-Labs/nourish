@@ -12,7 +12,7 @@ export default function FridgeProfile() {
         useEffect(() => {
             const fetchFridge = async () => {
                 try {
-                const response = await fetch(`http://localhost:8000/fridgeProfile/${userId}`)
+                const response = await fetch(`http://localhost:8000/fridge/fridgeProfile/${userId}`)
                 console.log(response)
                 const data = await response.json();
                 setFridge(data);

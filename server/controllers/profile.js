@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary.js"
+// import { cloudinary } from "../middleware/cloudinary.js"
 import { User } from "../models/User.js"
 import { Post } from "../models/Post.js"
 

@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary.js"
+// import { cloudinary } from "../middleware/cloudinary.js"
 import { CommunityFridge as Fridge } from "../models/CommunityFridge.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg

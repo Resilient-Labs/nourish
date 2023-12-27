@@ -19,6 +19,7 @@ export const postLogin = (req, res, next) => {
     validationErrors.push({ msg: "Password cannot be blank." });
   }
 
+
   if (validationErrors.length) {
     return res.status(400).json({ errors: validationErrors });
   }
@@ -100,15 +101,16 @@ export const postSignup = async (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
   try {
-    const existingUser = await User.findOne({ $or: [{ email: req.body.email }, { userName: req.body.userName }] });
+    const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      return res.status(409).json({ error: "Account with that email address or username already exists." });
+      return res.status(409).json({ error: "Account with that email address already exists." });
     }
 
     const newUser = new User({
       email: req.body.email,
       password: req.body.password, 
-      userName: req.body.userName,
+      fName: req.body.firstName,
+      lName: req.body.lastName,
     });
 
     await newUser.save();

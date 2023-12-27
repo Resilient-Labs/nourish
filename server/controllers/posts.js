@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary2.js"
+import { cloudinary2 } from "../middleware/cloudinary2.js"
 import { Post } from "../models/Post.js"
 import { Comment } from "../models/Comment.js"
 import pkg from "mongodb"
@@ -35,7 +35,7 @@ export const getPost = async (req, res) => {
 // }
 export const createPost = async (req, res) => {
   try {
-    const result = await cloudinary.uploader.upload(req.file.path)
+    const result = await cloudinary2.uploader.upload(req.file.path)
     await Post.create({
       title: req.body.title,
       image: result.secure_url,
@@ -128,7 +128,7 @@ export const deletePost = async (req, res) => {
     // Find post by id
     let post = await Post.findById({ _id: req.params.id })
     // Delete image from cloudinary
-    await cloudinary.uploader.destroy(post.cloudinaryId)
+    await cloudinary2.uploader.destroy(post.cloudinaryId)
     // Delete post from db
     await Post.remove({ _id: req.params.id })
     console.log("Deleted Post")
