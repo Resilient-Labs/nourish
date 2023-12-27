@@ -13,6 +13,7 @@ export default function Home() {
       < Navbar />
       < Hero />
       < Fridge />
+      < Fridge data={fridgeData} />
       < About1 />
       < About2 />
       < GetInvolved />
