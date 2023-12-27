@@ -25,7 +25,7 @@ export default function FridgeProfile() {
             fetchFridge();
         }, []);
         if (isLoading) {
-            return <p>Loading student data...</p>;
+            return <p>Loading fridge data...</p>;
         }
         if (error) {
             return <p>Error fetching data: {error.message}</p>;
@@ -43,7 +43,14 @@ export default function FridgeProfile() {
                     <div className="about-sub">
                     <div className="fridgePage--text">
                         <h2 className="fridgePage--header">Address</h2>
-                        <p><a className="fridgePage--directions" href={fridgeObj.location.diretionsURL}>{fridgeObj.location.address} {fridgeObj.location.cityState} {fridgeObj.location.zipCode}</a> | {fridgeObj.status} <span>🟢</span></p>
+                        <p>
+                            <a className="fridgePage--directions" href={fridgeObj.location.directionURL}>{fridgeObj.location.address} {fridgeObj.location.cityState} {fridgeObj.location.zipCode} </a> 
+                                | {fridgeObj.status === "Active" ? (
+                                <span className="fridgeProfile--status">Active Site 🟢</span>
+                                ) : (
+                                <span className="fridgeProfile--status">Site Unavailable 🔴</span>
+                                )}
+                        </p>
                         <h2 className="fridgePage--header">About this fridge</h2>
                     <p>{fridgeObj.description}</p>
                     <div className='socialsContainer'>
@@ -58,22 +65,30 @@ export default function FridgeProfile() {
                     </div>
                     </div>
                     <div className="donationsContainer">
-                        <div className="donationsSub">
-                            <h3 className="fridgePage--header donations">Accepts</h3>
+                    <div className="donationsSub">
+                        <h3 className="fridgePage--header donations">Accepts</h3>
+                        {fridgeObj.donations.allowed.length > 0 ? (
                             <ul>
-                                {fridgeObj.donations.allowed.map((item, index) => 
-                                <li key={index}>{item}</li>
-                                )}
-                            </ul>
-                        </div>
-                        <div className="donationsSub">
-                        <h3 className="fridgePage--header donations">Does not accept</h3>
-                            <ul>
-                                {fridgeObj.donations.notAllowed.map((item, index) => (
-                                <li key={index}>{item}</li>
+                                {fridgeObj.donations.allowed.map((item, index) => (
+                                    <li key={index}>{item}</li>
                                 ))}
                             </ul>
-                        </div>
+                        ) : (
+                            <p className="fridgeDonation--conditional">Data not available, please contact <span className="fridgeProfile--email">{fridgeObj.contact.email}</span> for specific donation inquiries.</p>
+                        )}
+                    </div>
+                    <div className="donationsSub">
+                        <h3 className="fridgePage--header donations">Does not accepts</h3>
+                        {fridgeObj.donations.allowed.length > 0 ? (
+                            <ul>
+                                {fridgeObj.donations.notAllowed.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="fridgeDonation--conditional">Data not available, please contact <span className="fridgeProfile--email">{fridgeObj.contact.email}</span> for specific donation inquiries.</p>
+                        )}
+                    </div>
                     </div>
                 </div>
         </div>
