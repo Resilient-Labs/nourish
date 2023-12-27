@@ -27,22 +27,62 @@
 
 /********************************************** Icons styling ********************************************/
 .social-icons {
-  width: 2rem;
+  width: 2.5rem;
 }
 
 /************************************** Fridge Profile Styling *******************************************/
 
 /******** Container styling******/
-.fridgePage--parent {
+.about-sub,
+.donationsContainer {
   display: flex;
-  border: 1px solid black;
   width: 100%;
 }
 
-.fridgePage--left,
-.fridgePage--right {
+.fridgePage--text,
+.fridgePage--IMG {
+  display: 50%;
+  margin: 2.5rem;
+}
+
+.donationsSub {
   width: 50%;
-  padding: 5rem;
+  border-radius: 15px;
+  border: .1px solid rgb(66, 66, 66);
+  justify-content: space-between;
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  overflow: hidden; 
+}
+
+.donationsSub h3 {
+  border-bottom: 1px solid rgb(66, 66, 66);
+  padding-bottom: 0.5rem; 
+}
+
+.fridgePage--header.donations {
+  background: linear-gradient(45deg, #ffde5b, #ffffa9); 
+}
+
+.socialsContainer {
+  display: flex;
+}
+
+/*******Font Styling**********/
+.fridgePage--status {
+  margin-top:2rem;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.fridgePage--left p {
+  font-size: 1rem;
+  padding: .5rem;
+}
+
+.fridgePage--header {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .fridgePage--community {
@@ -52,3 +92,75 @@
 .fridgePage--status a {
   text-decoration: none;
 }
+
+.fridgePage--status a:hover {
+  color: #0e9e6d;
+  font-size: 125%;
+}
+
+.social-icons:hover {
+  width: 90%;
+}
+
+.donationsSub h3 {
+  text-align: center;
+}
+
+.fridgePage--parent li {
+  margin-left: 1rem;
+}
+
+.donationsSub ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem;
+  list-style-type: circle;
+}
+
+.fridgePage--IMG img {
+  max-height: 1300px;
+}
+
+.fridgePage--directions {
+  color: #0e9e6d;
+}
+
+/****************************************** Media Queries ********************************************/
+
+/******************* Individual Fridge Profiles ************************/
+@media (max-width: 975px) {
+  .about-sub {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .about-sub > div {
+    width: 100%;
+    margin: 0;
+  }
+  .fridgePage--IMG img,
+  .donationsContainer img {
+    width: 100%; 
+    max-width: 100%; 
+    height: auto; 
+  }
+  .fridgePage--text,
+  .fridgePage-IMG {
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .donationsContainer {
+    flex-direction: column;
+  }
+
+  .donationsSub {
+    width: 100%;
+    margin: 1rem 0; 
+  }
+  .donationsContainer{
+    padding: 1rem;
+  }
+}
+
+/**************** End of Individual Fridge Profiles ************************/
