@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import UserProfile from "./pages/UserProfile"
+import FridgeLanding from "./pages/FridgeLanding"
 
 // Routes for pages
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/fridgeprofile" element={<FridgeLanding />} />
       </Routes>
     </BrowserRouter>
   )
