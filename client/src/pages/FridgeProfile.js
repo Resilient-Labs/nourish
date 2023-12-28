@@ -78,7 +78,7 @@ export default function FridgeProfile() {
                         )}
                     </div>
                     <div className="donationsSub">
-                        <h3 className="fridgePage--header donations">Does not accepts</h3>
+                        <h3 className="fridgePage--header donations">Does not accept</h3>
                         {fridgeObj.donations.allowed.length > 0 ? (
                             <ul>
                                 {fridgeObj.donations.notAllowed.map((item, index) => (
