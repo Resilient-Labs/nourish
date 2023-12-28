@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary2.js"
+import { cloudinary2 } from "../middleware/cloudinary2.js"
 import { Post } from "../models/Post.js"
 import { Comment } from "../models/Comment.js"
 import pkg from "mongodb"
@@ -35,12 +35,13 @@ export const getPost = async (req, res) => {
 // }
 export const createPost = async (req, res) => {
   try {
-    const result = await cloudinary.uploader.upload(req.file.path)
+    //may have to add to this once community board is created
+    const result = await cloudinary2.uploader.upload(req.file.path)
     await Post.create({
       title: req.body.title,
       image: result.secure_url,
       cloudinaryId: result.public_id,
-      caption: req.body.caption,
+      content: req.body.content,
       likes: 0,
       user: req.user.id
     })
@@ -68,9 +69,8 @@ export const addComment = async (req, res) => {
   try {
     await Comment.create({
       comment: req.body.comment.trim(),
-      commentByUserID: req.user.id,
-      commentByUserName: req.user.userName,
-      postID: req.params.id
+      user: req.user.id,
+      post: req.params.id
     })
     console.log("Comment has been added!")
     //res.redirect(`/post/${req.params.id}`);
@@ -128,7 +128,7 @@ export const deletePost = async (req, res) => {
     // Find post by id
     let post = await Post.findById({ _id: req.params.id })
     // Delete image from cloudinary
-    await cloudinary.uploader.destroy(post.cloudinaryId)
+    await cloudinary2.uploader.destroy(post.cloudinaryId)
     // Delete post from db
     await Post.remove({ _id: req.params.id })
     console.log("Deleted Post")

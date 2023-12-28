@@ -37,7 +37,11 @@ const PostSchema = new mongoose.Schema({
   cloudinaryId: {
     type: String,
     require: true
-  }
+  },
+  likes: {
+    type: Number,
+    required: true
+  },
 })
 
 const Post = mongoose.model("Post", PostSchema)

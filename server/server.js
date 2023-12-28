@@ -11,6 +11,8 @@ import { connectDB } from "./config/database.js"
 import { router as fridgeRoutes } from "./routes/fridge.js"
 import { router as postRoutes } from "./routes/posts.js"
 import { router as profileRoutes } from "./routes/profile.js"
+import { router as mainRoutes } from "./routes/main.js"
+
 import dotenv from "dotenv"
 import path from "path"
 import cors from "cors"
@@ -49,7 +51,6 @@ app.use(logger("dev"))
 // Passport Config
 configurePassport(passport)
 
-console.log(process.env.DB_STRING)
 
 // Setup Sessions - stored in MongoDB
 const MongoStore = ConnectMongo.create({
@@ -75,7 +76,8 @@ app.use(passport.session())
 app.use(flash())
 
 // Setup Routes For Which The Server Is Listening
-app.use("/", fridgeRoutes)
+app.use("/", mainRoutes)
+app.use("/fridge", fridgeRoutes)
 app.use("/post", postRoutes)
 app.use("/profile", profileRoutes)
 

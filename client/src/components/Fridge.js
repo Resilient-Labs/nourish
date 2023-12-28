@@ -15,7 +15,7 @@ export default function Fridge() {
     const fetchAllFridges = async () => {
       try {
         console.log("i am here now")
-        const response = await fetch(`http://localhost:8000/getAllFridges`)//connect to backend to pull DB due to the chain b-e makes request to be and f-e makes request to b-e server local 8000
+        const response = await fetch(`http://localhost:8000/fridge/getAllFridges`)//connect to backend to pull DB due to the chain b-e makes request to be and f-e makes request to b-e server local 8000
         console.log(response)
 
         const data = await response.json();
