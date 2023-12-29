@@ -7,7 +7,7 @@ const { ObjectID } = pkg
 export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find().sort({ time: "desc" }).lean()
-    res.json({ POSTS: posts })
+    res.json({ posts: posts })
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: "Internal Server Error" })
@@ -82,7 +82,6 @@ export const addComment = async (req, res) => {
 }
 export const editComment = async (req, res) => {
   try {
-   
     const commentId = req.params.id;
 
     // Find the comment by ID and update
