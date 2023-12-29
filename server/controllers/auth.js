@@ -109,8 +109,8 @@ export const postSignup = async (req, res, next) => {
     const newUser = new User({
       email: req.body.email,
       password: req.body.password, 
-      fName: req.body.firstName,
-      lName: req.body.lastName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
     });
 
     await newUser.save();
