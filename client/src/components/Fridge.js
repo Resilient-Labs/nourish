@@ -43,10 +43,10 @@ export default function Fridge() {
       <h1 className="text-2xl font-bold text-center pt-8">Philadelphia Community Fridges and Pantries</h1>
 
       <div className="flex p-12">
-        <div style={{ flex: 1, marginRight: "2.5rem" }}>
+        <div className="flex-1"  style={{ marginRight: "2.5rem" }}>
           <FridgeList allFridges={allFridges} />
         </div>
-        <div style={{ flex: 1 }}>
+        <div className="lg:flex-1 block">
           <FridgeMap allFridges={allFridges} />
         </div>
       </div>
