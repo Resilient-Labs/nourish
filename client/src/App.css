@@ -30,15 +30,20 @@
 
 /************************************** Fridge Profile Styling ** ********************/
 /************************************** Fridge Landing Styling *******************************************/
-.fridgeLanding h1 {
-  font-size: 3rem;
+.fridgeLanding--page h1 {
+  font-size: 2rem;
+}
+
+.fridgeLanding--page h1,
+.fridgeLanding--page p,
+.fridgeLanding--zipFilter {
   text-align: center;
+  margin: 1rem 0;
 }
 
 .fridgeLanding--areas {
   font-size: 2rem;
 }
-
 
 /************************************** End of Fridge Landing Styling ************************************/
 
@@ -144,6 +149,84 @@
 .fridgeDonation--conditional {
   margin: 1rem;
 }
+
+/************************************** End of Fridge Profile Styling ***************************************/
+
+/************************************** Fridge Landing Styling *******************************************/
+.fridgeLanding--container {
+  width: 350px;
+  border-radius: 15px;
+  border: .1px solid rgb(66, 66, 66);
+  justify-content: space-between;
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  overflow: hidden; 
+}
+
+.fridgeLanding--container h2 {
+  border-bottom: 1px solid rgb(66, 66, 66);
+  padding-bottom: 0.5rem; 
+}
+
+h2.fridgeLanding--header {
+  background: linear-gradient(45deg, #ffde5b, #ffffa9);
+  text-align: center;
+  font-size: 1.1rem; 
+  padding: 1rem;
+}
+
+.fridgeLanding--text {
+  padding: 1rem;
+}
+
+.fridgeLanding--container img {
+  width: 100%; 
+  height: auto; 
+  max-height: 200px; 
+  object-fit: cover;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.fridgeLanding--container {
+  flex: 1;
+}
+
+.fridgeLanding--descrip {
+  margin: 1rem 0;
+}
+
+.fridgeLanding--button {
+  background: #0b9f6e;
+  padding: .5rem;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center;
+}
+
+.fridgeLanding--button:hover {
+  background: #047a55;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/************************************** End of Fridge Landing Styling ************************************/
+
+
 /****************************************** Media Queries ********************************************/
 
 /******************* Individual Fridge Profiles ************************/
