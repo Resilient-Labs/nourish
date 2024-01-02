@@ -17,8 +17,8 @@ const router = express.Router()
 // Routes where ensureAuth middleware is applied to protect routes
 router.get("/board", ensureAuth, getAllPosts)
 router.get("/post/:id", ensureAuth, getPost)
-router.post("/createPost", upload.single("file"), createPost)
-router.put("/likePost/:id", likePost)
+router.post("/createPost", ensureAuth, upload.single("file"), createPost)
+router.put("/likePost/:id", ensureAuth, likePost)
 router.post("/addComment/:id", ensureAuth, addComment)
 router.put("/editComment/:id", ensureAuth, editComment)
 router.delete(
