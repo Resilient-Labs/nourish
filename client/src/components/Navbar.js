@@ -24,7 +24,7 @@ export default function Component() {
         <Navbar.Link as={Link} to="/" className="text-lg">Home</Navbar.Link>
         <Navbar.Link as={Link} to="/locations" className="text-lg">Locations</Navbar.Link>
         <Navbar.Link as={Link} to="/community" className="text-lg">Community</Navbar.Link>
-        <Navbar.Link as={Link} to="/contact" className="text-lg">Contact</Navbar.Link>
+        <Navbar.Link as={Link} to="/team" className="text-lg">Team</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   )
