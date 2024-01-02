@@ -4,6 +4,7 @@ import { Comment } from "../models/Comment.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg
 
+
 export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find().sort({ time: "desc" }).lean()
