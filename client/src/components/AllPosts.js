@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"; // using react-router for redirection
+import SocialButtons from './SocialButtons'
+import CommentBox from './CommentBox'
+
 
 
 function PostList() {
@@ -48,6 +51,13 @@ function PostList() {
                         ) : (
                             []
                         )}</div>
+          <div className="flex my-3">
+            <div className="text-4xl mr-4">
+              {post.likes}
+            </div>
+            <SocialButtons /> 
+          </div>
+          <CommentBox />
         </div>
       ))}
     </div>
