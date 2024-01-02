@@ -28,7 +28,7 @@ const teamMemberSchema = new mongoose.Schema({
 })
 
 const TeamMember = mongoose.model(
-  "teamMember",
+  "TeamMember",
   teamMemberSchema,
  "teamMembers"
 )
