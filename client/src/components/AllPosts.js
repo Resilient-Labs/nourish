@@ -32,17 +32,35 @@ function PostList() {
     fetchPosts();
   }, [navigate]);
 
-  const updateLikes = (postId, newLikes) => {
-    setGetAllPosts(prevState => {
-      const updatedPosts = prevState.posts.map(post => {
-        if (post._id === postId) {
-          return { ...post, likes: newLikes };
-        }
-        return post;
+
+  const updateLikes = async (postId) => {
+    try {
+      // Call your backend API to like the post
+      const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // If your backend requires credentials
       });
   
-      return { ...prevState, posts: updatedPosts };
-    });
+      if (response.ok) {
+        setGetAllPosts(prevState => {
+          const updatedPosts = prevState.posts.map(post => {
+            if (post._id === postId) {
+              return { ...post, likes: post.likes + 1 };
+            }
+            return post;
+          });
+  
+          return { ...prevState, posts: updatedPosts };
+        });
+      } else {
+        console.error("Failed to like the post", await response.json());
+      }
+    } catch (error) {
+      console.error("There was an error liking the post: ", error);
+    }
   };
 
   return (
@@ -73,7 +91,7 @@ function PostList() {
             <div className="text-4xl mr-4">
               {post.likes}
             </div>
-            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id, post.likes + 1)}/> 
+            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)}/> 
           </div>
           <CommentBox />
         </div>
