@@ -12,6 +12,7 @@ import { router as fridgeRoutes } from "./routes/fridge.js"
 import { router as postRoutes } from "./routes/posts.js"
 import { router as profileRoutes } from "./routes/profile.js"
 import { router as mainRoutes } from "./routes/main.js"
+import { router as teamRoutes } from "./routes/team.js"
 
 import dotenv from "dotenv"
 import path from "path"
@@ -81,6 +82,7 @@ app.use("/", mainRoutes)
 app.use("/fridge", fridgeRoutes)
 app.use("/post", postRoutes)
 app.use("/profile", profileRoutes)
+app.use("/team", teamRoutes)
 
 
 // Serve React App
