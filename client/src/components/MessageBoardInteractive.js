@@ -3,31 +3,59 @@ import React, { useState } from "react"
 //
 
 function MessageBoardInteractive() {
+ 
+  // const [formData, setFormData] = useState({
+  //   title: "",
+  //   content: "",
+  //   photo: null,
+  // });
   const [notes, setNotes] = useState("")
   const [photo, setPhoto] = useState(null)
   const [postTopic, setPostTopic] = useState("")
   const [fridgeLocation, setFridgeLocation] = useState("")
 
+  // const handleInputChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    // const message = new FormData();
+    // message.append("title", formData.title);
+    // message.append("content", formData.content);
+    // message.append("image", formData.photo);
+
     // Create a new message object
-    const message = {
+    // const message = {
+    //   title: e.target.title.value,
+    //   content: e.target.content.value,
+    //   image: e.target.image.value,
+    //   postTopic,
+    //   fridgeLocation
+    // }
+
+     // Create a new message object
+     const message = {
       notes,
       photo,
       postTopic,
       fridgeLocation
     }
+  
 
     try {
       // Make API call to submit the form data to the server
-      const response = await fetch("/api/messages", {
+      const response = await fetch("http://localhost:8000/post/createPost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: 'include', //This is needed for ensureAuth to work!! -Ro
         body: JSON.stringify(message)
       })
+
+      console.log(message)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -38,6 +66,8 @@ function MessageBoardInteractive() {
       console.log(data) // Assuming the response contains the saved message object
 
       // Reset the form fields
+      // setFormData({ title: "", content: "", photo: null });
+
       setNotes("")
       setPhoto(null)
       setPostTopic("")
@@ -46,6 +76,11 @@ function MessageBoardInteractive() {
       console.error("There was a problem with the fetch operation: ", error)
     }
   }
+
+  // const handlePhotoUpload = (e) => {
+  //   setFormData({ ...formData, photo: e.target.files[0] });
+  // };
+
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0]

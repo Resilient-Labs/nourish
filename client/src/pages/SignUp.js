@@ -20,7 +20,8 @@ export default function SignUp() {
       const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        credentials: 'include',
       })
       if (response.ok) {
         navigate('/')
