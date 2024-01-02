@@ -3,19 +3,17 @@ import "leaflet/dist/leaflet.css"
 
 //display icon in interactive map
 import L from "leaflet"
+import icon from '../images/fridgeIcon_one.png';
 
 //building blocks for leaflet
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
 
-//The MapContainer component now includes a bounds prop, which is set to the calculated bounds array.
-//The center prop of the MapContainer is still set to South Philly.
 // Create a custom icon
 const fridgeIcon = new L.Icon({
-  iconUrl:
-    "https://cdn0.iconfinder.com/data/icons/food-icons-rounded/110/Refrigerator-512.png",
+  iconUrl: icon,
   iconSize: [32, 32],
   iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
+  popupAnchor: [0, -32] 
 })
 
 export default function FridgeMap({ allFridges }) {
@@ -50,6 +48,7 @@ export default function FridgeMap({ allFridges }) {
 
   return (
     <div className="leaflet-container">
+      {/* The MapContainer component now includes a bounds prop, which is set to the calculated bounds array. */}
       <MapContainer
         center={mapCenter}
         zoom={13}
