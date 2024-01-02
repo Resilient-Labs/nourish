@@ -32,6 +32,59 @@ function PostList() {
     fetchPosts();
   }, [navigate]);
 
+
+  const updateLikes = async (postId) => {
+    try {
+      // Call your backend API to like the post
+      const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // If your backend requires credentials
+      });
+  
+      if (response.ok) {
+        setGetAllPosts(prevState => {
+          const updatedPosts = prevState.posts.map(post => {
+            if (post._id === postId) {
+              return { ...post, likes: post.likes + 1 };
+            }
+            return post;
+          });
+  
+          return { ...prevState, posts: updatedPosts };
+        });
+      } else {
+        console.error("Failed to like the post", await response.json());
+      }
+    } catch (error) {
+      console.error("There was an error liking the post: ", error);
+    }
+  };
+
+  const deletePost = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/post/deletePost/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // If your backend requires credentials
+      });
+  
+      if (response.ok) {
+        setGetAllPosts(prevState => ({
+          posts: prevState.posts.filter(post => post._id !== postId),
+        }));
+      } else {
+        console.error("Failed to delete the post", await response.json());
+      }
+    } catch (error) {
+      console.error("There was an error deleting the post: ", error);
+    }
+  };
+
   return (
     <div className="message-board bg-gray-100 p-5 rounded-lg">
       <h2 className="message-board-title text-2xl font-bold mb-5">All Posts</h2>
@@ -40,6 +93,11 @@ function PostList() {
           <h3 className="message-title text-xl font-semibold mb-2">
             {post.title}
           </h3>
+
+
+          {/* adding user info */}
+          <p className="post-author text-gray-500">Posted by: {post.user.firstName} {post.user.lastName}</p>
+
           <p className="message-content text-gray-700">{post.content}</p>
           <div><img src={post.image} alt="postIMG"/></div>
           <div>{post.tags.length > 0 ? (
@@ -55,7 +113,7 @@ function PostList() {
             <div className="text-4xl mr-4">
               {post.likes}
             </div>
-            <SocialButtons /> 
+            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={()=>deletePost(post._id)}/> 
           </div>
           <CommentBox />
         </div>
