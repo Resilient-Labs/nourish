@@ -128,18 +128,53 @@ export const deleteComment = async (req, res) => {
 //END COMMENTS =====================================================
 export const deletePost = async (req, res) => {
   try {
-    // Find post by id
-    let post = await Post.findById({ _id: req.params.id })
-    // Delete image from cloudinary
-    await cloudinary2.uploader.destroy(post.cloudinaryId)
-    // Delete post from db
-    await Post.remove({ _id: req.params.id })
-    console.log("Deleted Post")
-    //res.redirect("/profile");
-    res.status(200).send({ message: "Post deleted successfully" })
+    // Find the post by ID
+    const post = await Post.findById(req.params.id);
+
+    // Check if the post exists
+    if (!post) {
+      return res.status(404).send({ message: "Post not found" });
+    }
+
+    // Check if the authenticated user is the creator of the post
+    if (post.user.toString() !== req.user._id.toString()) {
+      return res.status(403).send({ message: "Not authorized to delete this post" });
+    }
+
+    // Delete image from Cloudinary
+    await cloudinary2.uploader.destroy(post.cloudinaryId);
+
+    // Delete the post from the database
+    await Post.deleteOne({ _id: req.params.id });
+
+    res.status(200).send({ message: "Post deleted successfully" });
   } catch (err) {
-    console.log(err)
-    //res.redirect("/profile");
-    res.status(500).send({ message: "Error deleting post" })
+    console.error(err);
+    res.status(500).send({ message: "Error deleting post" });
   }
-}
+};
+
+
+
+
+
+
+
+
+// export const deletePost = async (req, res) => {
+//   try {
+//     // Find post by id
+//     let post = await Post.findById({ _id: req.params.id })
+//     // Delete image from cloudinary
+//     await cloudinary2.uploader.destroy(post.cloudinaryId)
+//     // Delete post from db
+//     await Post.remove({ _id: req.params.id })
+//     console.log("Deleted Post")
+//     //res.redirect("/profile");
+//     res.status(200).send({ message: "Post deleted successfully" })
+//   } catch (err) {
+//     console.log(err)
+//     //res.redirect("/profile");
+//     res.status(500).send({ message: "Error deleting post" })
+//   }
+// }

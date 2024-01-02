@@ -63,6 +63,28 @@ function PostList() {
     }
   };
 
+  const deletePost = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/post/deletePost/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // If your backend requires credentials
+      });
+  
+      if (response.ok) {
+        setGetAllPosts(prevState => ({
+          posts: prevState.posts.filter(post => post._id !== postId),
+        }));
+      } else {
+        console.error("Failed to delete the post", await response.json());
+      }
+    } catch (error) {
+      console.error("There was an error deleting the post: ", error);
+    }
+  };
+
   return (
     <div className="message-board bg-gray-100 p-5 rounded-lg">
       <h2 className="message-board-title text-2xl font-bold mb-5">All Posts</h2>
@@ -91,7 +113,7 @@ function PostList() {
             <div className="text-4xl mr-4">
               {post.likes}
             </div>
-            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)}/> 
+            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={()=>deletePost(post._id)}/> 
           </div>
           <CommentBox />
         </div>
