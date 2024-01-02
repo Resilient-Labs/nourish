@@ -38,6 +38,7 @@ function PostList() {
             {post.title}
           </h3>
           <p className="message-content text-gray-700">{post.content}</p>
+          <div><img src={post.image}/></div>
         </div>
       ))}
     </div>

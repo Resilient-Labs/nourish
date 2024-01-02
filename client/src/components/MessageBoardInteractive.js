@@ -3,7 +3,7 @@ import React, { useState } from "react"
 //
 
 function MessageBoardInteractive() {
- 
+
   // const [formData, setFormData] = useState({
   //   title: "",
   //   content: "",
@@ -35,27 +35,34 @@ function MessageBoardInteractive() {
     //   fridgeLocation
     // }
 
-     // Create a new message object
-     const message = {
-      notes,
-      photo,
-      postTopic,
-      fridgeLocation
-    }
-  
+    // // Create a new message object
+    // const message = {
+    //   notes,
+    //   photo,
+    //   postTopic,
+    //   fridgeLocation
+    // }
+
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('file', photo); // Make sure the name 'file' matches what multer expects
+    formData.append('title', notes);
+    formData.append('postTopic', postTopic);
+    formData.append('fridgeLocation', fridgeLocation);
+
 
     try {
       // Make API call to submit the form data to the server
       const response = await fetch("http://localhost:8000/post/createPost", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        // headers: {
+        //   "Content-Type": "application/json"
+        // },
         credentials: 'include', //This is needed for ensureAuth to work!! -Ro
-        body: JSON.stringify(message)
+        body: formData
       })
 
-      console.log(message)
+      console.log(formData)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -129,6 +136,7 @@ function MessageBoardInteractive() {
           </h2>
           <input
             type="text"
+            name="title"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             className="h-10 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -160,6 +168,7 @@ function MessageBoardInteractive() {
               id="photo-upload"
               type="file"
               accept="image/*"
+              name="file"
               className="hidden"
               onChange={handlePhotoUpload}
             />
