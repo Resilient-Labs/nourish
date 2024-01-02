@@ -10,7 +10,7 @@ function PostList() {
     const fetchPosts = async () => {
       try {
         const response = await fetch("http://localhost:8000/post/board", {
-          credentials: 'include',
+          credentials: 'include', //needed to check ensureAuth -Ro
         });
         if (!response.ok) {
           if (response.status === 401) {
@@ -38,7 +38,16 @@ function PostList() {
             {post.title}
           </h3>
           <p className="message-content text-gray-700">{post.content}</p>
-          <div><img src={post.image}/></div>
+          <div><img src={post.image} alt="postIMG"/></div>
+          <div>{post.tags.length > 0 ? (
+                            <div>
+                                {post.tags.map((tag, index) => (
+                                    <div key={index}>{tag} </div> 
+                                ))}
+                            </div>
+                        ) : (
+                            []
+                        )}</div>
         </div>
       ))}
     </div>

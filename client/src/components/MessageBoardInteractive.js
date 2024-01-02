@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+
 
 //
 
@@ -9,14 +10,34 @@ function MessageBoardInteractive() {
   //   content: "",
   //   photo: null,
   // });
-  const [notes, setNotes] = useState("")
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
   const [photo, setPhoto] = useState(null)
+  const [tags, setTags] = useState([]);
+  const [getAllFridges, setGetAllFridges] = useState({ fridges: [] });
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [postTopic, setPostTopic] = useState("")
   const [fridgeLocation, setFridgeLocation] = useState("")
 
   // const handleInputChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  //   setFormData({ ...formData, [e.target.name]: e.target.value })
   // };
+
+   useEffect(() => {
+    const fetchAllFridges = async () => {
+        try {
+        const response = await fetch(`http://localhost:8000/fridge/getAllFridges`) // req to BE
+        const data = await response.json()
+        setGetAllFridges(data);
+        } catch (error) {
+        setError(error);
+        } finally {
+        setIsLoading(false);
+        }
+    };
+    fetchAllFridges();
+    }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,9 +67,12 @@ function MessageBoardInteractive() {
     // Create FormData object
     const formData = new FormData();
     formData.append('file', photo); // Make sure the name 'file' matches what multer expects
-    formData.append('title', notes);
+    formData.append('title', title);
+    formData.append('content', content)
+    formData.append('tags', JSON.stringify(tags)); // Convert array to JSON string
     formData.append('postTopic', postTopic);
     formData.append('fridgeLocation', fridgeLocation);
+
 
 
     try {
@@ -75,8 +99,10 @@ function MessageBoardInteractive() {
       // Reset the form fields
       // setFormData({ title: "", content: "", photo: null });
 
-      setNotes("")
+      setTitle("")
+      setContent("")
       setPhoto(null)
+      setTags([]); // Reset tags
       setPostTopic("")
       setFridgeLocation("")
     } catch (error) {
@@ -94,34 +120,50 @@ function MessageBoardInteractive() {
     setPhoto(file)
   }
 
-  const handlePostTopicClick = async () => {
-    try {
-      // Make API call to get post topics from the server
-      const response = await fetch("/api/postTopics")
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const data = await response.json()
-      // Handle the response from the server
-      console.log(data)
-    } catch (error) {
-      console.error("There was a problem with the fetch operation: ", error)
+  const handleSelectChange = (event) => {
+    const selectedTag = event.target.value;
+    if (selectedTag && !tags.includes(selectedTag)) {
+      setTags([...tags, selectedTag]);
     }
-  }
+  };
 
-  const handleFridgeLocationClick = async () => {
-    try {
-      // Make API call to get fridge locations from the server
-      const response = await fetch("/api/fridgeLocations")
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const data = await response.json()
-      // Handle the response from the server
-      console.log(data)
-    } catch (error) {
-      console.error("There was a problem with the fetch operation: ", error)
-    }
+
+  // const handlePostTopicClick = async () => {
+  //   try {
+  //     // Make API call to get post topics from the server
+  //     const response = await fetch("/api/postTopics")
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`)
+  //     }
+  //     const data = await response.json()
+  //     // Handle the response from the server
+  //     console.log(data)
+  //   } catch (error) {
+  //     console.error("There was a problem with the fetch operation: ", error)
+  //   }
+  // }
+
+  // const handleFridgeLocationClick = async () => {
+  //   try {
+  //     // Make API call to get fridge locations from the server
+  //     const response = await fetch("/api/fridgeLocations")
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`)
+  //     }
+  //     const data = await response.json()
+  //     // Handle the response from the server
+  //     console.log(data)
+  //   } catch (error) {
+  //     console.error("There was a problem with the fetch operation: ", error)
+  //   }
+  // }
+
+  //acts like a catch error
+  if (isLoading) {
+    return <p>Loading fridge list data...</p>;
+  }
+  if (error) {
+    return <p>Error fetching data: {error.message}</p>;
   }
 
   return (
@@ -134,11 +176,20 @@ function MessageBoardInteractive() {
           <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
             Got an update or request? Leave your notes here!
           </h2>
+          <label for="title">Title:</label>
           <input
             type="text"
             name="title"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="h-10 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <label for="content">Message:</label>
+          <textarea
+            type="text"
+            name="content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             className="h-10 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <button
@@ -181,12 +232,20 @@ function MessageBoardInteractive() {
                 alt="Post Topic Icon"
                 className="h-6 w-6"
               />
-              <button
+              <select id="locations" name="locations" onChange={handleSelectChange}>
+                <option value="">Fridge Locations</option>
+                {Array.from(new Set(getAllFridges.fridges.map(fridge => fridge.name))) //dynamically get zips from mdb
+                  .sort((a, b) => a - b) // sort drop down menu items for easy nav
+                  .map((location, index) => (
+                    <option key={index} value={location}>{location}</option>
+                  ))}
+              </select>
+              {/* <button
                 onClick={handlePostTopicClick}
                 className="text-neutral-800 text-opacity-80 text-lg tracking-wide"
               >
                 Select Post Topic
-              </button>
+              </button> */}
             </div>
             <div className="flex items-center gap-4">
               <img
@@ -195,12 +254,21 @@ function MessageBoardInteractive() {
                 alt="Fridge Location Icon"
                 className="h-6 w-6"
               />
-              <button
+              <select id="postTags" name="postTags" onChange={handleSelectChange}>
+              <option value="">Post Topic</option>
+                <option value="Food Request">Food Request</option>
+                <option value="Food Delivery">Food Delivery</option>
+                <option value="Food Contribution">Food Contribution</option>
+                <option value="Fridge Hardware Maintenance">Fridge Hardware Maintenance</option>
+                <option value="Fridge Cleaning Maintenance">Fridge Cleaning Maintenance</option>
+                <option value="General">General</option>
+              </select>
+              {/* <button
                 onClick={handleFridgeLocationClick}
                 className="text-neutral-800 text-opacity-80 text-lg tracking-wide"
               >
                 Select Fridge Location
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
