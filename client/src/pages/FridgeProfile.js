@@ -53,6 +53,7 @@ export default function FridgeProfile() {
                         </p>
                         <h2 className="fridgePage--header">About this fridge</h2>
                     <p>{fridgeObj.description}</p>
+                    <a className="fridgePage--volBut" href={fridgeObj.contact.volunteerURL}>Volunteer with {fridgeObj.name}</a>
                     <div className='socialsContainer'>
                         <a href={`mailto:${fridgeObj.contact.email}`} target="_blank"><img className='social-icons' src='../Icons/icons8-email-50.png'/></a>
                         <a href={fridgeObj.contact.siteURL}><img className='social-icons' src='../Icons/icons8-website-50.png'/></a>
@@ -79,7 +80,7 @@ export default function FridgeProfile() {
                     </div>
                     <div className="donationsSub">
                         <h3 className="fridgePage--header donations">Does not accept</h3>
-                        {fridgeObj.donations.allowed.length > 0 ? (
+                        {fridgeObj.donations.notAllowed.length > 0 ? (
                             <ul>
                                 {fridgeObj.donations.notAllowed.map((item, index) => (
                                     <li key={index}>{item}</li>
