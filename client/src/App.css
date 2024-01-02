@@ -216,8 +216,7 @@ h2.fridgeLanding--header {
   text-align: center;
 }
 
-.fridgeLanding--button:hover,
-.fridgePage--volBut:hover {
+.fridgeLanding--button:hover {
   background: #047a55;
 }
 
