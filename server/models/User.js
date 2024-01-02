@@ -1,34 +1,37 @@
 import bcrypt from 'bcrypt';
-import { mongoose } from "mongoose"
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
-  fName: String ,
-  lName: String,
-})
+  firstName: String,
+  lastName: String,
+});
 
 // Password hash middleware.
-UserSchema.pre("save", function save(next) {
-  const user = this
-  if (!user.isModified("password")) return next()
+UserSchema.pre("save", async function save(next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
 
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) return next(err)
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return next(err)
-      user.password = hash
-      next()
-    })
-  })
-})
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(user.password, salt);
+    user.password = hash;
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 // Helper method for validating user's password.
-UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    cb(err, isMatch)
-  })
-}
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  try {
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    return isMatch;
+  } catch (err) {
+    throw err;
+  }
+};
 
-const User = mongoose.model("User", UserSchema)
-export { User }
+const User = mongoose.model("User", UserSchema);
+export { User };

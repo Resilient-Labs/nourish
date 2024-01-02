@@ -88,9 +88,8 @@ export const updateContact = async (req, res) => {
     const updateProfile = await User.findByIdAndUpdate(
       userId,
       {
-        userName: req.body.userName.trim(),
-        fName: req.body.firstName.trim(),
-        lName: req.body.lastName.trim(),
+        firstName: req.body.firstName.trim(),
+        lastName: req.body.lastName.trim(),
         email: req.body.email.trim(),
       },
       { new: true }

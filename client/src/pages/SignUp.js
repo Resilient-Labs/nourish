@@ -1,8 +1,39 @@
-import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import { Link, useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import Terms from '../components/Terms';
 
-export default function Login() {
+export default function SignUp() {
+  const navigate = useNavigate()
+
+  const handleSignUp = async (e) => {
+    e.preventDefault()
+
+    const formData = {
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      confirmPassword: e.target.confirmPassword.value
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+        credentials: 'include',
+      })
+      if (response.ok) {
+        navigate('/')
+      } else {
+        const data = await response.json()
+        console.error('Signup failed:', data.errors || data.error)
+      }
+    } catch (err) {
+      console.error('An error occured during signup:', err)
+    }
+  }
+
   return (
     <div>
       <Navbar />
@@ -15,7 +46,12 @@ export default function Login() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Create an account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="POST">
+              <form
+                className="space-y-4 md:space-y-6"
+                method="POST"
+                action="http://localhost:8000/signup"
+                onSubmit={handleSignUp}
+              >
                 <div>
                   <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">First name</label>
                   <input type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-300 focus:border-green-300 block w-full p-2.5" required />
@@ -80,5 +116,5 @@ export default function Login() {
         © 2023 Nourish&trade;
       </p>
     </div>
-  );
+  )
 }
