@@ -204,7 +204,8 @@ h2.fridgeLanding--header {
   margin: 1rem 0;
 }
 
-.fridgeLanding--button {
+.fridgeLanding--button,
+.fridgePage--volBut {
   background: #0b9f6e;
   padding: .5rem;
   border-radius: 5px;
@@ -215,7 +216,8 @@ h2.fridgeLanding--header {
   text-align: center;
 }
 
-.fridgeLanding--button:hover {
+.fridgeLanding--button:hover,
+.fridgePage--volBut:hover {
   background: #047a55;
 }
 
