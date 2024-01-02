@@ -1,9 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
 import Navbar from '../components/Navbar'
 import Terms from '../components/Terms';
 
 export default function SignUp() {
   const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleSignUp = async (e) => {
     e.preventDefault()
@@ -27,12 +31,18 @@ export default function SignUp() {
         navigate('/')
       } else {
         const data = await response.json()
-        console.error('Signup failed:', data.errors || data.error)
+        if (data.errors) {
+          const errorMsg = data.errors.map(error => error.msg).join(', ');
+          setErrorMessage(errorMsg);
+        }
       }
     } catch (err) {
-      console.error('An error occured during signup:', err)
+      setErrorMessage('An error occurred during signup. Please try again.');
+      console.error('An error occurred during signup:', err);
     }
   }
+
+
 
   return (
     <div>
@@ -46,6 +56,10 @@ export default function SignUp() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Create an account
               </h1>
+              <div className="text-red-500 text-sm">
+                   {errorMessage}
+                </div>
+
               <form
                 className="space-y-4 md:space-y-6"
                 method="POST"
@@ -77,7 +91,7 @@ export default function SignUp() {
                     <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300" required />
                   </div>
                   <div className="ml-3 text-sm">
-                    
+
                     <label htmlFor="terms" className="font-light text-gray-500">I accept the <Link className="font-medium text-green-500 hover:underline" to="#"><Terms /></Link></label>
                   </div>
                 </div>

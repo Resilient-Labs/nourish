@@ -1,8 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
 import Navbar from '../components/Navbar'
 
 export default function Login() {
   const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleSignIn = async (e) => {
     e.preventDefault()
@@ -23,7 +27,22 @@ export default function Login() {
         navigate('/')
       } else {
         const data = await response.json()
-        console.error('Login failed:', data.errors || data.error)
+        console.log(data)
+        console.log(data.errors)
+        console.log(data.errors.msg)
+
+        console.error('Login failed:', data.errors.msg || data.error)
+        // Check if data.errors is an array before mapping
+        if (Array.isArray(data.errors)) {
+          const errorMsg = data.errors.map(error => error.msg).join(', ');
+          setErrorMessage(errorMsg);
+        } else if (data.errors) {
+          // Handle non-array error message
+          setErrorMessage(data.errors.msg);
+        } else {
+          // Fallback error message
+          setErrorMessage("An unknown error occurred");
+        }
       }
     } catch (err) {
       console.error('An error occured during login:', err)
@@ -42,6 +61,7 @@ export default function Login() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Sign in to your account
               </h1>
+              {errorMessage && <div className="text-red-500">{errorMessage}</div>}
               <form
                 className="space-y-4 md:space-y-6"
                 method="POST"
@@ -59,7 +79,7 @@ export default function Login() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
-                      <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300" required />
+                      <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300" />
                     </div>
                     <div className="ml-3 text-sm">
                       <label htmlFor="remember" className="text-gray-500">Remember me</label>
