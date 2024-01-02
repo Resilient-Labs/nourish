@@ -18,14 +18,6 @@ const PostSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  cityState: {
-    type: String,
-    required: true
-  },
-  zipCode: {
-    type: String,
-    required: true
-  },
   tags: [
     {
       type: String
@@ -37,7 +29,11 @@ const PostSchema = new mongoose.Schema({
   cloudinaryId: {
     type: String,
     require: true
-  }
+  },
+  likes: {
+    type: Number,
+    required: true
+  },
 })
 
 const Post = mongoose.model("Post", PostSchema)

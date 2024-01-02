@@ -1,13 +1,14 @@
-import { cloudinary } from "../middleware/cloudinary.js"
+import { cloudinary2 } from "../middleware/cloudinary2.js"
 import { Post } from "../models/Post.js"
 import { Comment } from "../models/Comment.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg
 
+
 export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find().sort({ time: "desc" }).lean()
-    res.json({ POSTS: posts })
+    res.json({ posts: posts })
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: "Internal Server Error" })
@@ -35,14 +36,16 @@ export const getPost = async (req, res) => {
 // }
 export const createPost = async (req, res) => {
   try {
-    const result = await cloudinary.uploader.upload(req.file.path)
+    //may have to add to this once community board is created
+    const result = await cloudinary2.uploader.upload(req.file.path)
     await Post.create({
       title: req.body.title,
       image: result.secure_url,
       cloudinaryId: result.public_id,
-      caption: req.body.caption,
+      content: req.body.content,
       likes: 0,
-      user: req.user.id
+      user: req.user.id,
+      tags: req.body.tags ? JSON.parse(req.body.tags) : [],
     })
     console.log("Post has been added!")
     //res.redirect("/profile");
@@ -68,9 +71,8 @@ export const addComment = async (req, res) => {
   try {
     await Comment.create({
       comment: req.body.comment.trim(),
-      commentByUserID: req.user.id,
-      commentByUserName: req.user.userName,
-      postID: req.params.id
+      user: req.user.id,
+      post: req.params.id
     })
     console.log("Comment has been added!")
     //res.redirect(`/post/${req.params.id}`);
@@ -82,7 +84,6 @@ export const addComment = async (req, res) => {
 }
 export const editComment = async (req, res) => {
   try {
-   
     const commentId = req.params.id;
 
     // Find the comment by ID and update
@@ -128,7 +129,7 @@ export const deletePost = async (req, res) => {
     // Find post by id
     let post = await Post.findById({ _id: req.params.id })
     // Delete image from cloudinary
-    await cloudinary.uploader.destroy(post.cloudinaryId)
+    await cloudinary2.uploader.destroy(post.cloudinaryId)
     // Delete post from db
     await Post.remove({ _id: req.params.id })
     console.log("Deleted Post")

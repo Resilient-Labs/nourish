@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary.js"
+// import { cloudinary } from "../middleware/cloudinary.js"
 import { User } from "../models/User.js"
 import { Post } from "../models/Post.js"
 
@@ -88,9 +88,8 @@ export const updateContact = async (req, res) => {
     const updateProfile = await User.findByIdAndUpdate(
       userId,
       {
-        userName: req.body.userName.trim(),
-        fName: req.body.firstName.trim(),
-        lName: req.body.lastName.trim(),
+        firstName: req.body.firstName.trim(),
+        lastName: req.body.lastName.trim(),
         email: req.body.email.trim(),
       },
       { new: true }

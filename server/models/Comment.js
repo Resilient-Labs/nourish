@@ -1,21 +1,13 @@
 import mongoose from "mongoose"
 
 const CommentSchema = new mongoose.Schema({
-  title: {
+  comment: {
     type: String,
-    required: true
+    required: true,
   },
-  image: {
-    type: String,
-    require: true
-  },
-  cloudinaryId: {
-    type: String,
-    require: true
-  },
-  caption: {
-    type: String,
-    required: true
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
   },
   likes: {
     type: Number,

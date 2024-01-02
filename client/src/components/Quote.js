@@ -1,6 +1,6 @@
 export default function Quote() {
   return (
-    <section className="relative isolate overflow-hidden px-6 pt-24 pb-10">
+    <section className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl lg:max-w-4xl">
         <figure>
           <blockquote className="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">

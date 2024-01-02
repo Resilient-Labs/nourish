@@ -1,4 +1,4 @@
-import { cloudinary } from "../middleware/cloudinary.js"
+// import { cloudinary } from "../middleware/cloudinary.js"
 import { CommunityFridge as Fridge } from "../models/CommunityFridge.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg
@@ -6,8 +6,6 @@ const { ObjectID } = pkg
 export const getAllFridges = async (req, res) => {
   try {
     const fridges = await Fridge.find().lean()
-    console.log('getAllFridges: ')
-    console.log(fridges)
     res.json({ fridges: fridges })
   } catch (err) {
     console.log(err)
