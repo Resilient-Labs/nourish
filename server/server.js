@@ -41,6 +41,7 @@ app.use(
   cors({
     origin: "http://localhost:3000", // Allow requests only from port 3000
     methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
+    credentials: true, 
     allowedHeaders: ["Content-Type", "Authorization"] // Allow specific headers
   })
 )

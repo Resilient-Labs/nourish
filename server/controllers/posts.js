@@ -44,7 +44,8 @@ export const createPost = async (req, res) => {
       cloudinaryId: result.public_id,
       content: req.body.content,
       likes: 0,
-      user: req.user.id
+      user: req.user.id,
+      tags: req.body.tags ? JSON.parse(req.body.tags) : [],
     })
     console.log("Post has been added!")
     //res.redirect("/profile");
