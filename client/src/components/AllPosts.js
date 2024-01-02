@@ -32,6 +32,19 @@ function PostList() {
     fetchPosts();
   }, [navigate]);
 
+  const updateLikes = (postId, newLikes) => {
+    setGetAllPosts(prevState => {
+      const updatedPosts = prevState.posts.map(post => {
+        if (post._id === postId) {
+          return { ...post, likes: newLikes };
+        }
+        return post;
+      });
+  
+      return { ...prevState, posts: updatedPosts };
+    });
+  };
+
   return (
     <div className="message-board bg-gray-100 p-5 rounded-lg">
       <h2 className="message-board-title text-2xl font-bold mb-5">All Posts</h2>
@@ -40,6 +53,11 @@ function PostList() {
           <h3 className="message-title text-xl font-semibold mb-2">
             {post.title}
           </h3>
+
+
+          {/* adding user info */}
+          <p className="post-author text-gray-500">Posted by: {post.user.firstName} {post.user.lastName}</p>
+
           <p className="message-content text-gray-700">{post.content}</p>
           <div><img src={post.image} alt="postIMG"/></div>
           <div>{post.tags.length > 0 ? (
@@ -55,7 +73,7 @@ function PostList() {
             <div className="text-4xl mr-4">
               {post.likes}
             </div>
-            <SocialButtons /> 
+            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id, post.likes + 1)}/> 
           </div>
           <CommentBox />
         </div>

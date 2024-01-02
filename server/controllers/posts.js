@@ -7,7 +7,9 @@ const { ObjectID } = pkg
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find().sort({ time: "desc" }).lean()
+    const posts = await Post.find()
+    .populate('user', 'firstName lastName') // Only include first and last name of the user
+    .sort({ time: "desc" }).lean()
     res.json({ posts: posts })
   } catch (err) {
     console.log(err)
