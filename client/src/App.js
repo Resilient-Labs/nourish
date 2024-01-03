@@ -7,6 +7,7 @@ import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import UserProfile from "./pages/UserProfile"
 import FridgeLocations from "./pages/FridgeLocations"
+import OurTeam from "./pages/OurTeam"
 
 // Routes for pages
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/locations" element={<FridgeLocations />} />
+        <Route path="/team" element={<OurTeam />} />
       </Routes>
     </BrowserRouter>
   )
