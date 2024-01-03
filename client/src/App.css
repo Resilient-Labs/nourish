@@ -256,7 +256,8 @@ h1 {
   padding: 4rem 15rem;
 }
 
-.teamBlurb h1 {
+.teamBlurb h1,
+.communityBoard--blurb h1 {
   font-weight: 700;
 }
 
@@ -305,6 +306,41 @@ h1 {
 }
 
 /************************************** End Team Styling ********************************/
+
+/************************************** Community Board Styling ********************************/
+.communityBoard--img {
+  max-width: 300px;
+}
+
+.communityBoard--tags {
+  background: linear-gradient(45deg, #00a41e, #364d00);
+  color: white;
+  padding: 1px 5px; /* Adjust padding as needed */
+  margin-right: 5px; /* Optional: Add margin between tags */
+  display: inline-block; /* Ensure tags appear on the same line */
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.communityBoard--user {
+  color: gray;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.messageContainer {
+  max-height: 100vh;
+  overflow: scroll;
+  margin: 1rem 0;
+}
+
+.communityBoard--blurb {
+  text-align: center;
+  background: linear-gradient(180deg, #0b9f6e8a, #ffeb92);
+  padding: 3rem 1rem;
+}
+
+/************************************ End Community Board Styling ******************************/
 
 
 /****************************************** Media Queries ********************************************/

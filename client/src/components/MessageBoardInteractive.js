@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
+import AllPosts from "../components/AllPosts"
+import PropTypes from "prop-types"
 
-
-//
-
-function MessageBoardInteractive({ onNewPost }) {
+function MessageBoardInteractive({ onNewPost, posts, setPosts }) {
 
   // set up states
   const [title, setTitle] = useState("")
@@ -105,15 +104,30 @@ function MessageBoardInteractive({ onNewPost }) {
   }
 
   return (
-    <div>
-      <form
-        className="bg-white flex flex-col md:flex-row gap-4 p-4 md:p-8 rounded-md border border-neutral-800 border-opacity-60"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex flex-col gap-4 md:w-1/2">
-          <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
-            Got an update or request? Leave your notes here!
+  <div className="messageForm">
+  <div className="flex flex-col md:flex-row gap-4">
+    <form className="bg-white flex flex-col md:w-1/4 gap-4 p-4 md:p-8" onSubmit={handleSubmit}>
+    <div className="flex flex-col gap-4">
+        <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
+            Need help or have help to offer? Leave a message!
           </h2>
+          <select id="locations" name="locations" onChange={handleSelectChange}>
+            <option value="">Fridge Locations</option>
+            {Array.from(new Set(getAllFridges.fridges.map(fridge => fridge.name))) //dynamically get zips from mdb
+              .sort((a, b) => a - b) // sort drop down menu items for easy nav
+              .map((location, index) => (
+                <option key={index} value={location}>{location}</option>
+            ))}
+          </select>
+          <select id="postTags" name="postTags" onChange={handleSelectChange}>
+            <option value="">Post Topic</option>
+            <option value="Food Request">Food Request</option>
+            <option value="Food Delivery">Food Delivery</option>
+            <option value="Food Contribution">Food Contribution</option>
+            <option value="Fridge Hardware Maintenance">Fridge Hardware Maintenance</option>
+            <option value="Fridge Cleaning Maintenance">Fridge Cleaning Maintenance</option>
+            <option value="General">General</option>
+          </select>
           <label for="title">Title:</label>
           <input
             type="text"
@@ -128,21 +142,9 @@ function MessageBoardInteractive({ onNewPost }) {
             name="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="h-10 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="h-20 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
-          >
-            SUBMIT
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-4 md:w-1/2">
-          <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
-            Upload a photo of the inside of the fridge to let others know what’s
-            there
-          </h2>
+          <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide"> Upload a photo of the inside of the fridge to let others know what’s there</h2>
           <div className="bg-orange-600 flex items-center justify-center py-2 px-4 rounded-md">
             <label htmlFor="photo-upload" className="cursor-pointer">
               <img
@@ -162,45 +164,21 @@ function MessageBoardInteractive({ onNewPost }) {
               onChange={handlePhotoUpload}
             />
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cdede62a8b4ab1216c8f8be6e05c0faa7f5d61b1542a8d3fda20b773757ee01?apiKey=24893b07929841ac8f1197a89a1bfe80&"
-                alt="Post Topic Icon"
-                className="h-6 w-6"
-              />
-              <select id="locations" name="locations" onChange={handleSelectChange}>
-                <option value="">Fridge Locations</option>
-                {Array.from(new Set(getAllFridges.fridges.map(fridge => fridge.name))) //dynamically get zips from mdb
-                  .sort((a, b) => a - b) // sort drop down menu items for easy nav
-                  .map((location, index) => (
-                    <option key={index} value={location}>{location}</option>
-                  ))}
-              </select>
-            </div>
-            <div className="flex items-center gap-4">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cdede62a8b4ab1216c8f8be6e05c0faa7f5d61b1542a8d3fda20b773757ee01?apiKey=24893b07929841ac8f1197a89a1bfe80&"
-                alt="Fridge Location Icon"
-                className="h-6 w-6"
-              />
-              <select id="postTags" name="postTags" onChange={handleSelectChange}>
-                <option value="">Post Topic</option>
-                <option value="Food Request">Food Request</option>
-                <option value="Food Delivery">Food Delivery</option>
-                <option value="Food Contribution">Food Contribution</option>
-                <option value="Fridge Hardware Maintenance">Fridge Hardware Maintenance</option>
-                <option value="Fridge Cleaning Maintenance">Fridge Cleaning Maintenance</option>
-                <option value="General">General</option>
-              </select>
-            </div>
-          </div>
+          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">Submit</button>
         </div>
       </form>
+      <div className="messageContainer md:w-3/4 p-4">
+        <AllPosts posts={posts} setPosts={setPosts}/>
+      </div>
+    </div>
     </div>
   )
 }
+
+MessageBoardInteractive.propTypes = {
+  onNewPost: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
+  setPosts: PropTypes.func.isRequired,
+};
 
 export default MessageBoardInteractive

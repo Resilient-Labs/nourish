@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react"
 import CommunityWelcome from "../components/WelcomeCommunity"
 import Navbar from "../components/Navbar"
-import CommunityInvolvement from "../components/CommunityInvolvement"
 import Footer from "../components/Footer"
-import MessageBoard from "../components/MessageBoardInfo"
 import MessageBoardInteractive from "../components/MessageBoardInteractive"
-import AllPosts from "../components/AllPosts"
+// import AllPosts from "../components/AllPosts"
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
@@ -39,10 +37,8 @@ export default function Community() {
     <div>
       <Navbar />
       <CommunityWelcome />
-      <MessageBoard />
-      <MessageBoardInteractive onNewPost={handleNewPost}/>
-      <AllPosts posts={posts} setPosts={setPosts}/>
-      <CommunityInvolvement />
+      <MessageBoardInteractive onNewPost={handleNewPost} posts={posts} setPosts={setPosts}/>
+      {/* <AllPosts posts={posts} setPosts={setPosts}/> */}
       <Footer />
     </div>
   )

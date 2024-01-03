@@ -9,6 +9,28 @@ function PostList({ posts, setPosts }) {
 
   const updateLikes = async (postId) => {
     try {
+        console.log("setPosts prop:", setPosts);
+        const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include', 
+        });
+        if (response.ok) {
+            // Update the local state using the setPosts passed from the parent component
+            setPosts(currentPosts => {
+                return currentPosts.map(post => {
+                    if (post._id === postId) {
+                        // Increment the likes count
+                        return { ...post, likes: post.likes + 1 };
+                    }
+                    return post;
+                });
+            });
+        } else {
+            console.error("Failed to like the post", await response.json());
+        }
       const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
         method: 'PUT',
         headers: {
@@ -72,7 +94,6 @@ function PostList({ posts, setPosts }) {
         },
         credentials: 'include',
       });
-
       if (response.ok) {
         // Update the local state using the setPosts passed from the parent component
         setPosts(currentPosts => currentPosts.filter(post => post._id !== postId));
@@ -81,23 +102,37 @@ function PostList({ posts, setPosts }) {
       }
     } catch (error) {
       console.error("There was an error deleting the post: ", error);
+  }
+};
+console.log("setPosts prop:", setPosts);
     }
   };
 
   return (
-    <div className="message-board bg-gray-100 p-5 rounded-lg">
-      <h2 className="message-board-title text-2xl font-bold mb-5">All Posts</h2>
+    <div>
       {posts.map((post) => (
         <div key={post._id} className="message bg-white p-5 mb-4 rounded shadow">
-          <h3 className="message-title text-xl font-semibold mb-2">
-            {post.title}
-          </h3>
+          <div className="communityBoard--header">
+            <h3 className="message-title text-xl font-semibold mb-2 flex items-center">
+              {post.title}
+              <span className="communityBoard--user ml-2">By: {post.user.firstName} {post.user.lastName}</span>
+            </h3>
+            <h2>
+                {post.tags.length > 0 ? (
+                  <div>
+                    {post.tags.map((tag, index) => (
+                      <div key={index} className="communityBoard--tags">{tag}</div> 
+                    ))}
+                  </div>
+                ) : (
+                  []
+                )}
+            </h2>
+          </div>
 
-
-          {/* adding user info */}
-          <p className="post-author text-gray-500">Posted by: {post.user.firstName} {post.user.lastName}</p>
-
+          
           <p className="message-content text-gray-700">{post.content}</p>
+          <div><img src={post.image} className="communityBoard--img" alt="postIMG"/></div>
           <div><img src={post.image} alt="postIMG" /></div>
           <div>{post.tags.length > 0 ? (
             <div>
@@ -137,6 +172,7 @@ function PostList({ posts, setPosts }) {
               <p>No comments yet.</p>
             )}
           </div>
+          <CommentBox postId={post._id}/>
         </div>
       ))}
     </div>
