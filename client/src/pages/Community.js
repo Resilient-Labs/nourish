@@ -10,6 +10,8 @@ import AllPosts from "../components/AllPosts"
 export default function Community() {
   const [posts, setPosts] = useState([]);
 
+
+
   useEffect(() => {
       fetchPosts();
   }, []);
