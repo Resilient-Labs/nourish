@@ -8,6 +8,8 @@ import MessageBoardInteractive from "../components/MessageBoardInteractive"
 export default function Community() {
   const [posts, setPosts] = useState([]);
 
+
+
   useEffect(() => {
       fetchPosts();
   }, []);
