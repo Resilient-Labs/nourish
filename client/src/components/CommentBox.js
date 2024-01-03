@@ -2,7 +2,7 @@ import { Button, Label, Textarea } from 'flowbite-react';
 import React, { useState, useEffect } from "react"
 
 
-export default function CommentBox({ postId, onNewComment }) {
+export default function CommentBox({ postId }) {
 
     const [comment, setComment] = useState("")
     const [error, setError] = useState(null);
@@ -35,7 +35,6 @@ export default function CommentBox({ postId, onNewComment }) {
             console.log(data);
     
             setComment(""); // Reset the comment field
-            onNewComment();
         } catch (error) {
             console.error("There was a problem with the fetch operation: ", error);
         }
