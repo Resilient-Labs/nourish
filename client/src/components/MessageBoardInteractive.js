@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 
 //
 
-function MessageBoardInteractive() {
+function MessageBoardInteractive({ onNewPost }) {
 
   // set up states
   const [title, setTitle] = useState("")
@@ -76,6 +76,7 @@ function MessageBoardInteractive() {
       setTags([]); // Reset tags
       setPostTopic("")
       setFridgeLocation("")
+      onNewPost();
     } catch (error) {
       console.error("There was a problem with the fetch operation: ", error)
     }
