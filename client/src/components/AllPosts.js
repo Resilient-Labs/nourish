@@ -6,6 +6,7 @@ import CommentBox from './CommentBox'
 
 function PostList({ posts, setPosts }) {
 
+
   const updateLikes = async (postId) => {
     try {
         const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
@@ -87,7 +88,25 @@ const deletePost = async (postId) => {
             </div>
             <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={()=>deletePost(post._id)}/> 
           </div>
-          <CommentBox />
+          <CommentBox postId={post._id} />
+          <div className="comments-section">
+                        <h3 className="comments-title text-lg font-semibold mb-2">Comments</h3>
+                        {post.comments && post.comments.length > 0 ? (
+                            post.comments.map((comment) => (
+                                <div key={comment._id} className="comment bg-gray-200 p-3 mb-2 rounded">
+                                    <p className="comment-author text-sm font-semibold">
+                                        {comment.user.firstName} {comment.user.lastName} says:
+                                    </p>
+                                    <p className="comment-content text-gray-700">
+                                        {comment.comment}
+                                    </p>
+                                    {/* Add any additional comment details here */}
+                                </div>
+                            ))
+                        ) : (
+                            <p>No comments yet.</p>
+                        )}
+                    </div>
         </div>
       ))}
     </div>
