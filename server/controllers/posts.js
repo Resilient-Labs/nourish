@@ -151,25 +151,49 @@ export const editComment = async (req, res) => {
     res.status(500).send({ message: "Error editing comment" });
   }
 }
+
+
 export const deleteComment = async (req, res) => {
   try {
-    
     const commentId = req.params.id;
+    const comment = await Comment.findById(commentId);
 
-    // Find the comment by ID and delete it
-    const deletedComment = await Comment.findByIdAndDelete(commentId);
-
-    if (!deletedComment) {
-      return res.status(404).send({ message: "Comment not found" });
+    // Check if the user is authenticated and if they are the owner of the comment
+    if (!req.user) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+    if (comment.user.toString() !== req.user._id.toString()) {
+      return res.status(403).send({ message: "Not authorized to delete this comment" });
     }
 
+    // Delete the comment
+    await Comment.findByIdAndDelete(commentId);
     console.log("Comment has been deleted!");
     res.status(200).send({ message: "Comment deleted successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Error deleting comment" });
   }
-}
+};
+// export const deleteComment = async (req, res) => {
+//   try {
+    
+//     const commentId = req.params.id;
+
+//     // Find the comment by ID and delete it
+//     const deletedComment = await Comment.findByIdAndDelete(commentId);
+
+//     if (!deletedComment) {
+//       return res.status(404).send({ message: "Comment not found" });
+//     }
+
+//     console.log("Comment has been deleted!");
+//     res.status(200).send({ message: "Comment deleted successfully" });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send({ message: "Error deleting comment" });
+//   }
+// }
 //END COMMENTS =====================================================
 export const deletePost = async (req, res) => {
   try {
