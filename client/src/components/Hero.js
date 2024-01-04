@@ -13,7 +13,7 @@ export default function Hero() {
           alt="sparkles"
         />
         <p className="mb-1 font-light text-gray-500 lg:text-xl sm:px-16 xl:px-48">
-          A network of Philly community fridges
+          A network of Philly community fridges and pantries
         </p>
         <p className="mb-8 font-light text-gray-500 lg:text-xl sm:px-16 xl:px-48">
           Maintained by the community, for the community

@@ -22,6 +22,7 @@ export default function Login() {
       })
       if (response.ok) {
         navigate("/")
+        location.reload()
       } else {
         const data = await response.json()
         console.error("Login failed:", data.errors.msg || data.error)

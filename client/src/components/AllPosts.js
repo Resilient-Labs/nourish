@@ -90,7 +90,7 @@ export default function AllPosts({ posts, setPosts }) {
         >
           <div className="messageBoard--contentLeft">
             <div className="communityBoard--header">
-              <h3 className="message-title text-xl font-semibold mb-2 flex items-center">
+              <h3 className="message-title text-xl font-semibold -mb-2 flex items-center">
                 {post.title}
                 <span className="flex my-1 ml-auto">
                   <div className="text-3xl mr-3">{post.likes}</div>
@@ -118,7 +118,7 @@ export default function AllPosts({ posts, setPosts }) {
                 )}
               </h2>
             </div>
-            <p className="message-content text-gray-700">{post.content}</p>
+            <p className="message-content text-gray-700 mb-4">{post.content}</p>
             {post.image && (
               <img
                 src={post.image}

@@ -42,6 +42,7 @@ export default function CommentBox({ postId }) {
           placeholder="Leave a comment..."
           required
           rows={4}
+          style={{ marginTop: "1rem", marginBottom: "1rem" }}
         />
         <Button
           type="submit"
