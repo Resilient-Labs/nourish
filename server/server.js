@@ -1,5 +1,4 @@
 import express from "express"
-
 import mongoose from "mongoose"
 import session from "express-session"
 import methodOverride from "method-override"
@@ -13,36 +12,34 @@ import { router as postRoutes } from "./routes/posts.js"
 import { router as profileRoutes } from "./routes/profile.js"
 import { router as mainRoutes } from "./routes/main.js"
 import { router as teamRoutes } from "./routes/team.js"
-
 import dotenv from "dotenv"
 import path from "path"
 import cors from "cors"
-
 import passport from "passport"
 import { configurePassport } from "./config/passport.js"
 
 // Use .env file in config folder
 dotenv.config({ path: "./.env" })
 
-// Connect To Database
+// Connect to MDB
 connectDB()
 
 // Initialize Express app
 const app = express()
 
-// Static Folder
+// Static folder
 app.use(express.static("public"))
 
-// Body Parsing
+// Body parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Cors errors
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests only from port 3000 (WE NEED TO CHANGE WHEN WE HOST TO FE URL)
+    origin: "http://localhost:3000", // Allow requests only from port 3000 (NEED TO CHANGE WHEN WE HOST TO FE URL)
     methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
-    credentials: true, 
+    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"] // Allow specific headers
   })
 )
@@ -50,15 +47,13 @@ app.use(
 // Logging
 app.use(logger("dev"))
 
-// Passport Config
+// Passport config
 configurePassport(passport)
 
-
-// Setup Sessions - stored in MongoDB
+// Set up sessions - stored in MongoDB
 const MongoStore = ConnectMongo.create({
-  mongoUrl: process.env.DB_STRING 
+  mongoUrl: process.env.DB_STRING
 })
-
 
 app.use(
   session({
@@ -73,22 +68,20 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Use flash messages for errors, info, etc...
+// Use flash messages for errors, info, etc.
 app.use(flash())
 
-// Setup Routes For Which The Server Is Listening
+// Routes for which server is listening
 app.use("/", mainRoutes)
 app.use("/fridge", fridgeRoutes)
 app.use("/post", postRoutes)
 app.use("/profile", profileRoutes)
 app.use("/team", teamRoutes)
 
-
-// Serve React App
+// Serve React app
 app.use(express.static("client/build"))
 
-
-// Server Running
+// Server running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!")
 })

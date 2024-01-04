@@ -24,12 +24,8 @@ const teamMemberSchema = new mongoose.Schema({
   },
   profilePhoto: {
     type: String
-  },
+  }
 })
 
-const TeamMember = mongoose.model(
-  "TeamMember",
-  teamMemberSchema,
- "teamMembers"
-)
+const TeamMember = mongoose.model("TeamMember", teamMemberSchema, "teamMembers")
 export { TeamMember }

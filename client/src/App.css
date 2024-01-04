@@ -1,6 +1,6 @@
-/****************************Fridge Landing Page *********************************/
+/**************************** Fridge Landing Page *********************************/
 
-/*******Fridge Component Styling ******/
+/******* Fridge Component Styling ******/
 .leaflet-container-outside {
   display: flex;
   justify-content: space-around;
@@ -8,27 +8,27 @@
   width: 100%;
 }
 
-/*******Fridge List  Component Styling ******/
+/******* FridgeList Component Styling ******/
 .leaflet-container {
   height: 30rem;
   width: 100%;
 }
 
-/*******FridgeMap Component Styling ******/
+/******* FridgeMap Component Styling ******/
 .leaflet-container-list {
   height: 30rem;
   width: 100%;
   overflow: scroll;
 }
 
-/*********************************End Fridge Landing Pg********************************************/
+/********************************* End Fridge Landing Page ********************************************/
 
-/********************************************** Icons styling ********************************************/
+/********************************************** Icons Styling ********************************************/
 .social-icons {
   width: 2.5rem;
 }
 
-/************************************** Fridge Profile Styling ** ********************/
+/************************************** Fridge Profile Styling ***********************/
 /************************************** Fridge Landing Styling *******************************************/
 .fridgeLanding--page h1 {
   font-size: 2rem;
@@ -47,12 +47,9 @@
 
 /************************************** End of Fridge Landing Styling ************************************/
 
-
-
-
 /************************************** Fridge Profile Styling *******************************************/
 
-/******** Container styling******/
+/******** Container Styling ******/
 .about-sub,
 .donationsContainer {
   display: flex;
@@ -68,36 +65,36 @@
 .donationsSub {
   width: 50%;
   border-radius: 15px;
-  border: .1px solid rgb(66, 66, 66);
+  border: 0.1px solid rgb(66, 66, 66);
   justify-content: space-between;
   margin: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  overflow: hidden; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .donationsSub h3 {
   border-bottom: 1px solid rgb(66, 66, 66);
-  padding-bottom: 0.5rem; 
+  padding-bottom: 0.5rem;
 }
 
 .fridgePage--header.donations {
-  background: linear-gradient(45deg, #ffde5b, #ffffa9); 
+  background: linear-gradient(45deg, #ffde5b, #ffffa9);
 }
 
 .socialsContainer {
   display: flex;
 }
 
-/*******Font Styling**********/
+/******* Font Styling **********/
 .fridgePage--status {
-  margin-top:2rem;
+  margin-top: 2rem;
   font-size: 2.5rem;
   text-align: center;
 }
 
 .fridgePage--left p {
   font-size: 1rem;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .fridgePage--header {
@@ -156,22 +153,22 @@
 .fridgeLanding--container {
   width: 350px;
   border-radius: 15px;
-  border: .1px solid rgb(66, 66, 66);
+  border: 0.1px solid rgb(66, 66, 66);
   justify-content: space-between;
   margin: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  overflow: hidden; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .fridgeLanding--container h2 {
   border-bottom: 1px solid rgb(66, 66, 66);
-  padding-bottom: 0.5rem; 
+  padding-bottom: 0.5rem;
 }
 
 h2.fridgeLanding--header {
   background: linear-gradient(45deg, #ffde5b, #ffffa9);
   text-align: center;
-  font-size: 1.1rem; 
+  font-size: 1.1rem;
   padding: 1rem;
 }
 
@@ -180,16 +177,16 @@ h2.fridgeLanding--header {
 }
 
 .fridgeLanding--container img {
-  width: 100%; 
-  height: auto; 
-  max-height: 200px; 
+  width: 100%;
+  height: auto;
+  max-height: 200px;
   object-fit: cover;
 }
 
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; 
+  gap: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,12 +204,12 @@ h2.fridgeLanding--header {
 .fridgeLanding--button,
 .fridgePage--volBut {
   background: #0b9f6e;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 5px;
   color: white;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   text-align: center;
 }
 
@@ -232,22 +229,22 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 2rem 2%; 
+  margin: 2rem 2%;
 }
 
 .memberCard {
   text-align: center;
   border: 1px solid black;
-  width: 30%; 
-  max-width: 400px; 
-  height: 545px;
+  width: 30%;
+  max-width: 400px;
+  height: 700px;
   border-radius: 15px;
-  border: .1px solid rgb(66, 66, 66);
+  border: 0.1px solid rgb(66, 66, 66);
   justify-content: space-between;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  flex: 0 0 calc(33.333% - 20px); 
-  margin: 10px; 
+  flex: 0 0 calc(33.333% - 20px);
+  margin: 10px;
 }
 
 .teamBlurb {
@@ -264,7 +261,7 @@ h1 {
 .memberCard--header {
   background: linear-gradient(45deg, #ffde5b, #ffffa9);
   text-align: center;
-  font-size: 1.1rem; 
+  font-size: 1.1rem;
   padding: 1rem;
 }
 
@@ -274,7 +271,7 @@ h1 {
 }
 
 .memberText {
-  height: 100px;
+  height: 250px;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: #047a5554;
@@ -285,15 +282,15 @@ h1 {
 }
 
 .memberText::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 98, 59, 0.1); 
-  border-radius: 6px; 
+  background-color: rgba(0, 98, 59, 0.1);
+  border-radius: 6px;
 }
 
 .memberSocials img {
   display: inline-block;
   max-height: 45px;
   padding-top: 1rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .memberSocials img:hover {
@@ -344,9 +341,7 @@ h1 {
   width: 100%;
 }
 
-
 /************************************ End Community Board Styling ******************************/
-
 
 /****************************************** Media Queries ********************************************/
 
@@ -362,9 +357,9 @@ h1 {
   }
   .fridgePage--IMG img,
   .donationsContainer img {
-    width: 100%; 
-    max-width: 100%; 
-    height: auto; 
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
   .fridgePage--text,
   .fridgePage-IMG {
@@ -379,9 +374,9 @@ h1 {
 
   .donationsSub {
     width: 100%;
-    margin: 1rem 0; 
+    margin: 1rem 0;
   }
-  .donationsContainer{
+  .donationsContainer {
     padding: 1rem;
   }
 }
@@ -391,13 +386,13 @@ h1 {
 /**************** Team Profiles ************************/
 @media (max-width: 900px) {
   .memberCard {
-    flex: 0 0 calc(50% - 20px); 
+    flex: 0 0 calc(50% - 20px);
   }
 }
 
 @media (max-width: 600px) {
   .memberCard {
-    flex: 0 0 calc(100% - 20px); 
+    flex: 0 0 calc(100% - 20px);
   }
 }
 /**************** End of Team Profiles ************************/

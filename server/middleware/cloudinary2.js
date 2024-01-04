@@ -1,7 +1,7 @@
-// Importing Cloudinary
+// Import cloudinary
 import { v2 as cloudinary2 } from "cloudinary"
 
-// Configuring dotenv (if needed, see note below)
+// Configure dotenv
 import dotenv from "dotenv"
 dotenv.config({ path: "./.env" })
 
@@ -12,5 +12,5 @@ cloudinary2.config({
   api_secret: process.env.API_SECRET2
 })
 
-// Exporting the configured cloudinary instance
+// Export configured cloudinary instance
 export { cloudinary2 }

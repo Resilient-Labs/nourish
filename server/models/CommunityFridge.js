@@ -72,9 +72,5 @@ const CommunityFridgeSchema = new mongoose.Schema({
   }
 })
 
-const CommunityFridge = mongoose.model(
-  "CommunityFridge",
-  CommunityFridgeSchema,
-  "communityFridges"
-)
+const CommunityFridge = mongoose.model("CommunityFridge", CommunityFridgeSchema, "communityFridges")
 export { CommunityFridge }
