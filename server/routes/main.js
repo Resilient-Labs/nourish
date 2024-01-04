@@ -12,6 +12,7 @@ import { ensureAuth, ensureGuest } from "../middleware/auth.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg
 
+
 router.get("/login", getLogin);
 router.post("/login", postLogin);
 router.get("/logout", logout);

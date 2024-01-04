@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-
 
 export default function FridgeProfile() {
         const [myFridge, setFridge] = useState({});
@@ -34,7 +32,6 @@ export default function FridgeProfile() {
         const fridgeObj = myFridge.fridge
         return (
         <div>
-            <Navbar />
             <div className="fridgePage--parent">
                 <div className="fridgePage--status">
                     <h1><a href={fridgeObj.contact.siteURL}>{fridgeObj.name} </a><span className="fridgePage--community">by {fridgeObj.community}</span></h1>
@@ -44,7 +41,7 @@ export default function FridgeProfile() {
                     <div className="fridgePage--text">
                         <h2 className="fridgePage--header">Address</h2>
                         <p>
-                            <a className="fridgePage--directions" href={fridgeObj.location.directionURL}>{fridgeObj.location.address} {fridgeObj.location.cityState} {fridgeObj.location.zipCode} </a> 
+                            <a className="fridgePage--directions" href={fridgeObj.location.directionURL} target="_blank">{fridgeObj.location.address} {fridgeObj.location.cityState} {fridgeObj.location.zipCode} </a> 
                                 | {fridgeObj.status === "Active" ? (
                                 <span className="fridgeProfile--status">Active Site 🟢</span>
                                 ) : (
@@ -56,9 +53,9 @@ export default function FridgeProfile() {
                     <a className="fridgePage--volBut" href={fridgeObj.contact.volunteerURL}>Volunteer with {fridgeObj.name}</a>
                     <div className='socialsContainer'>
                         <a href={`mailto:${fridgeObj.contact.email}`} target="_blank"><img className='social-icons' src='../Icons/icons8-email-50.png'/></a>
-                        <a href={fridgeObj.contact.siteURL}><img className='social-icons' src='../Icons/icons8-website-50.png'/></a>
-                        <a href={fridgeObj.contact.instagramURL}><img className='social-icons' src='../Icons/icons8-instagram-50.png'/></a>
-                        <a href={fridgeObj.donations.donationURL}><img className='social-icons' src='../Icons/icons8-coins-50.png'/></a>
+                        <a href={fridgeObj.contact.siteURL} target="_blank"><img className='social-icons' src='../Icons/icons8-website-50.png'/></a>
+                        <a href={fridgeObj.contact.instagramURL} target="_blank"><img className='social-icons' src='../Icons/icons8-instagram-50.png'/></a>
+                        <a href={fridgeObj.donations.donationURL} target="_blank"><img className='social-icons' src='../Icons/icons8-coins-50.png'/></a>
                     </div>
                     </div>
                     <div className="fridgePage--IMG">

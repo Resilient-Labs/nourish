@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react"
+import AllPosts from "../components/AllPosts"
+import PropTypes from "prop-types"
 
+function MessageBoardInteractive({ onNewPost, posts, setPosts }) {
 
-//
-
-function MessageBoardInteractive() {
-
-  // const [formData, setFormData] = useState({
-  //   title: "",
-  //   content: "",
-  //   photo: null,
-  // });
+  // set up states
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [photo, setPhoto] = useState(null)
@@ -20,59 +15,35 @@ function MessageBoardInteractive() {
   const [postTopic, setPostTopic] = useState("")
   const [fridgeLocation, setFridgeLocation] = useState("")
 
-  // const handleInputChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value })
-  // };
+//fetch all fridge info
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchAllFridges = async () => {
-        try {
+      try {
         const response = await fetch(`http://localhost:8000/fridge/getAllFridges`) // req to BE
         const data = await response.json()
         setGetAllFridges(data);
-        } catch (error) {
+      } catch (error) {
         setError(error);
-        } finally {
+      } finally {
         setIsLoading(false);
-        }
+      }
     };
     fetchAllFridges();
-    }, []);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // const message = new FormData();
-    // message.append("title", formData.title);
-    // message.append("content", formData.content);
-    // message.append("image", formData.photo);
-
-    // Create a new message object
-    // const message = {
-    //   title: e.target.title.value,
-    //   content: e.target.content.value,
-    //   image: e.target.image.value,
-    //   postTopic,
-    //   fridgeLocation
-    // }
-
-    // // Create a new message object
-    // const message = {
-    //   notes,
-    //   photo,
-    //   postTopic,
-    //   fridgeLocation
-    // }
 
     // Create FormData object
     const formData = new FormData();
-    formData.append('file', photo); // Make sure the name 'file' matches what multer expects
+    formData.append('file', photo); 
     formData.append('title', title);
     formData.append('content', content)
     formData.append('tags', JSON.stringify(tags)); // Convert array to JSON string
     formData.append('postTopic', postTopic);
     formData.append('fridgeLocation', fridgeLocation);
-
 
 
     try {
@@ -94,10 +65,9 @@ function MessageBoardInteractive() {
 
       // Handle the response from the server
       const data = await response.json()
-      console.log(data) // Assuming the response contains the saved message object
+      console.log(data) 
 
       // Reset the form fields
-      // setFormData({ title: "", content: "", photo: null });
 
       setTitle("")
       setContent("")
@@ -105,14 +75,11 @@ function MessageBoardInteractive() {
       setTags([]); // Reset tags
       setPostTopic("")
       setFridgeLocation("")
+      onNewPost();
     } catch (error) {
       console.error("There was a problem with the fetch operation: ", error)
     }
   }
-
-  // const handlePhotoUpload = (e) => {
-  //   setFormData({ ...formData, photo: e.target.files[0] });
-  // };
 
 
   const handlePhotoUpload = (e) => {
@@ -128,36 +95,6 @@ function MessageBoardInteractive() {
   };
 
 
-  // const handlePostTopicClick = async () => {
-  //   try {
-  //     // Make API call to get post topics from the server
-  //     const response = await fetch("/api/postTopics")
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`)
-  //     }
-  //     const data = await response.json()
-  //     // Handle the response from the server
-  //     console.log(data)
-  //   } catch (error) {
-  //     console.error("There was a problem with the fetch operation: ", error)
-  //   }
-  // }
-
-  // const handleFridgeLocationClick = async () => {
-  //   try {
-  //     // Make API call to get fridge locations from the server
-  //     const response = await fetch("/api/fridgeLocations")
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`)
-  //     }
-  //     const data = await response.json()
-  //     // Handle the response from the server
-  //     console.log(data)
-  //   } catch (error) {
-  //     console.error("There was a problem with the fetch operation: ", error)
-  //   }
-  // }
-
   //acts like a catch error
   if (isLoading) {
     return <p>Loading fridge list data...</p>;
@@ -167,15 +104,30 @@ function MessageBoardInteractive() {
   }
 
   return (
-    <div>
-      <form
-        className="bg-white flex flex-col md:flex-row gap-4 p-4 md:p-8 rounded-md border border-neutral-800 border-opacity-60"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex flex-col gap-4 md:w-1/2">
-          <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
-            Got an update or request? Leave your notes here!
+  <div className="messageForm">
+  <div className="flex flex-col md:flex-row gap-4">
+    <form className="bg-white flex flex-col md:w-1/4 gap-4 p-4 md:p-8" onSubmit={handleSubmit}>
+    <div className="flex flex-col gap-4">
+        <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
+            Need help or have help to offer? Leave a message!
           </h2>
+          <select id="locations" name="locations" onChange={handleSelectChange}>
+            <option value="">Fridge Locations</option>
+            {Array.from(new Set(getAllFridges.fridges.map(fridge => fridge.name))) //dynamically get zips from mdb
+              .sort((a, b) => a - b) // sort drop down menu items for easy nav
+              .map((location, index) => (
+                <option key={index} value={location}>{location}</option>
+            ))}
+          </select>
+          <select id="postTags" name="postTags" onChange={handleSelectChange}>
+            <option value="">Post Topic</option>
+            <option value="Food Request">Food Request</option>
+            <option value="Food Delivery">Food Delivery</option>
+            <option value="Food Contribution">Food Contribution</option>
+            <option value="Fridge Hardware Maintenance">Fridge Hardware Maintenance</option>
+            <option value="Fridge Cleaning Maintenance">Fridge Cleaning Maintenance</option>
+            <option value="General">General</option>
+          </select>
           <label for="title">Title:</label>
           <input
             type="text"
@@ -190,22 +142,10 @@ function MessageBoardInteractive() {
             name="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="h-10 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="h-20 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
-          >
-            SUBMIT
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-4 md:w-1/2">
-          <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide">
-            Upload a photo of the inside of the fridge to let others know what’s
-            there
-          </h2>
-          <div className="bg-orange-600 flex items-center justify-center py-2 px-4 rounded-md">
+          <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide"> Upload a photo of the inside of the fridge to let others know what’s there</h2>
+          <div className="bg-green-500 flex items-center justify-center py-2 px-4 rounded-md">
             <label htmlFor="photo-upload" className="cursor-pointer">
               <img
                 loading="lazy"
@@ -224,57 +164,21 @@ function MessageBoardInteractive() {
               onChange={handlePhotoUpload}
             />
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cdede62a8b4ab1216c8f8be6e05c0faa7f5d61b1542a8d3fda20b773757ee01?apiKey=24893b07929841ac8f1197a89a1bfe80&"
-                alt="Post Topic Icon"
-                className="h-6 w-6"
-              />
-              <select id="locations" name="locations" onChange={handleSelectChange}>
-                <option value="">Fridge Locations</option>
-                {Array.from(new Set(getAllFridges.fridges.map(fridge => fridge.name))) //dynamically get zips from mdb
-                  .sort((a, b) => a - b) // sort drop down menu items for easy nav
-                  .map((location, index) => (
-                    <option key={index} value={location}>{location}</option>
-                  ))}
-              </select>
-              {/* <button
-                onClick={handlePostTopicClick}
-                className="text-neutral-800 text-opacity-80 text-lg tracking-wide"
-              >
-                Select Post Topic
-              </button> */}
-            </div>
-            <div className="flex items-center gap-4">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cdede62a8b4ab1216c8f8be6e05c0faa7f5d61b1542a8d3fda20b773757ee01?apiKey=24893b07929841ac8f1197a89a1bfe80&"
-                alt="Fridge Location Icon"
-                className="h-6 w-6"
-              />
-              <select id="postTags" name="postTags" onChange={handleSelectChange}>
-              <option value="">Post Topic</option>
-                <option value="Food Request">Food Request</option>
-                <option value="Food Delivery">Food Delivery</option>
-                <option value="Food Contribution">Food Contribution</option>
-                <option value="Fridge Hardware Maintenance">Fridge Hardware Maintenance</option>
-                <option value="Fridge Cleaning Maintenance">Fridge Cleaning Maintenance</option>
-                <option value="General">General</option>
-              </select>
-              {/* <button
-                onClick={handleFridgeLocationClick}
-                className="text-neutral-800 text-opacity-80 text-lg tracking-wide"
-              >
-                Select Fridge Location
-              </button> */}
-            </div>
-          </div>
+          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">Submit</button>
         </div>
       </form>
+      <div className="messageContainer md:w-3/4 p-4">
+        <AllPosts posts={posts} setPosts={setPosts}/>
+      </div>
+    </div>
     </div>
   )
 }
+
+MessageBoardInteractive.propTypes = {
+  onNewPost: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
+  setPosts: PropTypes.func.isRequired,
+};
 
 export default MessageBoardInteractive

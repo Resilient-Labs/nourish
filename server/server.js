@@ -40,7 +40,7 @@ app.use(express.json())
 // Cors errors
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests only from port 3000
+    origin: "http://localhost:3000", // Allow requests only from port 3000 (WE NEED TO CHANGE WHEN WE HOST TO FE URL)
     methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
     credentials: true, 
     allowedHeaders: ["Content-Type", "Authorization"] // Allow specific headers
@@ -56,11 +56,10 @@ configurePassport(passport)
 
 // Setup Sessions - stored in MongoDB
 const MongoStore = ConnectMongo.create({
-  mongoUrl: process.env.DB_STRING // Your MongoDB connection string
-  //collectionName: 'sessions' // Optional: collection name to use in MongoDB
+  mongoUrl: process.env.DB_STRING 
 })
 
-// Then use it in your session configuration
+
 app.use(
   session({
     secret: "backendsessionsecret",
@@ -87,9 +86,7 @@ app.use("/team", teamRoutes)
 
 // Serve React App
 app.use(express.static("client/build"))
-// app.get("*", (req, res) => {
-// 	res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-// });
+
 
 // Server Running
 app.listen(process.env.PORT, () => {
