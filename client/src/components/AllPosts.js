@@ -1,59 +1,31 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"; // using react-router for redirection
 import SocialButtons from './SocialButtons'
+import CommentButtons from './CommentButtons'
 import CommentBox from './CommentBox'
 
 
-
-function PostList() {
-  const [getAllPosts, setGetAllPosts] = useState({ posts: [] });
-  const navigate = useNavigate(); // useNavigate hook for navigation
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/post/board", {
-          credentials: 'include', //needed to check ensureAuth -Ro
-        });
-        if (!response.ok) {
-          if (response.status === 401) {
-            // Redirect to login page if unauthorized
-            navigate('/login');
-          }
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setGetAllPosts(data);
-      } catch (error) {
-        console.error("There was a problem with the fetch operation: ", error);
-      }
-    };
-
-    fetchPosts();
-  }, [navigate]);
-
+function PostList({ posts, setPosts }) {
 
   const updateLikes = async (postId) => {
     try {
-      // Call your backend API to like the post
       const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // If your backend requires credentials
+        credentials: 'include',
       });
-  
+
       if (response.ok) {
-        setGetAllPosts(prevState => {
-          const updatedPosts = prevState.posts.map(post => {
+        // Update the local state using the setPosts passed from the parent component
+        setPosts(currentPosts => {
+          return currentPosts.map(post => {
             if (post._id === postId) {
+              // Increment the likes count
               return { ...post, likes: post.likes + 1 };
             }
             return post;
           });
-  
-          return { ...prevState, posts: updatedPosts };
         });
       } else {
         console.error("Failed to like the post", await response.json());
@@ -63,6 +35,33 @@ function PostList() {
     }
   };
 
+  const deleteComment = async (commentId, postId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/post/deleteComment/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        setPosts(currentPosts => currentPosts.map(post => {
+          if (post._id === postId) {
+            // Filter out the deleted comment
+            return { ...post, comments: post.comments.filter(comment => comment._id !== commentId) };
+          }
+          return post;
+        }));
+      } else {
+        console.error("Failed to delete the comment", await response.json());
+      }
+    } catch (error) {
+      console.error("There was an error deleting the comment: ", error);
+    }
+  };
+
+
   const deletePost = async (postId) => {
     try {
       const response = await fetch(`http://localhost:8000/post/deletePost/${postId}`, {
@@ -70,52 +69,74 @@ function PostList() {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // If your backend requires credentials
+        credentials: 'include',
       });
-  
       if (response.ok) {
-        setGetAllPosts(prevState => ({
-          posts: prevState.posts.filter(post => post._id !== postId),
-        }));
+        // Update the local state using the setPosts passed from the parent component
+        setPosts(currentPosts => currentPosts.filter(post => post._id !== postId));
       } else {
         console.error("Failed to delete the post", await response.json());
       }
     } catch (error) {
       console.error("There was an error deleting the post: ", error);
-    }
-  };
+  }
+};
+console.log("setPosts prop:", setPosts);
 
   return (
-    <div className="message-board bg-gray-100 p-5 rounded-lg">
-      <h2 className="message-board-title text-2xl font-bold mb-5">All Posts</h2>
-      {getAllPosts.posts.map((post) => (
+    <div>
+      {posts.map((post) => (
         <div key={post._id} className="message bg-white p-5 mb-4 rounded shadow">
-          <h3 className="message-title text-xl font-semibold mb-2">
-            {post.title}
-          </h3>
+          <div className="communityBoard--header">
+            <h3 className="message-title text-xl font-semibold mb-2 flex items-center">
+              {post.title}
+              <span className="communityBoard--user ml-2">By: {post.user.firstName} {post.user.lastName}</span>
+            </h3>
+            <h2>
+                {post.tags.length > 0 ? (
+                  <div>
+                    {post.tags.map((tag, index) => (
+                      <div key={index} className="communityBoard--tags">{tag}</div> 
+                    ))}
+                  </div>
+                ) : (
+                  []
+                )}
+            </h2>
+          </div>
 
-
-          {/* adding user info */}
-          <p className="post-author text-gray-500">Posted by: {post.user.firstName} {post.user.lastName}</p>
-
+          
           <p className="message-content text-gray-700">{post.content}</p>
-          <div><img src={post.image} alt="postIMG"/></div>
-          <div>{post.tags.length > 0 ? (
-                            <div>
-                                {post.tags.map((tag, index) => (
-                                    <div key={index}>{tag} </div> 
-                                ))}
-                            </div>
-                        ) : (
-                            []
-                        )}</div>
+          <div><img src={post.image} className="communityBoard--img" alt="postIMG"/></div>
           <div className="flex my-3">
             <div className="text-4xl mr-4">
               {post.likes}
             </div>
-            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={()=>deletePost(post._id)}/> 
+            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={() => deletePost(post._id)} />
           </div>
-          <CommentBox />
+          <CommentBox postId={post._id} />
+          <div className="comments-section">
+            <h3 className="comments-title text-lg font-semibold mb-2">Comments</h3>
+            {post.comments && post.comments.length > 0 ? (
+              post.comments.map((comment) => (
+                <div key={comment._id} className="comment bg-gray-200 p-3 mb-2 rounded">
+                  <p className="comment-author text-sm font-semibold">
+                    {comment.user.firstName} {comment.user.lastName} says:
+                  </p>
+                  <p className="comment-content text-gray-700">
+                    {comment.comment}
+                  </p>
+                  <CommentButtons commentId={comment._id}
+                    commentUserId={comment.user._id}
+                    // currentUserId={/* current user's ID */}
+                    // onLike={() => updateLikes(comment._id)}
+                    onDelete={deleteComment}/>
+                </div>
+              ))
+            ) : (
+              <p>No comments yet.</p>
+            )}
+          </div>
         </div>
       ))}
     </div>

@@ -1,6 +1,6 @@
 import "./App.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useState, useEffect } from 'react' //
+import { useState, useEffect } from 'react'
 import Community from "./pages/Community"
 import FridgeProfile from "./pages/FridgeProfile"
 import Home from "./pages/Home"
@@ -8,7 +8,8 @@ import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import UserProfile from "./pages/UserProfile"
 import FridgeLocations from "./pages/FridgeLocations"
-import NavbarComponent from "./components/Navbar" //
+import OurTeam from "./pages/OurTeam"
+import NavbarComponent from "./components/Navbar"
 
 // Routes for pages
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/locations" element={<FridgeLocations />} />
+        <Route path="/team" element={<OurTeam />} />
       </Routes>
     </BrowserRouter>
   )
