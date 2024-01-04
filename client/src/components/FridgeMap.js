@@ -13,27 +13,23 @@ const fridgeIcon = new L.Icon({
 
 export default function FridgeMap({ allFridges }) {
   let reformatData = []
-  // Iterate through each object in data array using for...of loop
+  
+  // Iterate through all fridges to reformat location and get necessary data
   for (const item of allFridges.fridges) {
     let location = {}
 
-    // Extract latitude and longitude values
+    // Convert lat and long to numbers and push them into position array
     const lat = item.location.lat
     const long = item.location.long
 
-    // Convert lat and long to numbers and push into position array
     location.position = [parseFloat(lat), parseFloat(long)]
 
-    // Convert key to id and push into position array
+    // Get only necessary fields for Map
     location.id = item.key
-
-    // Convert name and push into position array
     location.name = item.name
-
-    // Convert key to id and push into position array
     location.address = item.location.address
 
-    // Push new object into reformatData array
+    // Add fridge data to list
     reformatData.push(location)
   }
 
@@ -43,16 +39,21 @@ export default function FridgeMap({ allFridges }) {
 
   return (
     <div className="leaflet-container">
+
       <MapContainer
         center={mapCenter}
-        zoom={13}
+        zoom={12}
         style={{ height: "100vh" }}
         bounds={bounds}
       >
+      
+        {/* Interactive map with selected style*/}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
         />
+
+        {/* Create marker on map for all fridges  */}
         {reformatData.map(({ id, position, name, address }) => (
           <Marker key={id} position={position} icon={fridgeIcon}>
             <Popup>
@@ -60,7 +61,9 @@ export default function FridgeMap({ allFridges }) {
             </Popup>
           </Marker>
         ))}
+
       </MapContainer>
+
     </div>
   )
 }
