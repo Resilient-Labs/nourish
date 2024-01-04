@@ -24,8 +24,8 @@ export default function CommentBox({ postId }) {
       }
 
       const data = await response.json()
-
       setComment("") // Reset comment field
+      window.location.reload()
     } catch (error) {
       console.error("There was a problem with the fetch operation: ", error)
     }
