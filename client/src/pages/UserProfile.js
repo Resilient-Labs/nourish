@@ -54,7 +54,7 @@ export default function UserProfile() {
 
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div>
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     User Profile

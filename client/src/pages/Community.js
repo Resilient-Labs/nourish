@@ -10,7 +10,7 @@ import AllPosts from "../components/AllPosts"
 export default function Community() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <CommunityWelcome />
       <MessageBoard />
       <MessageBoardInteractive />

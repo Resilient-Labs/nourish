@@ -51,7 +51,7 @@ export default function Login() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Log in */}
       <section className="bg-gray-50">

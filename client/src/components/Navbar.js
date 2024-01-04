@@ -2,7 +2,7 @@
 import { Button, Navbar } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 
-export default function Component() {
+export default function NavbarComponent({ isAuthenticated }) {
   return (
     <Navbar className="py-4" fluid rounded>
       <Navbar.Brand as={Link} to="/" className="pl-10">
@@ -10,13 +10,25 @@ export default function Component() {
       </Navbar.Brand>
 
       <div className="flex gap-2 md:order-2 pr-10">
-        <Button as={Link} to="/login" size="lg" className="text-black bg-gray-100 hover:bg-gray-200">
-          Log In
-        </Button>
-
-        <Button as={Link} to="/signup" size="lg" className="bg-green-500 hover:bg-green-600">
-          Sign Up
-        </Button>
+        {isAuthenticated ? (
+          <>
+            <Button as={Link} to="/userprofile" size="lg" className="text-black bg-gray-100 hover:bg-gray-200">
+              Profile
+            </Button>
+            <Button as={Link} to="/logout" size="lg" className="bg-red-500 hover:bg-red-600">
+              Log Out
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button as={Link} to="/login" size="lg" className="text-black bg-gray-100 hover:bg-gray-200">
+              Log In
+            </Button>
+            <Button as={Link} to="/signup" size="lg" className="bg-green-500 hover:bg-green-600">
+              Sign Up
+            </Button>
+          </>
+        )}
         <Navbar.Toggle />
       </div>
 

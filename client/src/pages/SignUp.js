@@ -46,7 +46,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Sign up */}
       <section className="bg-gray-50">
