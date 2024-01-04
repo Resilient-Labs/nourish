@@ -47,9 +47,9 @@ export default function OurTeam() {
                     </div>
                     <img src={member.profilePhoto} alt={`${member.firstName}'s profile`} />
                     <div className="memberSocials">
-                            <a href={member.email}><img src="../Icons/icons8-mail-48.png" alt="Email" /></a>
-                            <a href={member.github}><img src="../Icons/icons8-github-50.png" alt="GitHub" /></a>
-                            <a href={member.linkedin}><img src="../Icons/icons8-linkedin-50.png" alt="LinkedIn" /></a>
+                            <a href={`mailto:${member.email}`}><img src="../Icons/icons8-mail-48.png" alt="Email" /></a>
+                            <a href={member.github} target="_blank"><img src="../Icons/icons8-github-50.png" alt="GitHub" /></a>
+                            <a href={member.linkedin} target="_blank"><img src="../Icons/icons8-linkedin-50.png" alt="LinkedIn" /></a>
                         </div>
                     <div className="memberText">
                         <p>{member.bio}</p>

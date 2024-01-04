@@ -84,14 +84,19 @@ function PostList({ posts, setPosts }) {
 console.log("setPosts prop:", setPosts);
 
   return (
-    <div>
+    <div className="container">
       {posts.map((post) => (
         <div key={post._id} className="message bg-white p-5 mb-4 rounded shadow">
+          <div className="messageBoard--contentLeft">
           <div className="communityBoard--header">
             <h3 className="message-title text-xl font-semibold mb-2 flex items-center">
               {post.title}
-              <span className="communityBoard--user ml-2">By: {post.user.firstName} {post.user.lastName}</span>
+              <span className="flex my-1 ml-auto">
+              <div className="text-3xl mr-3">{post.likes}</div>
+              <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={() => deletePost(post._id)} />
+              </span>
             </h3>
+            <p className="communityBoard--user">By: {post.user.firstName} {post.user.lastName}</p>
             <h2>
                 {post.tags.length > 0 ? (
                   <div>
@@ -103,38 +108,30 @@ console.log("setPosts prop:", setPosts);
                   []
                 )}
             </h2>
-          </div>
-
-          
-          <p className="message-content text-gray-700">{post.content}</p>
-          <div><img src={post.image} className="communityBoard--img" alt="postIMG"/></div>
-          <div className="flex my-3">
-            <div className="text-4xl mr-4">
-              {post.likes}
             </div>
-            <SocialButtons postId={post._id} onLike={() => updateLikes(post._id)} onDelete={() => deletePost(post._id)} />
+            <p className="message-content text-gray-700">{post.content}</p>
+            {post.image && <img src={post.image} className="communityBoard--img" alt="postIMG" />}
           </div>
-          <CommentBox postId={post._id} />
           <div className="comments-section">
+            <CommentBox postId={post._id} className="commentBox"/>
             <h3 className="comments-title text-lg font-semibold mb-2">Comments</h3>
             {post.comments && post.comments.length > 0 ? (
               post.comments.map((comment) => (
-                <div key={comment._id} className="comment bg-gray-200 p-3 mb-2 rounded">
+                <div key={comment._id} className="comment bg-gray-100 p-3 mb-2 rounded">
                   <p className="comment-author text-sm font-semibold">
                     {comment.user.firstName} {comment.user.lastName} says:
                   </p>
-                  <p className="comment-content text-gray-700">
-                    {comment.comment}
-                  </p>
+                  <p className="comment-content text-gray-700">{comment.comment}</p>
                   <CommentButtons commentId={comment._id}
                     commentUserId={comment.user._id}
                     // currentUserId={/* current user's ID */}
                     // onLike={() => updateLikes(comment._id)}
-                    onDelete={deleteComment}/>
+                    onDelete={deleteComment}
+                    />
                 </div>
               ))
             ) : (
-              <p>No comments yet.</p>
+              <p>No comments yet. Be the first to comment!</p>
             )}
           </div>
         </div>

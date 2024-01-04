@@ -145,7 +145,7 @@ function MessageBoardInteractive({ onNewPost, posts, setPosts }) {
             className="h-20 px-4 py-2 rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <h2 className="text-neutral-800 text-opacity-80 text-lg tracking-wide"> Upload a photo of the inside of the fridge to let others know what’s there</h2>
-          <div className="bg-orange-600 flex items-center justify-center py-2 px-4 rounded-md">
+          <div className="bg-green-500 flex items-center justify-center py-2 px-4 rounded-md">
             <label htmlFor="photo-upload" className="cursor-pointer">
               <img
                 loading="lazy"
