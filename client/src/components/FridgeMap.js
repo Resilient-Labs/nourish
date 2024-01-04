@@ -1,12 +1,14 @@
 //display styling for leaflet
 import "leaflet/dist/leaflet.css"
 
+//building blocks for leaflet
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
+
 //display icon in interactive map
 import L from "leaflet"
 import icon from '../images/fridgeIcon_one.png';
 
-//building blocks for leaflet
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
+
 
 // Create a custom icon
 const fridgeIcon = new L.Icon({
@@ -17,28 +19,24 @@ const fridgeIcon = new L.Icon({
 })
 
 export default function FridgeMap({ allFridges }) {
+
   let reformatData = []
-  // Iterate through each object in the data array using a for...of loop
+  
+  // Iterate through all fridges to reformat the position and get necessary data
   for (const item of allFridges.fridges) {
     let location = {}
 
-    // Extract latitude and longitude values
+    // Convert lat and long to numbers and push them into the position array
     const lat = item.location.lat
     const long = item.location.long
-
-    // Convert lat and long to numbers and push them into the position array
     location.position = [parseFloat(lat), parseFloat(long)]
 
-    // Convert key to id and push it into the position array
+    // Get only necessary fields for Map
     location.id = item.key
-
-    // Convert name and push it into the position array
     location.name = item.name
-
-    // Convert key to id and push it into the position array
     location.address = item.location.address
 
-    // Push the new object into the reformatData array
+    // Add fridge data to list
     reformatData.push(location)
   }
 
@@ -48,17 +46,21 @@ export default function FridgeMap({ allFridges }) {
 
   return (
     <div className="leaflet-container">
-      {/* The MapContainer component now includes a bounds prop, which is set to the calculated bounds array. */}
+
       <MapContainer
         center={mapCenter}
-        zoom={13}
+        zoom={12}
         style={{ height: "100vh" }}
         bounds={bounds}
       >
+      
+        {/*The interactive map with selected style*/}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
         />
+
+        {/* This creates a marker on the map for all provided fridges  */}
         {reformatData.map(({ id, position, name, address }) => (
           <Marker key={id} position={position} icon={fridgeIcon}>
             <Popup>
@@ -66,6 +68,7 @@ export default function FridgeMap({ allFridges }) {
             </Popup>
           </Marker>
         ))}
+
       </MapContainer>
     </div>
   )
