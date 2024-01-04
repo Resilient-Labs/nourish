@@ -310,19 +310,21 @@ h1 {
 }
 
 .communityBoard--tags {
-  background: linear-gradient(45deg, #00a41e, #364d00);
-  color: white;
-  padding: 1px 5px; /* Adjust padding as needed */
-  margin-right: 5px; /* Optional: Add margin between tags */
-  display: inline-block; /* Ensure tags appear on the same line */
+  background: #f8d57e;
+  color: black;
+  padding: 1px 5px;
+  margin-right: 5px;
+  display: inline-block;
   border-radius: 5px;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .communityBoard--user {
   color: gray;
   font-weight: 400;
   font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 .messageContainer {

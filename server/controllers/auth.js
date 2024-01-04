@@ -45,7 +45,7 @@ export const postLogin = (req, res, next) => {
   })(req, res, next)
 }
 
-// LOG OUT CRUD =====================================================
+// LOGOUT CRUD =====================================================
 
 export const logout = (req, res) => {
   req.logout()
