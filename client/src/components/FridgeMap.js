@@ -1,34 +1,27 @@
-//display styling for leaflet
-import "leaflet/dist/leaflet.css"
+import "leaflet/dist/leaflet.css" // Display styling for leaflet
+import L from "leaflet" // Display icon in interactive map
+import icon from "../images/fridgeIcon_one.png"
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet" // Building blocks for leaflet
 
-//building blocks for leaflet
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
-
-//display icon in interactive map
-import L from "leaflet"
-import icon from '../images/fridgeIcon_one.png';
-
-
-
-// Create a custom icon
+// Create custom icon
 const fridgeIcon = new L.Icon({
   iconUrl: icon,
   iconSize: [32, 32],
   iconAnchor: [16, 32],
-  popupAnchor: [0, -32] 
+  popupAnchor: [0, -32]
 })
 
 export default function FridgeMap({ allFridges }) {
-
   let reformatData = []
   
-  // Iterate through all fridges to reformat the position and get necessary data
+  // Iterate through all fridges to reformat location and get necessary data
   for (const item of allFridges.fridges) {
     let location = {}
 
-    // Convert lat and long to numbers and push them into the position array
+    // Convert lat and long to numbers and push them into position array
     const lat = item.location.lat
     const long = item.location.long
+
     location.position = [parseFloat(lat), parseFloat(long)]
 
     // Get only necessary fields for Map
@@ -40,7 +33,7 @@ export default function FridgeMap({ allFridges }) {
     reformatData.push(location)
   }
 
-  // Calculate the bounds to include all markers
+  // Calculate bounds to include all markers
   const bounds = reformatData.map(({ position }) => position)
   const mapCenter = [39.933026, -75.174741] // South Philly
 
@@ -54,13 +47,13 @@ export default function FridgeMap({ allFridges }) {
         bounds={bounds}
       >
       
-        {/*The interactive map with selected style*/}
+        {/* Interactive map with selected style*/}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
         />
 
-        {/* This creates a marker on the map for all provided fridges  */}
+        {/* Create marker on map for all fridges  */}
         {reformatData.map(({ id, position, name, address }) => (
           <Marker key={id} position={position} icon={fridgeIcon}>
             <Popup>
@@ -70,6 +63,7 @@ export default function FridgeMap({ allFridges }) {
         ))}
 
       </MapContainer>
+
     </div>
   )
 }

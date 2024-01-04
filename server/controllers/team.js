@@ -6,12 +6,13 @@ const { ObjectID } = pkg
 //OUR TEAM PAGE LOGIC=====================================================
 
 export const getTeamMembers = async (req, res) => {
-    try {
-        const teamMembers = await TeamMember.find().sort({ firstName : "desc"}).lean()
-        res.json({ teamMembers: teamMembers })
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ message: "Internal Server Error" })
-    }
-    }
-
+  try {
+    const teamMembers = await TeamMember.find()
+      .sort({ firstName: "desc" })
+      .lean()
+    res.json({ teamMembers: teamMembers })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: "Internal Server Error" })
+  }
+}

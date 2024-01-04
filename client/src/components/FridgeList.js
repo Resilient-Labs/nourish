@@ -1,14 +1,12 @@
 "use client"
-import { Card, Button } from 'flowbite-react';
-import React from 'react'
+import { Card, Button } from "flowbite-react"
 
 export default function FridgeList({ allFridges }) {
-
     return (
         <div className="leaflet-container-list">
             <div>
                 
-                {/* Creates a card for every fridge to display relevant data */}
+                {/* Create card for every fridge to display data */}
                 {allFridges.fridges.map((item, index) => (
                     <Card className="max-w-sm m-10" imgSrc={item.fridgeIMG ? item.fridgeIMG : item.pantryIMG} horizontal>
 
@@ -36,5 +34,5 @@ export default function FridgeList({ allFridges }) {
                 ))}
             </div>
         </div>
-    );
+    )
 }
