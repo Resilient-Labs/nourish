@@ -3,6 +3,7 @@ import { Button } from "flowbite-react"
 export default function CommentButtons({ commentId, onDelete }) {
   return (
     <div className="flex flex-wrap">
+      
       <Button
         className="ml-2"
         color="failure"

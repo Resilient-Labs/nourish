@@ -26,7 +26,7 @@ export default function SignUp() {
       })
       if (response.ok) {
         navigate("/")
-        location.reload()
+        window.location.reload()
       } else {
         const data = await response.json()
         if (data.errors) {
