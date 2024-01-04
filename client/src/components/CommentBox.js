@@ -1,7 +1,7 @@
 import { Button, Textarea } from "flowbite-react"
 import { useState } from "react"
 
-export default function CommentBox({ postId }) {
+export default function CommentBox({ postId, onNewComment }) {
   const [comment, setComment] = useState("")
 
   const handleSubmit = async (e) => {
@@ -23,9 +23,12 @@ export default function CommentBox({ postId }) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
-      const data = await response.json()
-      setComment("") // Reset comment field
-      window.location.reload()
+      if (response.ok) {
+        const data = await response.json();
+        setComment("");
+        console.log(data.comment)
+        onNewComment(data.comment, postId); // Update parent state with new comment
+      }
     } catch (error) {
       console.error("There was a problem with the fetch operation: ", error)
     }

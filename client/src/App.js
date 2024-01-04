@@ -10,6 +10,10 @@ import UserProfile from "./pages/UserProfile"
 import FridgeLocations from "./pages/FridgeLocations"
 import OurTeam from "./pages/OurTeam"
 import NavbarComponent from "./components/Navbar"
+import ProtectedRoute from './components/ProtectedRoute';
+
+
+
 
 // Routes for pages
 export default function App() {
@@ -36,7 +40,11 @@ export default function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/community" element={<Community />} />
+        <Route path="/community" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Community />
+            </ProtectedRoute>
+          }  />
         <Route path="/fridgeprofile/:userId" element={<FridgeProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

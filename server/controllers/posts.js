@@ -109,74 +109,36 @@ export const deletePost = async (req, res) => {
 
 // COMMENTS =====================================================
 
+
 export const addComment = async (req, res) => {
   try {
-    const newComment = new Comment({
-      comment: req.body.comment,
+    // Create the comment and store the result in a variable
+    const newComment = await Comment.create({
+      comment: req.body.comment.trim(),
       user: req.user.id,
-      post: req.params.id, // Make sure this is correctly getting the post ID
-      likes: 0
-    })
-    await newComment.save()
+      post: req.params.id,
+      likes: 0,
+    });
 
-    //  update the post to include this comment
+    // Update the post to include this comment
     await Post.findByIdAndUpdate(req.params.id, {
       $push: { comments: newComment._id }
-    })
+    });
 
-    res.status(200).send({ message: "Comment added successfully" })
+    console.log("Comment has been added!");
+
+    // Populate user details in the newly created comment
+    const populatedComment = await Comment.findById(newComment._id)
+      .populate('user', 'firstName lastName');
+
+    res.status(200).send({ message: "Comment added successfully", comment: populatedComment });
   } catch (err) {
-    console.log(err)
-    res.status(500).send({ message: "Error adding comment" })
+    console.log(err);
+    res.status(500).send({ message: "Error adding comment" });
   }
-}
+};
 
-// KEEP THIS CODE FOR NOW TESTING SOMETHING -RO =====================================================
 
-// export const addComment = async (req, res) => {
-//   try {
-
-//     console.log(req.body)
-
-//     await Comment.create({
-//       comment: req.body.comment.trim(),
-//       user: req.user.id,
-//       post: req.params.id,
-//       likes: 0,
-//     })
-//     console.log("Comment has been added!")
-//     //res.redirect(`/post/${req.params.id}`);
-//     res.status(200).send({ message: "Comment added successfully" })
-//   } catch (err) {
-//     console.log(err)
-//     res.status(500).send({ message: "Error adding comment" })
-//   }
-// }
-
-// KEEP THIS CODE FOR NOW TESTING SOMETHING -RO =====================================================
-
-export const editComment = async (req, res) => {
-  try {
-    const commentId = req.params.id
-
-    // Find the comment by ID and update
-    const updatedComment = await Comment.findByIdAndUpdate(
-      commentId,
-      { comment: req.body.comment.trim() }, // Update 'comment' field
-      { new: true } // Returns updated document
-    )
-
-    if (!updatedComment) {
-      return res.status(404).send({ message: "Comment not found" })
-    }
-
-    console.log("Comment has been edited!")
-    res.status(200).send({ message: "Comment edited successfully" })
-  } catch (err) {
-    console.log(err)
-    res.status(500).send({ message: "Error editing comment" })
-  }
-}
 
 export const deleteComment = async (req, res) => {
   try {
@@ -196,6 +158,13 @@ export const deleteComment = async (req, res) => {
     // Delete comment
     await Comment.findByIdAndDelete(commentId)
     console.log("Comment has been deleted!")
+
+      // Remove comment ID from post
+      await Post.findByIdAndUpdate(comment.post, {
+        $pull: { comments: commentId }
+      });
+
+      console.log("Comment has been deleted!");
     res.status(200).send({ message: "Comment deleted successfully" })
   } catch (err) {
     console.log(err)

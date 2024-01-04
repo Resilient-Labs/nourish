@@ -29,37 +29,36 @@ export default function AllPosts({ posts, setPosts }) {
     }
   }
 
+
   const deleteComment = async (commentId, postId) => {
     try {
       const response = await fetch(`http://localhost:8000/post/deleteComment/${commentId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include"
-      })
-
+      });
+  
       if (response.ok) {
         setPosts((currentPosts) =>
           currentPosts.map((post) => {
             if (post._id === postId) {
-              // Filter out deleted comment
               return {
                 ...post,
-                comments: post.comments.filter(
-                  (comment) => comment._id !== commentId
-                )
-              }
+                comments: post.comments.filter((comment) => comment._id !== commentId)
+              };
             }
-            return post
+            return post;
           })
-        )
-        window.location.reload()
+        );
       } else {
-        console.error("Failed to delete the comment", await response.json())
+        console.error("Failed to delete the comment", await response.json());
       }
     } catch (error) {
-      console.error("There was an error deleting the comment: ", error)
+      console.error("There was an error deleting the comment: ", error);
     }
-  }
+  };
+
+ 
 
   const deletePost = async (postId) => {
     try {
@@ -80,6 +79,20 @@ export default function AllPosts({ posts, setPosts }) {
       console.error("There was an error deleting the post: ", error)
     }
   }
+
+  const addNewComment = (newComment, postId) => {
+    setPosts((currentPosts) =>
+      currentPosts.map((post) => {
+        if (post._id === postId) {
+          return {
+            ...post,
+            comments: [...post.comments, newComment] // Add new comment to the comments array
+          };
+        }
+        return post;
+      })
+    );
+  };
 
   return (
     <div className="container">
@@ -128,7 +141,7 @@ export default function AllPosts({ posts, setPosts }) {
             )}
           </div>
           <div className="comments-section">
-            <CommentBox postId={post._id} className="commentBox" />
+            <CommentBox postId={post._id} onNewComment={addNewComment} className="commentBox" />
             <h3 className="comments-title text-lg font-semibold mb-2">
               Comments
             </h3>
@@ -147,7 +160,7 @@ export default function AllPosts({ posts, setPosts }) {
                   <CommentButtons
                     commentId={comment._id}
                     commentUserId={comment.user._id}
-                    onDelete={deleteComment}
+                    onDelete={() => deleteComment(comment._id, post._id)}
                   />
                 </div>
               ))
