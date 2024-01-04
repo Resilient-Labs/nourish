@@ -14,5 +14,5 @@ export default function Quote() {
         </figure>
       </div>
     </section>
-  );
+  )
 }
