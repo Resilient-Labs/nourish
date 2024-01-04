@@ -43,18 +43,18 @@ export default function CommentBox({ postId }) {
 
 
     return (
-        <div className="max-w-md">
+        <div>
             <form onSubmit={handleSubmit}>
-                <div className="mb-2 block">
+                <div>
                     <Label htmlFor="comment" value="Your message" />
                 </div>
                 <Textarea id="comment" name="comment" value={comment} onChange={(e) => setComment(e.target.value)}placeholder="Leave a comment..." required rows={4} />
                 <Button
                     type="submit"
-                    value="Submit"
-                    className="bg-blue-500 text-white py-2 px-4 rounded-md"
-                />
-                
+                    className="bg-green-500 text-white py-1 px-2 rounded-md ml-auto"
+                > 
+                Submit 
+                </Button>
             </form>
         </div>
     );
