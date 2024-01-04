@@ -35,17 +35,19 @@ Ensure you have npm installed:
 
 ```bash
 npm install npm@latest -g
+```
 
 
 ### 📦 Installation
-
+```bash
 1. Clone the Nourish repository:
 2. Install NPM packages:
-
+```
 
 ### 🌐 Environment Variables
-
+```bash
 Set up the necessary environment variables in your `.env` file.
+```
 
 ## 💡 Usage
 
@@ -83,4 +85,3 @@ Project Link: [Nourish](https://github.com/Resilient-Labs/nourish)
 ## 📚 Challenges (To be Updated)
 
 [Placeholder for challenges faced during the development of Nourish, as per team feedback.]
-```
