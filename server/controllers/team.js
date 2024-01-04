@@ -3,6 +3,7 @@ import { TeamMember } from "../models/Team.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg
 
+//OUR TEAM PAGE LOGIC=====================================================
 
 export const getTeamMembers = async (req, res) => {
     try {

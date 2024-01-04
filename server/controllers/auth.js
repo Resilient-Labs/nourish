@@ -2,6 +2,10 @@ import passport from 'passport';
 import validator from 'validator';
 import { User } from "../models/User.js";
 
+
+//LOGIN CRUD=====================================================
+
+
 export const getLogin = (req, res) => {
   if (req.user) {
     res.json({ isAuthenticated: true });
@@ -42,6 +46,8 @@ export const postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
+//LOGOUT CRUD =====================================================
+
 export const logout = (req, res) => {
   req.logout();
   req.session.destroy(err => {
@@ -54,6 +60,9 @@ export const logout = (req, res) => {
   });
 };
 
+//SIGNUP CRUD =====================================================
+
+
 export const getSignup = (req, res) => {
   if (req.user) {
     res.json({ isAuthenticated: true });
@@ -62,25 +71,7 @@ export const getSignup = (req, res) => {
   }
 };
 
-//delete the user's account
 
-export const deleteAccount = async (req, res) => {
-  try {
-    await User.findByIdAndDelete(req.user._id);
-    req.logout();
-    req.session.destroy(err => {
-      if (err) {
-        console.log("Error: Failed to destroy the session during logout.", err);
-        return res.status(500).json({ error: "Session destruction failed" });
-      }
-      req.user = null;
-      res.json({ success: true });
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
 
 export const postSignup = async (req, res, next) => {
   const validationErrors = [];
@@ -118,6 +109,29 @@ export const postSignup = async (req, res, next) => {
       if (err) {
         return next(err);
       }
+      res.json({ success: true });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+//DELETE USER ACCOUNT =====================================================
+
+
+//delete the user's account
+
+export const deleteAccount = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user._id);
+    req.logout();
+    req.session.destroy(err => {
+      if (err) {
+        console.log("Error: Failed to destroy the session during logout.", err);
+        return res.status(500).json({ error: "Session destruction failed" });
+      }
+      req.user = null;
       res.json({ success: true });
     });
   } catch (err) {

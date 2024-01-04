@@ -1,5 +1,5 @@
 import express from "express"
-// import { upload } from "../middleware/multer.js"
+
 import {
     getUserProfile,
     changePassword,
@@ -19,12 +19,7 @@ router.get("/:id", ensureAuth, getUserProfile)
 router.put("/changePassword/:id", ensureAuth, changePassword)
 router.put("/contact/:id", ensureAuth, updateContact)
 
-// router.delete(
-//     "/deleteComment/:id",
-//     ensureAuth,
-//     upload.single("file"),
-//     deleteComment
-// )
+
 router.delete("/deleteAccount/:id", ensureAuth, deleteAccount)
 
 export { router }

@@ -3,6 +3,10 @@ import { CommunityFridge as Fridge } from "../models/CommunityFridge.js"
 import pkg from "mongodb"
 const { ObjectID } = pkg
 
+//FRIDGES CRUD=====================================================
+
+// Do we use all of these? 
+
 export const getAllFridges = async (req, res) => {
   try {
     const fridges = await Fridge.find().lean()
@@ -22,7 +26,7 @@ export const getFridgesbyZip = async (req, res) => {
     const fridges = await Fridge.find({
       "location.zipCode": req.params.zipcode
     })
-    console.log(fridges)
+    // console.log(fridges)
     res.json({ fridges: fridges })
   } catch (err) {
     console.error("Error in getFridgesbyZip:", err)
@@ -33,7 +37,7 @@ export const getFridgesbyZip = async (req, res) => {
 export const getFridge = async (req, res) => {
   try {
     const fridge = await Fridge.findById(req.params.id)
-    console.log(fridge)
+    // console.log(fridge)
     res.json({ fridge: fridge })
   } catch (err) {
     console.log(err)

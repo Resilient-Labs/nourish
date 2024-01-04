@@ -8,6 +8,9 @@ const { ObjectID } = pkg1
 import bcrypt from 'bcrypt';
 
 
+//SHOW USERS POSTS ON PROFILE - Do we need? -Ro =====================================================
+
+
 export const getUserProfile = async (req, res) => {
   try {
     const posts = await Post.find({ user: req.user.id })
@@ -27,6 +30,7 @@ export const getUserProfile = async (req, res) => {
   }
 }
 
+//CHANGE PASSWORD =====================================================
 
 
 //Set up changing passwords
@@ -76,6 +80,9 @@ export const changePassword = async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
+
+//UPDATE/CHANGE CONTACT INFO =====================================================
+
 
 //set up changing/updating contact info 
 
