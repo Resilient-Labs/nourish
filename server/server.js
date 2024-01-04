@@ -73,6 +73,7 @@ app.use(flash())
 
 // Routes for which server is listening
 app.use("/", mainRoutes)
+//app.use("/logout", mainRoutes)
 app.use("/fridge", fridgeRoutes)
 app.use("/post", postRoutes)
 app.use("/profile", profileRoutes)

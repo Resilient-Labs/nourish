@@ -52,6 +52,7 @@ export default function AllPosts({ posts, setPosts }) {
             return post
           })
         )
+        window.location.reload()
       } else {
         console.error("Failed to delete the comment", await response.json())
       }
