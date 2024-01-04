@@ -34,7 +34,7 @@ export default function FridgeProfile() {
         const fridgeObj = myFridge.fridge
         return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="fridgePage--parent">
                 <div className="fridgePage--status">
                     <h1><a href={fridgeObj.contact.siteURL}>{fridgeObj.name} </a><span className="fridgePage--community">by {fridgeObj.community}</span></h1>

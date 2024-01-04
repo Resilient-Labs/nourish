@@ -10,7 +10,7 @@ import Quote from '../components/Quote'
 export default function Home() {
   return (
     <div>
-      < Navbar />
+      {/* < Navbar /> */}
       < Hero />
       < Fridge />
       < About1 />

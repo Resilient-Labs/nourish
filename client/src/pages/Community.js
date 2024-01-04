@@ -35,7 +35,7 @@ export default function Community() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <CommunityWelcome />
       <MessageBoardInteractive onNewPost={handleNewPost} posts={posts} setPosts={setPosts}/>
       {/* <AllPosts posts={posts} setPosts={setPosts}/> */}

@@ -38,7 +38,7 @@ export default function FridgeLocations() {
     }
     return (
         <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="fridgeLanding--page">
             <h1>Fridges and Pantries of Philadelphia</h1>
             <p>Explore the list below or use the zip code filter to locate a nearby fridge!</p>
