@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <NavbarComponent isAuthenticated={isAuthenticated} />
+      <NavbarComponent isAuthenticated={isAuthenticated} setIsAuth={setIsAuthenticated} />
 
       <Routes>
         <Route index element={<Home />} />
