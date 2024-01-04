@@ -1,12 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-import Navbar from '../components/Navbar'
-
 export default function Login() {
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState("");
-
 
   const handleSignIn = async (e) => {
     e.preventDefault()
@@ -51,8 +48,6 @@ export default function Login() {
 
   return (
     <div>
-      {/* <Navbar /> */}
-
       {/* Log in */}
       <section className="bg-gray-50">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

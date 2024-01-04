@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function UserProfile() {
@@ -54,7 +53,6 @@ export default function UserProfile() {
 
     return (
         <div>
-            {/* <Navbar /> */}
             <div>
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     User Profile
@@ -198,19 +196,3 @@ export default function UserProfile() {
         </div>
     );
 }
-
-
-// import Navbar from '../components/Navbar';
-// import Footer from '../components/Footer';
-
-
-// export default function UserProfile() {
-//     return (
-//       <div>
-//         <Navbar />
-
-
-//         <Footer />
-//       </div>
-//     );
-//   }

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react"
 import CommunityWelcome from "../components/WelcomeCommunity"
-import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import MessageBoardInteractive from "../components/MessageBoardInteractive"
 // import AllPosts from "../components/AllPosts"
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
-
-
 
   useEffect(() => {
       fetchPosts();
@@ -35,7 +32,6 @@ export default function Community() {
 
   return (
     <div>
-      {/* <Navbar /> */}
       <CommunityWelcome />
       <MessageBoardInteractive onNewPost={handleNewPost} posts={posts} setPosts={setPosts}/>
       {/* <AllPosts posts={posts} setPosts={setPosts}/> */}
