@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-
 
 export default function FridgeProfile() {
         const [myFridge, setFridge] = useState({});
@@ -34,7 +32,6 @@ export default function FridgeProfile() {
         const fridgeObj = myFridge.fridge
         return (
         <div>
-            {/* <Navbar /> */}
             <div className="fridgePage--parent">
                 <div className="fridgePage--status">
                     <h1><a href={fridgeObj.contact.siteURL}>{fridgeObj.name} </a><span className="fridgePage--community">by {fridgeObj.community}</span></h1>

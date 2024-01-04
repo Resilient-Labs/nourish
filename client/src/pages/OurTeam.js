@@ -1,7 +1,5 @@
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import React, {useState, useEffect} from 'react'
-
 
 export default function OurTeam() {
     const [getTeam, setGetTeam] = useState({ teamMembers: []});
@@ -30,7 +28,6 @@ export default function OurTeam() {
     }
     return (
     <div>
-        <Navbar />
         <div className="teamBlurb">
         <h1>Our Team</h1>
             <p>Introducing our team of versatile full-stack developers, each bringing unique expertise from front-end, back-end, and dev ops. Learn more about us below and don't hesitate to reach out - let's connect and make positive impacts together!</p>
