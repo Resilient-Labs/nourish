@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
+const API_URL = process.env.REACT_APP_API_URL
+
+
 export default function Login() {
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState("")
@@ -14,7 +17,7 @@ export default function Login() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/login`, {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -22,7 +25,6 @@ export default function Login() {
       })
       if (response.ok) {
         navigate("/")
-        window.location.reload()
       } else {
         const data = await response.json()
         console.error("Login failed:", data.errors.msg || data.error)
@@ -59,7 +61,7 @@ export default function Login() {
               <form
                 className="space-y-4 md:space-y-6"
                 method="POST"
-                action="http://localhost:8000/login"
+                action= { API_URL + "/login"}
                 onSubmit={handleSignIn}
               >
                 <div>

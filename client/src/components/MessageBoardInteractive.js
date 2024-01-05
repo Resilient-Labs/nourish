@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import AllPosts from "../components/AllPosts"
 import PropTypes from "prop-types"
 
+const API_URL = process.env.REACT_APP_API_URL
+
 export default function MessageBoardInteractive({ onNewPost, posts, setPosts }) {
   // Set up states
   const [title, setTitle] = useState("")
@@ -18,7 +20,7 @@ export default function MessageBoardInteractive({ onNewPost, posts, setPosts }) 
   useEffect(() => {
     const fetchAllFridges = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/fridge/getAllFridges`)
+        const response = await fetch(`${API_URL}/fridge/getAllFridges`)
         const data = await response.json()
         setGetAllFridges(data)
       } catch (error) {
@@ -44,7 +46,7 @@ export default function MessageBoardInteractive({ onNewPost, posts, setPosts }) 
 
     try {
       // Make API call to submit form data to server
-      const response = await fetch("http://localhost:8000/post/createPost", {
+      const response = await fetch(`${API_URL}/post/createPost`, {
         method: "POST",
         credentials: "include",
         body: formData

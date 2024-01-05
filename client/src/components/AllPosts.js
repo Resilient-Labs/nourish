@@ -2,10 +2,12 @@ import SocialButtons from "./SocialButtons"
 import CommentButtons from "./CommentButtons"
 import CommentBox from "./CommentBox"
 
+const API_URL = process.env.REACT_APP_API_URL
+
 export default function AllPosts({ posts, setPosts }) {
   const updateLikes = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:8000/post/likePost/${postId}`, {
+      const response = await fetch(`${API_URL}/post/likePost/${postId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include"
@@ -32,7 +34,7 @@ export default function AllPosts({ posts, setPosts }) {
 
   const deleteComment = async (commentId, postId) => {
     try {
-      const response = await fetch(`http://localhost:8000/post/deleteComment/${commentId}`, {
+      const response = await fetch(`${API_URL}/post/deleteComment/${commentId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include"
@@ -62,7 +64,7 @@ export default function AllPosts({ posts, setPosts }) {
 
   const deletePost = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:8000/post/deletePost/${postId}`, {
+      const response = await fetch(`${API_URL}/post/deletePost/${postId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include"

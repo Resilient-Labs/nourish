@@ -2,12 +2,14 @@
 import { Button, Navbar } from "flowbite-react"
 import { Link, useNavigate } from "react-router-dom"
 
+const API_URL = process.env.REACT_APP_API_URL
+
 export default function NavbarComponent({ isAuthenticated, setIsAuth }) {
   const navigate = useNavigate()
 
   const handleLogOut = async () => {
     try {
-      const response = await fetch('http://localhost:8000/logout', {
+      const response = await fetch(`${API_URL}/logout`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include"
@@ -48,7 +50,7 @@ export default function NavbarComponent({ isAuthenticated, setIsAuth }) {
               size="lg"
               className="bg-green-500"
               method="GET"
-              action="http://localhost:8000/logout"
+              action={API_URL + "/logout"}
               onClick={handleLogOut}
             >
               Log Out

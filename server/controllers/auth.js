@@ -34,13 +34,13 @@ export const postLogin = (req, res, next) => {
       return next(err)
     }
     if (!user) {
-      return res.status(401).json({ errors: info })
+      return res.status(401).json({ errors: info, isAuthenticated: false })
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err)
       }
-      res.json({ success: true })
+      res.json({ success: true, isAuthenticated: true })
     })
   })(req, res, next)
 }
