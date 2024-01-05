@@ -82,6 +82,34 @@ Project Lead - jacinthadev8@gmail.com
 
 Project Link: [Nourish](https://github.com/Resilient-Labs/nourish)
 
-## 📚 Challenges (To be Updated)
+## 📚 Challenges 
 
-[Placeholder for challenges faced during the development of Nourish, as per team feedback.]
+Delegating Work
+Efficient delegation is crucial. Tasks are assigned based on strengths, expertise, and workload. Regular communication ensures everyone is on the same page, addressing concerns promptly.
+
+Adapting to New Ideas and Issues
+The development process is dynamic. We readjust plans when necessary, allowing us to incorporate innovative solutions and address emerging issues promptly.
+
+Time Management
+We value time as a critical resource. Prioritizing tasks, setting milestones, and closely monitoring progress ensure we deliver a high-quality product within deadlines.
+
+Handling Errors on the Fly
+Errors are inevitable. We take a proactive approach, collaboratively troubleshooting issues, documenting solutions, and ensuring the project stays on course.
+
+Staying on Track
+Project goals are paramount. Regularly revisiting and updating our project plan ensures our efforts align with objectives. Continuous communication and adaptation keep the project on track.
+
+Event Handling:
+Handling events in Leaflet and synchronizing them with React's events requires careful attention to ensure smooth functionality.
+
+Performance Optimization:
+Efficient rendering and preventing unnecessary re-renders, especially with a large number of markers or dynamic data updates, pose challenges. We aim to achieve optimization without solely relying on Redux for state handling.
+
+Data Passing between Sibling Components:
+Dynamically updating the Leaflet interactive map for the Fridge Map component and Fridge List component based on filtered zip codes demands effective data passing between sibling components.
+
+Parent Component Communication:
+Implementing a robust mechanism for the parent component to pass filtered zip code data to both the Leaflet map and Fridge List components is a critical aspect of seamless integration.
+
+Real-Time Updates:
+Ensuring real-time responsiveness in both the Leaflet map and Fridge List components to changes in filtered zip code data is crucial for providing users with a synchronized and seamless experience.
