@@ -1,34 +1,96 @@
-'use client';
-import { Button, Navbar } from 'flowbite-react';
+"use client"
+import { Button, Navbar } from "flowbite-react"
+import { Link, useNavigate } from "react-router-dom"
 
-export default function Component() {
+export default function NavbarComponent({ isAuthenticated, setIsAuth }) {
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/logout', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include"
+      })
+      const result = await response.json()
+      setIsAuth(result.isAuthenticated)
+  
+      if (response.ok) {
+        navigate("/")
+      } else {
+        console.error("Logout failed:", result)
+      }
+    } catch (error) {
+      console.error("Error during logout:", error)
+    }
+  }
+
   return (
-    <Navbar fluid rounded>
-
-      <Navbar.Brand href="https://nourish.com" className="pl-10">
-        <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Nourish</span>
+    <Navbar className="py-4" fluid rounded>
+      <Navbar.Brand as={Link} to="/" className="pl-10">
+        <span className="self-center whitespace-nowrap text-2xl font-extrabold">
+          Nourish
+        </span>
       </Navbar.Brand>
 
       <div className="flex gap-2 md:order-2 pr-10">
-        <Button href="#" size="lg"
-        className="text-gray-700 bg-gray-100 hover:bg-gray-200">
-          Log In
-        </Button>
-
-        <Button href="#" size="lg"
-        className="bg-pink-400 hover:bg-pink-500">
-          Sign Up
-        </Button>
-        <Navbar.Toggle/>
+        {isAuthenticated ? (
+          <>
+            <Button
+              as={Link}
+              to="/userprofile"
+              size="lg"
+              className="text-black bg-gray-100 hover:bg-gray-200"
+            >
+              Profile
+            </Button>
+            <Button
+              size="lg"
+              className="bg-green-500"
+              method="GET"
+              action="http://localhost:8000/logout"
+              onClick={handleLogOut}
+            >
+              Log Out
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              as={Link}
+              to="/login"
+              size="lg"
+              className="text-black bg-gray-100 hover:bg-gray-200"
+            >
+              Log In
+            </Button>
+            <Button
+              as={Link}
+              to="/signup"
+              size="lg"
+              className="bg-green-500 hover:bg-green-600"
+            >
+              Sign Up
+            </Button>
+          </>
+        )}
+        <Navbar.Toggle />
       </div>
 
       <Navbar.Collapse>
-        <Navbar.Link href="#" className="text-lg">Home</Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">Donate</Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">Volunteer</Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">Contact</Navbar.Link>
+        <Navbar.Link as={Link} to="/" className="text-lg">
+          Home
+        </Navbar.Link>
+        <Navbar.Link as={Link} to="/locations" className="text-lg">
+          Locations
+        </Navbar.Link>
+        <Navbar.Link as={Link} to="/community" className="text-lg">
+          Community
+        </Navbar.Link>
+        <Navbar.Link as={Link} to="/team" className="text-lg">
+          Team
+        </Navbar.Link>
       </Navbar.Collapse>
-
     </Navbar>
-  );
+  )
 }
