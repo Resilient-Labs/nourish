@@ -1,8 +1,30 @@
 "use client"
 import { Button, Navbar } from "flowbite-react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
-export default function NavbarComponent({ isAuthenticated }) {
+export default function NavbarComponent({ isAuthenticated, setIsAuth }) {
+  const navigate = useNavigate()
+
+  const handleLogOut = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/logout', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include"
+      })
+      const result = await response.json()
+      setIsAuth(result.isAuthenticated)
+  
+      if (response.ok) {
+        navigate("/")
+      } else {
+        console.error("Logout failed:", result)
+      }
+    } catch (error) {
+      console.error("Error during logout:", error)
+    }
+  }
+
   return (
     <Navbar className="py-4" fluid rounded>
       <Navbar.Brand as={Link} to="/" className="pl-10">
@@ -23,10 +45,11 @@ export default function NavbarComponent({ isAuthenticated }) {
               Profile
             </Button>
             <Button
-              as={Link}
-              to="/logout"
               size="lg"
-              className="bg-red-500 hover:bg-red-600"
+              className="bg-green-500"
+              method="GET"
+              action="http://localhost:8000/logout"
+              onClick={handleLogOut}
             >
               Log Out
             </Button>
