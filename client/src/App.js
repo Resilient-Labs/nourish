@@ -19,6 +19,10 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
+    const storedAuthState = localStorage.getItem('isAuthenticated');
+  if (storedAuthState) {
+    setIsAuthenticated(storedAuthState === 'true'); // localStorage stores everything as a string
+  } else {
     fetch(`${API_URL}/login`, {
       method: "GET",
       credentials: "include"
@@ -26,11 +30,12 @@ export default function App() {
       .then((response) => response.json())
       .then((data) => {
         setIsAuthenticated(data.isAuthenticated)
+        localStorage.setItem('isAuthenticated', data.isAuthenticated)
       })
       .catch((error) => {
         console.error("Error checking authentication status:", error)
       })
-  }, [])
+  }}, [])
 
   return (
     <BrowserRouter>
@@ -45,7 +50,7 @@ export default function App() {
             </ProtectedRoute>
           }  />
         <Route path="/fridgeprofile/:userId" element={<FridgeProfile />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/locations" element={<FridgeLocations />} />

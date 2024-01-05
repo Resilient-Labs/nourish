@@ -4,7 +4,7 @@ import { useState } from "react"
 const API_URL = process.env.REACT_APP_API_URL
 
 
-export default function Login() {
+export default function Login({ setIsAuthenticated }) {
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -24,6 +24,7 @@ export default function Login() {
         credentials: "include"
       })
       if (response.ok) {
+        setIsAuthenticated(true)
         navigate("/")
       } else {
         const data = await response.json()

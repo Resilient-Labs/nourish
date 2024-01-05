@@ -14,9 +14,9 @@ import { ensureAuth, ensureGuest } from "../middleware/auth.js"
 const router = express.Router()
 
 // Apply ensureAuth middleware to protect routes
-router.get("/board", ensureAuth, getAllPosts)
+router.get("/board", getAllPosts)
 router.get("/post/:id", ensureAuth, getPost)
-router.post("/createPost", ensureAuth, upload.single("file"), createPost)
+router.post("/createPost", upload.single("file"), createPost)
 router.put("/likePost/:id", ensureAuth, likePost)
 router.post("/addComment/:id", ensureAuth, addComment)
 router.delete("/deleteComment/:id", ensureAuth, upload.single("file"), deleteComment)

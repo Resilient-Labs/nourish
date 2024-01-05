@@ -18,6 +18,7 @@ export default function NavbarComponent({ isAuthenticated, setIsAuth }) {
       setIsAuth(result.isAuthenticated)
   
       if (response.ok) {
+        localStorage.removeItem('isAuthenticated')
         navigate("/")
       } else {
         console.error("Logout failed:", result)
