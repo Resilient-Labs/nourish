@@ -84,19 +84,19 @@ Project Link: [Nourish](https://github.com/Resilient-Labs/nourish)
 
 ## 📚 Challenges 
 
-Delegating Work
+Delegating Work:
 Efficient delegation is crucial. Tasks are assigned based on strengths, expertise, and workload. Regular communication ensures everyone is on the same page, addressing concerns promptly.
 
-Adapting to New Ideas and Issues
+Adapting to New Ideas and Issues:
 The development process is dynamic. We readjust plans when necessary, allowing us to incorporate innovative solutions and address emerging issues promptly.
 
-Time Management
+Time Management:
 We value time as a critical resource. Prioritizing tasks, setting milestones, and closely monitoring progress ensure we deliver a high-quality product within deadlines.
 
-Handling Errors on the Fly
+Handling Errors on the Fly:
 Errors are inevitable. We take a proactive approach, collaboratively troubleshooting issues, documenting solutions, and ensuring the project stays on course.
 
-Staying on Track
+Staying on Track:
 Project goals are paramount. Regularly revisiting and updating our project plan ensures our efforts align with objectives. Continuous communication and adaptation keep the project on track.
 
 Event Handling:
