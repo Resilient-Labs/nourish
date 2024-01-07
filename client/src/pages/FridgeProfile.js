@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 
+const apiKey = process.env.REACT_APP_API_URL
+
 export default function FridgeProfile() {
   const [myFridge, setFridge] = useState({})
   const [isLoading, setIsLoading] = useState(true)
@@ -12,7 +14,7 @@ export default function FridgeProfile() {
     const fetchFridge = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/fridge/fridgeProfile/${userId}`
+          `${apiKey}/fridge/fridgeProfile/${userId}`
         )
         const data = await response.json()
         setFridge(data)
