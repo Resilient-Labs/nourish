@@ -3,6 +3,8 @@ import CommunityWelcome from "../components/WelcomeCommunity"
 import Footer from "../components/Footer"
 import MessageBoardInteractive from "../components/MessageBoardInteractive"
 
+const apiKey = process.env.REACT_APP_API_URL
+
 export default function Community() {
   const [posts, setPosts] = useState([])
 
@@ -12,7 +14,7 @@ export default function Community() {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("http://localhost:8000/post/board", {
+      const response = await fetch(`${apiKey}/post/board`, {
         credentials: "include"
       })
       if (!response.ok) {

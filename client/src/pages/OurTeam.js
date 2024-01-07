@@ -1,6 +1,8 @@
 import Footer from "../components/Footer"
 import { useState, useEffect } from "react"
 
+const apiKey = process.env.REACT_APP_API_URL
+
 export default function OurTeam() {
   const [getTeam, setGetTeam] = useState({ teamMembers: [] })
   const [isLoading, setIsLoading] = useState(true)
@@ -8,7 +10,7 @@ export default function OurTeam() {
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/team`)
+        const response = await fetch(`${apiKey}/team`)
         const data = await response.json()
         setGetTeam(data)
       } catch (error) {

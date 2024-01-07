@@ -12,7 +12,7 @@ import OurTeam from "./pages/OurTeam"
 import NavbarComponent from "./components/Navbar"
 import ProtectedRoute from './components/ProtectedRoute';
 
-
+const apiKey = process.env.REACT_APP_API_URL
 
 
 // Routes for pages
@@ -20,7 +20,7 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    fetch(`http://localhost:8000/login`, {
+    fetch(`${apiKey}/login`, {
       method: "GET",
       credentials: "include"
     })

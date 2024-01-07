@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import Terms from "../components/Terms"
 
+const apiKey = process.env.REACT_APP_API_URL
+
 export default function SignUp() {
   const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState("")
@@ -18,7 +20,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/signup`, {
+      const response = await fetch(`${apiKey}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -55,7 +57,7 @@ export default function SignUp() {
               <form
                 className="space-y-4 md:space-y-6"
                 method="POST"
-                action="http://localhost:8000/signup"
+                action={apiKey + "/signup"}
                 onSubmit={handleSignUp}
               >
                 <div>
