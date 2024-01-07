@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import FridgeList from "./FridgeList.js"
 import FridgeMap from "./FridgeMap.js"
 import Searchbar from "./Searchbar.js"
+const apiKey = process.env.REACT_APP_API_URL
 
 export default function Fridge() {
   // Variables, setters
@@ -21,7 +22,7 @@ export default function Fridge() {
 
     const fetchAllFridges = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/fridge/getAllFridges`)
+        const response = await fetch(`${apiKey}/fridge/getAllFridges`)
         const data = await response.json()
 
         // Use setters to update variables holding fridge data

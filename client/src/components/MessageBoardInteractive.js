@@ -13,12 +13,13 @@ export default function MessageBoardInteractive({ onNewPost, posts, setPosts }) 
   const [isLoading, setIsLoading] = useState(true)
   const [postTopic, setPostTopic] = useState("")
   const [fridgeLocation, setFridgeLocation] = useState("")
+  const apiKey = process.env.REACT_APP_API_URL
 
   // Fetch all fridge info
   useEffect(() => {
     const fetchAllFridges = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/fridge/getAllFridges`)
+        const response = await fetch(`${apiKey}/fridge/getAllFridges`)
         const data = await response.json()
         setGetAllFridges(data)
       } catch (error) {
