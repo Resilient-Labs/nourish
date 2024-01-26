@@ -80,7 +80,7 @@ This project is licensed under the [MIT License](LICENSE.txt).
 
 Project Lead - jacinthadev8@gmail.com
 
-Project Link: [Nourish](https://nourish-production-78a8.up.railway.app/)
+Project Link: [Nourish](https://nourish.up.railway.app/)
 
 ## 📚 Challenges 
 
