@@ -2,6 +2,12 @@
 
 Nourish is an innovative application aimed at connecting community members in Philadelphia with nearby community fridges. Our mission is to promote communal food sharing and ensure convenient access to essential food resources.
 
+<img width="1440" alt="Nourish 4" src="https://github.com/user-attachments/assets/b480fc39-92a2-4292-8468-ed66eb37ebfb">
+<img width="1440" alt="Nourish 3" src="https://github.com/user-attachments/assets/87ae312d-67cb-49ec-9db6-d08bad6abb0e">
+<img width="1440" alt="Nourish 2" src="https://github.com/user-attachments/assets/50d2671e-71c8-4089-956f-35c1070d1fa8">
+<img width="1440" alt="Nourish 1" src="https://github.com/user-attachments/assets/544774ce-d0d8-41bd-a990-bc0dbfd7adb8">
+
+
 ## 📖 Description
 
 Nourish allows users to easily locate community fridges throughout Philadelphia. The app also includes a community board, where members can sign up to share updates about fridge restocking, express community needs or offers, and report on any maintenance required. This project is committed to fostering a sense of community and supporting local food security initiatives.
